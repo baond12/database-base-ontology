@@ -1,0 +1,334 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:payments",
+    "name": "Payment",
+    "source_table": "payments",
+    "description": "Bản ghi thanh toán liên kết với một đơn hàng, chứa phương thức, trạng thái, số tiền và thời điểm thanh toán.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:payments.payment_id",
+      "name": "paymentId",
+      "description": "Khóa chính của bản ghi thanh toán.",
+      "confidence": 1,
+      "source_table": "payments",
+      "source_column": "payment_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:payments.order_id",
+      "name": "orderId",
+      "description": "Tham chiếu đến đơn hàng mà thanh toán này thuộc về.",
+      "confidence": 0.95,
+      "source_table": "payments",
+      "source_column": "order_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:payments.payment_method",
+      "name": "paymentMethod",
+      "description": "Phương thức thanh toán. Schema không giới hạn danh sách giá trị cụ thể.",
+      "confidence": 0.9,
+      "source_table": "payments",
+      "source_column": "payment_method",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:payments.status",
+      "name": "status",
+      "description": "Trạng thái thanh toán. Giá trị hợp lệ theo CHECK: pending, failed, success.",
+      "confidence": 1,
+      "source_table": "payments",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:payments.amount",
+      "name": "amount",
+      "description": "Số tiền thanh toán, không âm (CHECK amount >= 0). Schema không xác định đơn vị tiền tệ.",
+      "confidence": 0.95,
+      "source_table": "payments",
+      "source_column": "amount",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:payments.paid_at",
+      "name": "paidAt",
+      "description": "Thời điểm thanh toán, kiểu TEXT, có thể thiếu. Schema không quy định định dạng cụ thể.",
+      "confidence": 0.9,
+      "source_table": "payments",
+      "source_column": "paid_at",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupPayment",
+      "description": "Tra cứu một bản ghi thanh toán theo khóa chính paymentId.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "paymentId",
+          "type": "integer",
+          "required": true,
+          "source_column": "payment_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "payment_id",
+          "order_id",
+          "payment_method",
+          "status",
+          "amount",
+          "paid_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "payment_id",
+        "order_id",
+        "payment_method",
+        "status",
+        "amount",
+        "paid_at"
+      ],
+      "confidence": 1,
+      "method_id": "method:payments.lookupPayment",
+      "owner_class_id": "class:payments",
+      "source_table": "payments",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listPayments",
+      "description": "Danh sách bản ghi thanh toán, có thể lọc theo orderId và/hoặc status.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": false,
+          "source_column": "order_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "payment_id",
+          "order_id",
+          "payment_method",
+          "status",
+          "amount",
+          "paid_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "payment_id",
+        "order_id",
+        "payment_method",
+        "status",
+        "amount",
+        "paid_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:payments.listPayments",
+      "owner_class_id": "class:payments",
+      "source_table": "payments",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countPayments",
+      "description": "Đếm số bản ghi thanh toán, có thể lọc theo orderId và/hoặc status.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": false,
+          "source_column": "order_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "order_id",
+        "status"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:payments.countPayments",
+      "owner_class_id": "class:payments",
+      "source_table": "payments",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "aggregateAmountByStatus",
+      "description": "Tổng và trung bình số tiền thanh toán theo từng trạng thái, có thể lọc theo orderId.",
+      "operation": "aggregate",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": false,
+          "source_column": "order_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "totalAmount",
+            "function": "sum",
+            "source_column": "amount"
+          },
+          {
+            "name": "avgAmount",
+            "function": "avg",
+            "source_column": "amount"
+          }
+        ]
+      },
+      "source_columns": [
+        "order_id",
+        "status",
+        "amount"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:payments.aggregateAmountByStatus",
+      "owner_class_id": "class:payments",
+      "source_table": "payments",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột amount có kiểu INTEGER và CHECK >= 0 nhưng schema không xác định đơn vị tiền tệ (ví dụ: đồng, xu, USD).",
+    "Cột paid_at có kiểu TEXT và nullable; schema không quy định định dạng ngày giờ cụ thể (ISO 8601, epoch, v.v.).",
+    "Cột payment_method không có CHECK constraint nên không thể xác định danh sách phương thức hợp lệ từ schema.",
+    "Một đơn hàng có thể có nhiều bản ghi thanh toán (không có UNIQUE trên order_id)."
+  ],
+  "input_fingerprint": "4c7178d4cd92079360b5a328d3507a1f25f17bb63aa656be7178792060009723",
+  "relations": [
+    {
+      "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1",
+      "name": "paymentOrder",
+      "description": "Bản ghi Payment tham chiếu bản ghi Order qua cột order_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:payments",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:payments.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "payments",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

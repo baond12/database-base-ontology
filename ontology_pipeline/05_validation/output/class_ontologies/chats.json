@@ -1,0 +1,661 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:chats",
+    "name": "Chat",
+    "source_table": "chats",
+    "description": "Một tin nhắn trong hội thoại, ghi nhận nội dung, người gửi, thời điểm và các nhãn phân tích (intent, sentiment) liên quan.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:chats.chat_id",
+      "name": "chatId",
+      "description": "Định danh duy nhất của tin nhắn, khóa chính.",
+      "confidence": 0.98,
+      "source_table": "chats",
+      "source_column": "chat_id",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.conversation_id",
+      "name": "conversationId",
+      "description": "Định danh hội thoại mà tin nhắn thuộc về, nhóm nhiều tin nhắn thành một cuộc trò chuyện.",
+      "confidence": 0.95,
+      "source_table": "chats",
+      "source_column": "conversation_id",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.agent_id",
+      "name": "agentId",
+      "description": "Tham chiếu đến agent liên quan đến tin nhắn, có thể trống.",
+      "confidence": 0.93,
+      "source_table": "chats",
+      "source_column": "agent_id",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.customer_id",
+      "name": "customerId",
+      "description": "Tham chiếu đến customer liên quan đến tin nhắn.",
+      "confidence": 0.95,
+      "source_table": "chats",
+      "source_column": "customer_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.product_id",
+      "name": "productId",
+      "description": "Tham chiếu đến sản phẩm liên quan đến tin nhắn, có thể trống.",
+      "confidence": 0.93,
+      "source_table": "chats",
+      "source_column": "product_id",
+      "data_type": "VARCHAR(50)",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.channel_id",
+      "name": "channelId",
+      "description": "Tham chiếu đến kênh giao tiếp mà tin nhắn được gửi qua, có thể trống.",
+      "confidence": 0.93,
+      "source_table": "chats",
+      "source_column": "channel_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.chat_time",
+      "name": "chatTime",
+      "description": "Thời điểm tin nhắn được gửi. Giá trị mặc định là CURRENT_TIMESTAMP khi không chỉ định.",
+      "confidence": 0.92,
+      "source_table": "chats",
+      "source_column": "chat_time",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "CURRENT_TIMESTAMP",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.sender_type",
+      "name": "senderType",
+      "description": "Loại người gửi tin nhắn, một trong các giá trị: AGENT, CUSTOMER, SYSTEM.",
+      "confidence": 0.97,
+      "source_table": "chats",
+      "source_column": "sender_type",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.content",
+      "name": "content",
+      "description": "Nội dung tin nhắn, không được rỗng sau khi loại bỏ khoảng trắng đầu cuối.",
+      "confidence": 0.97,
+      "source_table": "chats",
+      "source_column": "content",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.intent_label",
+      "name": "intentLabel",
+      "description": "Nhãn ý định (intent) được gán cho tin nhắn, có thể trống.",
+      "confidence": 0.9,
+      "source_table": "chats",
+      "source_column": "intent_label",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.sentiment_label",
+      "name": "sentimentLabel",
+      "description": "Nhãn cảm xúc (sentiment) được gán cho tin nhắn, có thể trống.",
+      "confidence": 0.9,
+      "source_table": "chats",
+      "source_column": "sentiment_label",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:chats.created_at",
+      "name": "createdAt",
+      "description": "Thời điểm bản ghi được tạo trong hệ thống. Giá trị mặc định là CURRENT_TIMESTAMP khi không chỉ định.",
+      "confidence": 0.92,
+      "source_table": "chats",
+      "source_column": "created_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "CURRENT_TIMESTAMP",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByChatId",
+      "description": "Tra cứu một tin nhắn theo định danh duy nhất chatId.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "chatId",
+          "type": "string",
+          "required": true,
+          "source_column": "chat_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "chat_id",
+          "conversation_id",
+          "agent_id",
+          "customer_id",
+          "product_id",
+          "channel_id",
+          "chat_time",
+          "sender_type",
+          "content",
+          "intent_label",
+          "sentiment_label",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "chat_id",
+        "conversation_id",
+        "agent_id",
+        "customer_id",
+        "product_id",
+        "channel_id",
+        "chat_time",
+        "sender_type",
+        "content",
+        "intent_label",
+        "sentiment_label",
+        "created_at"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:chats.lookupByChatId",
+      "owner_class_id": "class:chats",
+      "source_table": "chats",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByConversation",
+      "description": "Liệt kê các tin nhắn thuộc một hội thoại, có thể lọc thêm theo loại người gửi.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "conversationId",
+          "type": "string",
+          "required": true,
+          "source_column": "conversation_id",
+          "operator": "eq"
+        },
+        {
+          "name": "senderType",
+          "type": "string",
+          "required": false,
+          "source_column": "sender_type",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "chat_id",
+          "conversation_id",
+          "agent_id",
+          "customer_id",
+          "product_id",
+          "channel_id",
+          "chat_time",
+          "sender_type",
+          "content",
+          "intent_label",
+          "sentiment_label",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "chat_id",
+        "conversation_id",
+        "agent_id",
+        "customer_id",
+        "product_id",
+        "channel_id",
+        "chat_time",
+        "sender_type",
+        "content",
+        "intent_label",
+        "sentiment_label",
+        "created_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:chats.listByConversation",
+      "owner_class_id": "class:chats",
+      "source_table": "chats",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByCustomer",
+      "description": "Liệt kê các tin nhắn liên quan đến một customer, có thể lọc thêm theo kênh giao tiếp.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        },
+        {
+          "name": "channelId",
+          "type": "integer",
+          "required": false,
+          "source_column": "channel_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "chat_id",
+          "conversation_id",
+          "agent_id",
+          "customer_id",
+          "product_id",
+          "channel_id",
+          "chat_time",
+          "sender_type",
+          "content",
+          "intent_label",
+          "sentiment_label",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "chat_id",
+        "conversation_id",
+        "agent_id",
+        "customer_id",
+        "product_id",
+        "channel_id",
+        "chat_time",
+        "sender_type",
+        "content",
+        "intent_label",
+        "sentiment_label",
+        "created_at"
+      ],
+      "confidence": 0.94,
+      "method_id": "method:chats.listByCustomer",
+      "owner_class_id": "class:chats",
+      "source_table": "chats",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByConversation",
+      "description": "Đếm tổng số tin nhắn thuộc một hội thoại.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "conversationId",
+          "type": "string",
+          "required": true,
+          "source_column": "conversation_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "conversation_id"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:chats.countByConversation",
+      "owner_class_id": "class:chats",
+      "source_table": "chats",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countBySenderType",
+      "description": "Đếm số tin nhắn theo loại người gửi (sender_type) trong một hội thoại.",
+      "operation": "aggregate",
+      "input_parameters": [
+        {
+          "name": "conversationId",
+          "type": "string",
+          "required": true,
+          "source_column": "conversation_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [
+        "sender_type"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "sender_type"
+        ],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "conversation_id",
+        "sender_type"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:chats.countBySenderType",
+      "owner_class_id": "class:chats",
+      "source_table": "chats",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "chat_time và created_at có DEFAULT CURRENT_TIMESTAMP nhưng không xác nhận định dạng hay timezone cho mọi giá trị TEXT do ứng dụng ghi.",
+    "intent_label và sentiment_label không có CHECK constraint, không xác nhận tập giá trị hợp lệ hay phương pháp gán nhãn.",
+    "conversation_id không có UNIQUE constraint; nhiều bản ghi có thể cùng conversation_id, phù hợp với thiết kế nhiều tin nhắn trong một hội thoại.",
+    "agent_id nullable không có nghĩa mọi tin nhắn đều có agent liên quan; NULL chỉ chứng minh không có tham chiếu.",
+    "product_id nullable không có nghĩa mọi tin nhắn đều liên quan đến sản phẩm cụ thể."
+  ],
+  "input_fingerprint": "b7d506927c22310f077463bc9cc2a55fc92409989e468a28fb4974ce27f0e217",
+  "relations": [
+    {
+      "relation_id": "fk:1a63e58c48c731ca43afd203:1",
+      "name": "chatCustomer",
+      "description": "Bản ghi Chat tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:chats.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "RESTRICT",
+        "match": "NONE",
+        "relation_id": "fk:1a63e58c48c731ca43afd203:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:2041d1b09c418baf39a64157:1",
+      "name": "chatChannel",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Channel qua cột channel_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:channels",
+      "source_property_ids": [
+        "property:chats.channel_id"
+      ],
+      "target_property_ids": [
+        "property:channels.channel_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "channel_id"
+        ],
+        "target_table": "channels",
+        "target_columns": [
+          "channel_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:2041d1b09c418baf39a64157:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:925c89136854bd14425db972:1",
+      "name": "orderChat",
+      "description": "Mỗi Order có thể tham chiếu đến một Chat qua cột chat_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh chat gây ra đơn hàng."
+      ],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:chats",
+      "source_property_ids": [
+        "property:orders.chat_id"
+      ],
+      "target_property_ids": [
+        "property:chats.chat_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "chat_id"
+        ],
+        "target_table": "chats",
+        "target_columns": [
+          "chat_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:925c89136854bd14425db972:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1",
+      "name": "chatProduct",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:chats.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:afa1eddf108851d2045fcd06:1",
+      "name": "chatAgent",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Agent qua cột agent_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:agents",
+      "source_property_ids": [
+        "property:chats.agent_id"
+      ],
+      "target_property_ids": [
+        "property:agents.agent_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "agent_id"
+        ],
+        "target_table": "agents",
+        "target_columns": [
+          "agent_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:afa1eddf108851d2045fcd06:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

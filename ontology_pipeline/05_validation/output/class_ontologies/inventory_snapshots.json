@@ -1,0 +1,433 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:inventory_snapshots",
+    "name": "InventorySnapshot",
+    "source_table": "inventory_snapshots",
+    "description": "Bản ghi chụp trạng thái tồn kho của một sản phẩm tại một cửa hàng vào một ngày cụ thể. Mỗi tổ hợp (cửa hàng, sản phẩm, ngày) tối đa một bản ghi.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:inventory_snapshots.snapshot_id",
+      "name": "snapshotId",
+      "description": "Khóa chính INTEGER của bản ghi snapshot tồn kho.",
+      "confidence": 0.95,
+      "source_table": "inventory_snapshots",
+      "source_column": "snapshot_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:inventory_snapshots.store_id",
+      "name": "storeId",
+      "description": "Tham chiếu đến cửa hàng (stores.store_id) nơi sản phẩm được lưu kho.",
+      "confidence": 0.95,
+      "source_table": "inventory_snapshots",
+      "source_column": "store_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:inventory_snapshots.product_id",
+      "name": "productId",
+      "description": "Tham chiếu đến sản phẩm (products.product_id) được chụp tồn kho.",
+      "confidence": 0.95,
+      "source_table": "inventory_snapshots",
+      "source_column": "product_id",
+      "data_type": "VARCHAR(50)",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:inventory_snapshots.snapshot_date",
+      "name": "snapshotDate",
+      "description": "Ngày chụp snapshot tồn kho, kiểu TEXT. Định dạng cụ thể không được schema xác nhận.",
+      "confidence": 0.9,
+      "source_table": "inventory_snapshots",
+      "source_column": "snapshot_date",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:inventory_snapshots.qty_on_hand",
+      "name": "qtyOnHand",
+      "description": "Số lượng tồn kho thực tế tại thời điểm snapshot, không âm.",
+      "confidence": 0.95,
+      "source_table": "inventory_snapshots",
+      "source_column": "qty_on_hand",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:inventory_snapshots.qty_reserved",
+      "name": "qtyReserved",
+      "description": "Số lượng đã đặt giữ tại thời điểm snapshot, không âm và không vượt quá qty_on_hand.",
+      "confidence": 0.95,
+      "source_table": "inventory_snapshots",
+      "source_column": "qty_reserved",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByStoreProductDate",
+      "description": "Tìm bản ghi snapshot tồn kho theo tổ hợp cửa hàng, sản phẩm và ngày (duy nhất toàn bảng).",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        },
+        {
+          "name": "snapshotDate",
+          "type": "string",
+          "required": true,
+          "source_column": "snapshot_date",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "snapshot_id",
+          "store_id",
+          "product_id",
+          "snapshot_date",
+          "qty_on_hand",
+          "qty_reserved"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "snapshot_id",
+        "store_id",
+        "product_id",
+        "snapshot_date",
+        "qty_on_hand",
+        "qty_reserved"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:inventory_snapshots.lookupByStoreProductDate",
+      "owner_class_id": "class:inventory_snapshots",
+      "source_table": "inventory_snapshots",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByStore",
+      "description": "Liệt kê các snapshot tồn kho của một cửa hàng, có thể lọc thêm theo sản phẩm và khoảng ngày.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "required": false,
+          "source_column": "product_id",
+          "operator": "eq"
+        },
+        {
+          "name": "snapshotDateFrom",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "gte"
+        },
+        {
+          "name": "snapshotDateTo",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "snapshot_id",
+          "store_id",
+          "product_id",
+          "snapshot_date",
+          "qty_on_hand",
+          "qty_reserved"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "snapshot_id",
+        "store_id",
+        "product_id",
+        "snapshot_date",
+        "qty_on_hand",
+        "qty_reserved"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:inventory_snapshots.listByStore",
+      "owner_class_id": "class:inventory_snapshots",
+      "source_table": "inventory_snapshots",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByProduct",
+      "description": "Liệt kê các snapshot tồn kho của một sản phẩm, có thể lọc thêm theo cửa hàng và khoảng ngày.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        },
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "snapshotDateFrom",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "gte"
+        },
+        {
+          "name": "snapshotDateTo",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "snapshot_id",
+          "store_id",
+          "product_id",
+          "snapshot_date",
+          "qty_on_hand",
+          "qty_reserved"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "snapshot_id",
+        "store_id",
+        "product_id",
+        "snapshot_date",
+        "qty_on_hand",
+        "qty_reserved"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:inventory_snapshots.listByProduct",
+      "owner_class_id": "class:inventory_snapshots",
+      "source_table": "inventory_snapshots",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByStore",
+      "description": "Đếm số bản ghi snapshot tồn kho của một cửa hàng, có thể lọc thêm theo sản phẩm và khoảng ngày.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "required": false,
+          "source_column": "product_id",
+          "operator": "eq"
+        },
+        {
+          "name": "snapshotDateFrom",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "gte"
+        },
+        {
+          "name": "snapshotDateTo",
+          "type": "string",
+          "required": false,
+          "source_column": "snapshot_date",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "store_id",
+        "product_id",
+        "snapshot_date"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:inventory_snapshots.countByStore",
+      "owner_class_id": "class:inventory_snapshots",
+      "source_table": "inventory_snapshots",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "snapshot_date có kiểu TEXT; định dạng ngày (ISO 8601, YYYY-MM-DD, hay khác) không được schema xác nhận, do đó các filter gte/lte trên cột này phụ thuộc vào định dạng thực tế của dữ liệu.",
+    "snapshot_id là khóa chính INTEGER nhưng DDL không có AUTOINCREMENT; SQLite có thể cấp rowid khi ứng dụng không chỉ định giá trị.",
+    "qty_reserved ≤ qty_on_hand được đảm bảo bởi CHECK constraint, nhưng ý nghĩa nghiệp vụ cụ thể của 'reserved' (đặt trước, đang xử lý đơn, v.v.) không được schema xác nhận."
+  ],
+  "input_fingerprint": "532254a7a5b9de27ad3736a4f9715453d777fec8f7e2d11f1fdba9e7ab95fd6b",
+  "relations": [
+    {
+      "relation_id": "fk:414459466aa044594654457b:1",
+      "name": "inventorySnapshotToProduct",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:inventory_snapshots",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:inventory_snapshots.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "inventory_snapshots",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:414459466aa044594654457b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:9018fc15e3b26510bd233872:1",
+      "name": "inventorySnapshotToStore",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:inventory_snapshots",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:inventory_snapshots.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "inventory_snapshots",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9018fc15e3b26510bd233872:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

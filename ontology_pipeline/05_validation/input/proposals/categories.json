@@ -1,0 +1,128 @@
+{
+  "class_name": "Category",
+  "description": "Bản ghi danh mục sản phẩm, có parent_category_id tham chiếu category_id trong cùng bảng; có thể không có tham chiếu.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "category_id",
+      "name": "categoryId",
+      "description": "Khóa chính của danh mục, kiểu INTEGER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "category_name",
+      "name": "categoryName",
+      "description": "Tên của danh mục, bắt buộc có giá trị.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "parent_category_id",
+      "name": "parentCategoryId",
+      "description": "Tham chiếu category_id trong cùng bảng, có thể NULL.",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupCategory",
+      "description": "Tra cứu một danh mục theo category_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "categoryId",
+          "type": "integer",
+          "required": true,
+          "source_column": "category_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listCategories",
+      "description": "Liệt kê danh mục, có thể lọc theo parent_category_id hoặc tìm kiếm theo category_name.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "parent_category_id",
+          "operator": "eq"
+        },
+        {
+          "name": "categoryName",
+          "type": "string",
+          "required": false,
+          "source_column": "category_name",
+          "operator": "contains"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "name": "countCategories",
+      "description": "Đếm số danh mục, có thể lọc theo parent_category_id.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "parent_category_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "parent_category_id"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "assumptions": [
+    "category_name không có ràng buộc UNIQUE, nên có thể tồn tại nhiều danh mục cùng tên.",
+    "parent_category_id có thể trỏ tới chính category_id của bản ghi hiện tại; schema không có ràng buộc ngăn chu trình."
+  ]
+}

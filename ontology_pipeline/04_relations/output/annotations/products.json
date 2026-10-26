@@ -1,0 +1,27 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:1ca4934b55d522a257faee39:1",
+      "name": "productBrand",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Brand qua cột brand_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:3282f4e3a36f192ee4a91cef:1",
+      "name": "productPromotion",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Promotion qua cột promotion_id.",
+      "confidence": 0.93,
+      "assumptions": [
+        "Khóa ngoại chỉ thiết lập tham chiếu; không xác nhận khuyến mãi đang hiệu lực tại thời điểm truy vấn."
+      ]
+    },
+    {
+      "relation_id": "fk:b9167cb8ed2a5bffc6cbd46d:1",
+      "name": "productCategory",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Category qua cột category_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

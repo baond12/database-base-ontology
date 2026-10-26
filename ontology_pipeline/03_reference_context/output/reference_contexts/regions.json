@@ -1,0 +1,371 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:regions",
+  "current": {
+    "class": {
+      "class_id": "class:regions",
+      "name": "Region",
+      "source_table": "regions",
+      "description": "Khu vực địa lý trong hệ thống bán lẻ đa kênh, được định danh bằng mã vùng duy nhất.",
+      "metadata_description": "",
+      "confidence": 0.95,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:regions.region_id",
+        "name": "regionId",
+        "description": "Khóa chính của khu vực, kiểu INTEGER.",
+        "confidence": 0.95,
+        "source_table": "regions",
+        "source_column": "region_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:regions.region_code",
+        "name": "regionCode",
+        "description": "Mã vùng duy nhất, không trùng lặp trong bảng.",
+        "confidence": 0.95,
+        "source_table": "regions",
+        "source_column": "region_code",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:regions.region_name",
+        "name": "regionName",
+        "description": "Tên hiển thị của khu vực.",
+        "confidence": 0.95,
+        "source_table": "regions",
+        "source_column": "region_name",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "7c2e9e0a28d0710ca0ed1cd83e12a39f6ef7e7eef09b6738b6a7568289209073"
+  },
+  "references": [
+    {
+      "class_id": "class:customers",
+      "ontology": {
+        "class": {
+          "class_id": "class:customers",
+          "name": "Customer",
+          "source_table": "customers",
+          "description": "Khách hàng trong hệ thống bán lẻ đa kênh, được phân loại theo phân khúc (Retail, VIP, Wholesale) và liên kết với một vùng/khu vực.",
+          "metadata_description": "",
+          "confidence": 0.92,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:customers.customer_id",
+            "name": "customerId",
+            "description": "Khóa chính của bản ghi khách hàng.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.customer_code",
+            "name": "customerCode",
+            "description": "Mã khách hàng duy nhất trong hệ thống, không trùng lặp.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.region_id",
+            "name": "regionId",
+            "description": "Tham chiếu đến vùng/khu vực mà khách hàng thuộc về.",
+            "confidence": 0.9,
+            "source_table": "customers",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.customer_segment",
+            "name": "customerSegment",
+            "description": "Phân khúc khách hàng, giới hạn trong các giá trị: Retail, VIP, Wholesale.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_segment",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.joined_at",
+            "name": "joinedAt",
+            "description": "Thời điểm khách hàng tham gia hệ thống, lưu dưới dạng TEXT.",
+            "confidence": 0.85,
+            "source_table": "customers",
+            "source_column": "joined_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "2120c88fc0afd61ab9d78b133a6ed06d2f48981aff4690d18e7fbf54cacd483f"
+      }
+    },
+    {
+      "class_id": "class:stores",
+      "ontology": {
+        "class": {
+          "class_id": "class:stores",
+          "name": "Store",
+          "source_table": "stores",
+          "description": "Cửa hàng bán lẻ trong hệ thống omnichannel, bao gồm mã định danh, tên, khu vực, thành phố và ngày mở.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:stores.store_id",
+            "name": "storeId",
+            "description": "Khóa chính của cửa hàng, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "stores",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:stores.store_code",
+            "name": "storeCode",
+            "description": "Mã cửa hàng, duy nhất trong bảng.",
+            "confidence": 0.95,
+            "source_table": "stores",
+            "source_column": "store_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:stores.store_name",
+            "name": "storeName",
+            "description": "Tên cửa hàng.",
+            "confidence": 0.95,
+            "source_table": "stores",
+            "source_column": "store_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:stores.region_id",
+            "name": "regionId",
+            "description": "Tham chiếu đến vùng/khu vực mà cửa hàng thuộc về (regions.region_id).",
+            "confidence": 0.95,
+            "source_table": "stores",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:stores.city",
+            "name": "city",
+            "description": "Thành phố nơi cửa hàng tọa lạc.",
+            "confidence": 0.95,
+            "source_table": "stores",
+            "source_column": "city",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:stores.opened_on",
+            "name": "openedOn",
+            "description": "Ngày mở cửa hàng, lưu dưới dạng TEXT.",
+            "confidence": 0.9,
+            "source_table": "stores",
+            "source_column": "opened_on",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "2e95c093adbac758935bacfa1d32bb8d8c090f7246184f0312cad360cb1da413"
+      }
+    },
+    {
+      "class_id": "class:suppliers",
+      "ontology": {
+        "class": {
+          "class_id": "class:suppliers",
+          "name": "Supplier",
+          "source_table": "suppliers",
+          "description": "Nhà cung cấp trong hệ thống bán lẻ đa kênh, mỗi nhà cung cấp có tên duy nhất và thuộc về một vùng/khu vực.",
+          "metadata_description": "",
+          "confidence": 0.92,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:suppliers.supplier_id",
+            "name": "supplierId",
+            "description": "Khóa chính của nhà cung cấp, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "suppliers",
+            "source_column": "supplier_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:suppliers.supplier_name",
+            "name": "supplierName",
+            "description": "Tên nhà cung cấp, bắt buộc và duy nhất trong bảng.",
+            "confidence": 0.95,
+            "source_table": "suppliers",
+            "source_column": "supplier_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:suppliers.region_id",
+            "name": "regionId",
+            "description": "Tham chiếu đến vùng/khu vực mà nhà cung cấp thuộc về, bắt buộc.",
+            "confidence": 0.9,
+            "source_table": "suppliers",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "a09f567e7ea311d559416587c115d3b86cbec69ee532d5c8edf9d28db1192ca4"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "customers",
+      "source_columns": [
+        "region_id"
+      ],
+      "target_table": "regions",
+      "target_columns": [
+        "region_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:a283ee7a5099b23e1147b7d1:1"
+    },
+    {
+      "source_table": "stores",
+      "source_columns": [
+        "region_id"
+      ],
+      "target_table": "regions",
+      "target_columns": [
+        "region_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:f09377f1f9863f5d6e217f86:1"
+    },
+    {
+      "source_table": "suppliers",
+      "source_columns": [
+        "region_id"
+      ],
+      "target_table": "regions",
+      "target_columns": [
+        "region_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:10a35090f252896640d3ee73:1"
+    }
+  ],
+  "context_fingerprint": "234d49734b1f6a45c3fcbb7e17fe72471ded88c455ae91fc1a5154715a0e0f10"
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "code_cells_executed": 15,
+  "custom_classes": 0,
+  "try_except_blocks": 1,
+  "imports_legacy_repo": false,
+  "hardcoded_machine_paths": false,
+  "api_key_in_git_candidates": false,
+  "row_database_in_git_candidates": false,
+  "git_candidate_files": 375,
+  "structural_status": "PASS",
+  "regression_checks": 38,
+  "semantic_reviews": 20,
+  "unresolved_ai_findings": 0,
+  "portable_execution": "PASS",
+  "versions": {
+    "requests": "2.32.5",
+    "jsonschema": "4.19.2",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0",
+    "ipykernel": "7.4.0"
+  }
+}

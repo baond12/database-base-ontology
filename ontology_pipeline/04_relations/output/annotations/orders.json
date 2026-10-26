@@ -1,0 +1,43 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:06a913a6b3fcac6b9086f05b:1",
+      "name": "orderChannel",
+      "description": "Mỗi Order tham chiếu đến một Channel qua cột channel_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:31c7cd7e496bc75c99a652eb:1",
+      "name": "orderStore",
+      "description": "Mỗi Order tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:925c89136854bd14425db972:1",
+      "name": "orderChat",
+      "description": "Mỗi Order có thể tham chiếu đến một Chat qua cột chat_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh chat gây ra đơn hàng."
+      ]
+    },
+    {
+      "relation_id": "fk:a59a4bf83f0bbb4455a60168:1",
+      "name": "orderCustomer",
+      "description": "Mỗi Order tham chiếu đến một Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1",
+      "name": "orderAgent",
+      "description": "Mỗi Order có thể tham chiếu đến một Agent qua cột agent_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh agent tạo hoặc chốt đơn hàng."
+      ]
+    }
+  ]
+}

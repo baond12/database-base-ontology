@@ -1,0 +1,687 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:stores",
+  "current": {
+    "class": {
+      "class_id": "class:stores",
+      "name": "Store",
+      "source_table": "stores",
+      "description": "Cửa hàng bán lẻ trong hệ thống omnichannel, bao gồm mã định danh, tên, khu vực, thành phố và ngày mở.",
+      "metadata_description": "",
+      "confidence": 0.95,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:stores.store_id",
+        "name": "storeId",
+        "description": "Khóa chính của cửa hàng, kiểu INTEGER.",
+        "confidence": 0.95,
+        "source_table": "stores",
+        "source_column": "store_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:stores.store_code",
+        "name": "storeCode",
+        "description": "Mã cửa hàng, duy nhất trong bảng.",
+        "confidence": 0.95,
+        "source_table": "stores",
+        "source_column": "store_code",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:stores.store_name",
+        "name": "storeName",
+        "description": "Tên cửa hàng.",
+        "confidence": 0.95,
+        "source_table": "stores",
+        "source_column": "store_name",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:stores.region_id",
+        "name": "regionId",
+        "description": "Tham chiếu đến vùng/khu vực mà cửa hàng thuộc về (regions.region_id).",
+        "confidence": 0.95,
+        "source_table": "stores",
+        "source_column": "region_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:stores.city",
+        "name": "city",
+        "description": "Thành phố nơi cửa hàng tọa lạc.",
+        "confidence": 0.95,
+        "source_table": "stores",
+        "source_column": "city",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:stores.opened_on",
+        "name": "openedOn",
+        "description": "Ngày mở cửa hàng, lưu dưới dạng TEXT.",
+        "confidence": 0.9,
+        "source_table": "stores",
+        "source_column": "opened_on",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "2e95c093adbac758935bacfa1d32bb8d8c090f7246184f0312cad360cb1da413"
+  },
+  "references": [
+    {
+      "class_id": "class:agents",
+      "ontology": {
+        "class": {
+          "class_id": "class:agents",
+          "name": "Agent",
+          "source_table": "agents",
+          "description": "Đại lý bán hàng trong hệ thống bán lẻ đa kênh, có thể được gán về một cửa hàng và một nhóm.",
+          "metadata_description": "",
+          "confidence": 0.92,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:agents.agent_id",
+            "name": "agentId",
+            "description": "Định danh duy nhất của agent, khóa chính dạng TEXT.",
+            "confidence": 0.98,
+            "source_table": "agents",
+            "source_column": "agent_id",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.agent_code",
+            "name": "agentCode",
+            "description": "Mã agent, duy nhất trong bảng.",
+            "confidence": 0.95,
+            "source_table": "agents",
+            "source_column": "agent_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.full_name",
+            "name": "fullName",
+            "description": "Họ tên đầy đủ của agent.",
+            "confidence": 0.95,
+            "source_table": "agents",
+            "source_column": "full_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.store_id",
+            "name": "storeId",
+            "description": "Tham chiếu đến cửa hàng mà agent có thể được gán; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "agents",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.email",
+            "name": "email",
+            "description": "Địa chỉ email của agent, duy nhất trong bảng; có thể không có giá trị.",
+            "confidence": 0.93,
+            "source_table": "agents",
+            "source_column": "email",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.phone",
+            "name": "phone",
+            "description": "Số điện thoại của agent; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "agents",
+            "source_column": "phone",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.team",
+            "name": "team",
+            "description": "Nhóm mà agent thuộc về; có thể không có giá trị.",
+            "confidence": 0.88,
+            "source_table": "agents",
+            "source_column": "team",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.status",
+            "name": "status",
+            "description": "Trạng thái của agent, giá trị hợp lệ theo CHECK là 'ACTIVE' hoặc 'INACTIVE'; mặc định 'ACTIVE'.",
+            "confidence": 0.95,
+            "source_table": "agents",
+            "source_column": "status",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": "'ACTIVE'",
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:agents.created_at",
+            "name": "createdAt",
+            "description": "Thời điểm bản ghi được tạo, dạng TEXT; giá trị mặc định là CURRENT_TIMESTAMP.",
+            "confidence": 0.9,
+            "source_table": "agents",
+            "source_column": "created_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": "CURRENT_TIMESTAMP",
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "63cd072b299b970f4253dde89325c531995187c8de573ebabb92edffe7093b24"
+      }
+    },
+    {
+      "class_id": "class:inventory_snapshots",
+      "ontology": {
+        "class": {
+          "class_id": "class:inventory_snapshots",
+          "name": "InventorySnapshot",
+          "source_table": "inventory_snapshots",
+          "description": "Bản ghi chụp trạng thái tồn kho của một sản phẩm tại một cửa hàng vào một ngày cụ thể. Mỗi tổ hợp (cửa hàng, sản phẩm, ngày) tối đa một bản ghi.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:inventory_snapshots.snapshot_id",
+            "name": "snapshotId",
+            "description": "Khóa chính INTEGER của bản ghi snapshot tồn kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "snapshot_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.store_id",
+            "name": "storeId",
+            "description": "Tham chiếu đến cửa hàng (stores.store_id) nơi sản phẩm được lưu kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.product_id",
+            "name": "productId",
+            "description": "Tham chiếu đến sản phẩm (products.product_id) được chụp tồn kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.snapshot_date",
+            "name": "snapshotDate",
+            "description": "Ngày chụp snapshot tồn kho, kiểu TEXT. Định dạng cụ thể không được schema xác nhận.",
+            "confidence": 0.9,
+            "source_table": "inventory_snapshots",
+            "source_column": "snapshot_date",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.qty_on_hand",
+            "name": "qtyOnHand",
+            "description": "Số lượng tồn kho thực tế tại thời điểm snapshot, không âm.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "qty_on_hand",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.qty_reserved",
+            "name": "qtyReserved",
+            "description": "Số lượng đã đặt giữ tại thời điểm snapshot, không âm và không vượt quá qty_on_hand.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "qty_reserved",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "532254a7a5b9de27ad3736a4f9715453d777fec8f7e2d11f1fdba9e7ab95fd6b"
+      }
+    },
+    {
+      "class_id": "class:orders",
+      "ontology": {
+        "class": {
+          "class_id": "class:orders",
+          "name": "Order",
+          "source_table": "orders",
+          "description": "Đại diện một đơn hàng trong hệ thống bán lẻ đa kênh, bao gồm thông tin khách hàng, kênh, cửa hàng, trạng thái và các giá trị tài chính.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:orders.order_id",
+            "name": "orderId",
+            "description": "Khóa chính của đơn hàng, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "order_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.order_code",
+            "name": "orderCode",
+            "description": "Mã đơn hàng duy nhất trong toàn bảng.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "order_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.customer_id",
+            "name": "customerId",
+            "description": "Tham chiếu đến khách hàng liên quan đến đơn hàng.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.channel_id",
+            "name": "channelId",
+            "description": "Tham chiếu đến kênh bán hàng mà đơn hàng được đặt qua.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "channel_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.store_id",
+            "name": "storeId",
+            "description": "Tham chiếu đến cửa hàng liên quan đến đơn hàng.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.chat_id",
+            "name": "chatId",
+            "description": "Tham chiếu đến cuộc chat liên quan; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "chat_id",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.agent_id",
+            "name": "agentId",
+            "description": "Tham chiếu đến agent liên quan; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "agent_id",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.ordered_at",
+            "name": "orderedAt",
+            "description": "Thời điểm đặt hàng, lưu dưới dạng TEXT.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "ordered_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.status",
+            "name": "status",
+            "description": "Trạng thái đơn hàng, thuộc một trong các giá trị: placed, paid, shipped, delivered, cancelled.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "status",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.gross_amount",
+            "name": "grossAmount",
+            "description": "Tổng giá trị đơn hàng trước giảm giá, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "gross_amount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.discount_amount",
+            "name": "discountAmount",
+            "description": "Giá trị giảm giá áp dụng cho đơn hàng, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "discount_amount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.shipping_fee",
+            "name": "shippingFee",
+            "description": "Phí vận chuyển của đơn hàng, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "shipping_fee",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "100d20a9836f58a7d762acc4d88ed759e336fd6f68312f74642bd31087188057"
+      }
+    },
+    {
+      "class_id": "class:regions",
+      "ontology": {
+        "class": {
+          "class_id": "class:regions",
+          "name": "Region",
+          "source_table": "regions",
+          "description": "Khu vực địa lý trong hệ thống bán lẻ đa kênh, được định danh bằng mã vùng duy nhất.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:regions.region_id",
+            "name": "regionId",
+            "description": "Khóa chính của khu vực, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:regions.region_code",
+            "name": "regionCode",
+            "description": "Mã vùng duy nhất, không trùng lặp trong bảng.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:regions.region_name",
+            "name": "regionName",
+            "description": "Tên hiển thị của khu vực.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "7c2e9e0a28d0710ca0ed1cd83e12a39f6ef7e7eef09b6738b6a7568289209073"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "agents",
+      "source_columns": [
+        "store_id"
+      ],
+      "target_table": "stores",
+      "target_columns": [
+        "store_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:25d84fb39fb2430a7849b37e:1"
+    },
+    {
+      "source_table": "inventory_snapshots",
+      "source_columns": [
+        "store_id"
+      ],
+      "target_table": "stores",
+      "target_columns": [
+        "store_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:9018fc15e3b26510bd233872:1"
+    },
+    {
+      "source_table": "orders",
+      "source_columns": [
+        "store_id"
+      ],
+      "target_table": "stores",
+      "target_columns": [
+        "store_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:31c7cd7e496bc75c99a652eb:1"
+    },
+    {
+      "source_table": "stores",
+      "source_columns": [
+        "region_id"
+      ],
+      "target_table": "regions",
+      "target_columns": [
+        "region_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:f09377f1f9863f5d6e217f86:1"
+    }
+  ],
+  "context_fingerprint": "7dfd2d0266d3b914060a6ef4e8b0ec9e08091dc273435f560f21c6dd505321e4"
+}

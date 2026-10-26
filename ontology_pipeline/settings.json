@@ -1,0 +1,9 @@
+{
+  "database_id": "omnichannel_retail",
+  "base_url": "https://code-agent.cads.live/v1",
+  "model": "qwen/qwen3.6-27b",
+  "enable_thinking": true,
+  "max_tokens": 16000,
+  "timeout_seconds": 300,
+  "proxy_url": ""
+}

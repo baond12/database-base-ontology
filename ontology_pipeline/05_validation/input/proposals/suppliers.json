@@ -1,0 +1,122 @@
+{
+  "class_name": "Supplier",
+  "description": "Nhà cung cấp trong hệ thống bán lẻ đa kênh, mỗi nhà cung cấp có tên duy nhất và thuộc về một vùng/khu vực.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "supplier_id",
+      "name": "supplierId",
+      "description": "Khóa chính của nhà cung cấp, kiểu INTEGER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "supplier_name",
+      "name": "supplierName",
+      "description": "Tên nhà cung cấp, bắt buộc và duy nhất trong bảng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "region_id",
+      "name": "regionId",
+      "description": "Tham chiếu đến vùng/khu vực mà nhà cung cấp thuộc về, bắt buộc.",
+      "confidence": 0.9
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupSupplier",
+      "description": "Tra cứu một nhà cung cấp theo supplier_id, trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "supplierId",
+          "type": "integer",
+          "required": true,
+          "source_column": "supplier_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "supplier_id",
+          "supplier_name",
+          "region_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "supplier_id",
+        "supplier_name",
+        "region_id"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listSuppliers",
+      "description": "Danh sách nhà cung cấp, có thể lọc theo region_id.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "supplier_id",
+          "supplier_name",
+          "region_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "supplier_id",
+        "supplier_name",
+        "region_id"
+      ],
+      "confidence": 0.93
+    },
+    {
+      "name": "countSuppliers",
+      "description": "Đếm số nhà cung cấp, có thể lọc theo region_id.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id"
+      ],
+      "confidence": 0.93
+    }
+  ],
+  "assumptions": [
+    "supplier_id là khóa chính INTEGER; DDL không khai báo AUTOINCREMENT nên không khẳng định cơ chế cấp giá trị.",
+    "region_id tham chiếu regions(region_id) nhưng không có thêm thông tin về cấu trúc bảng regions trong ngữ cảnh hiện tại.",
+    "supplier_name duy nhất trong bảng (UNIQUE constraint) nhưng không có ràng buộc về độ dài hay định dạng cụ thể."
+  ]
+}

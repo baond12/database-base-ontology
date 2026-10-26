@@ -1,0 +1,460 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:support_tickets",
+  "current": {
+    "class": {
+      "class_id": "class:support_tickets",
+      "name": "SupportTicket",
+      "source_table": "support_tickets",
+      "description": "Vé hỗ trợ khách hàng, ghi nhận một vấn đề do khách hàng phản ánh, có thể liên kết với một đơn hàng và được phân loại theo loại vấn đề, mức ưu tiên và trạng thái xử lý.",
+      "metadata_description": "",
+      "confidence": 0.92,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:support_tickets.ticket_id",
+        "name": "ticketId",
+        "description": "Khóa chính định danh vé hỗ trợ.",
+        "confidence": 1.0,
+        "source_table": "support_tickets",
+        "source_column": "ticket_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.order_id",
+        "name": "orderId",
+        "description": "Tham chiếu đến đơn hàng liên quan (nếu có).",
+        "confidence": 0.95,
+        "source_table": "support_tickets",
+        "source_column": "order_id",
+        "data_type": "INTEGER",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.customer_id",
+        "name": "customerId",
+        "description": "Tham chiếu đến khách hàng liên quan đến vé hỗ trợ.",
+        "confidence": 0.95,
+        "source_table": "support_tickets",
+        "source_column": "customer_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.issue_type",
+        "name": "issueType",
+        "description": "Loại vấn đề được ghi nhận trong vé hỗ trợ.",
+        "confidence": 0.9,
+        "source_table": "support_tickets",
+        "source_column": "issue_type",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.priority",
+        "name": "priority",
+        "description": "Mức ưu tiên xử lý của vé hỗ trợ.",
+        "confidence": 0.9,
+        "source_table": "support_tickets",
+        "source_column": "priority",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.status",
+        "name": "status",
+        "description": "Trạng thái xử lý của vé hỗ trợ. Giá trị hợp lệ theo ràng buộc: open, in_progress, resolved.",
+        "confidence": 0.95,
+        "source_table": "support_tickets",
+        "source_column": "status",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.created_at",
+        "name": "createdAt",
+        "description": "Thời điểm vé hỗ trợ được tạo.",
+        "confidence": 0.9,
+        "source_table": "support_tickets",
+        "source_column": "created_at",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:support_tickets.resolved_at",
+        "name": "resolvedAt",
+        "description": "Thời điểm vé hỗ trợ được giải quyết (nếu có).",
+        "confidence": 0.9,
+        "source_table": "support_tickets",
+        "source_column": "resolved_at",
+        "data_type": "TEXT",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "adf3faf538d40ad9377a3d1c71570baccb5f9e432b0f26ed484c3ea895a6fd6e"
+  },
+  "references": [
+    {
+      "class_id": "class:customers",
+      "ontology": {
+        "class": {
+          "class_id": "class:customers",
+          "name": "Customer",
+          "source_table": "customers",
+          "description": "Khách hàng trong hệ thống bán lẻ đa kênh, được phân loại theo phân khúc (Retail, VIP, Wholesale) và liên kết với một vùng/khu vực.",
+          "metadata_description": "",
+          "confidence": 0.92,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:customers.customer_id",
+            "name": "customerId",
+            "description": "Khóa chính của bản ghi khách hàng.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.customer_code",
+            "name": "customerCode",
+            "description": "Mã khách hàng duy nhất trong hệ thống, không trùng lặp.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.region_id",
+            "name": "regionId",
+            "description": "Tham chiếu đến vùng/khu vực mà khách hàng thuộc về.",
+            "confidence": 0.9,
+            "source_table": "customers",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.customer_segment",
+            "name": "customerSegment",
+            "description": "Phân khúc khách hàng, giới hạn trong các giá trị: Retail, VIP, Wholesale.",
+            "confidence": 0.95,
+            "source_table": "customers",
+            "source_column": "customer_segment",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:customers.joined_at",
+            "name": "joinedAt",
+            "description": "Thời điểm khách hàng tham gia hệ thống, lưu dưới dạng TEXT.",
+            "confidence": 0.85,
+            "source_table": "customers",
+            "source_column": "joined_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "2120c88fc0afd61ab9d78b133a6ed06d2f48981aff4690d18e7fbf54cacd483f"
+      }
+    },
+    {
+      "class_id": "class:orders",
+      "ontology": {
+        "class": {
+          "class_id": "class:orders",
+          "name": "Order",
+          "source_table": "orders",
+          "description": "Đại diện một đơn hàng trong hệ thống bán lẻ đa kênh, bao gồm thông tin khách hàng, kênh, cửa hàng, trạng thái và các giá trị tài chính.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:orders.order_id",
+            "name": "orderId",
+            "description": "Khóa chính của đơn hàng, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "order_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.order_code",
+            "name": "orderCode",
+            "description": "Mã đơn hàng duy nhất trong toàn bảng.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "order_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.customer_id",
+            "name": "customerId",
+            "description": "Tham chiếu đến khách hàng liên quan đến đơn hàng.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.channel_id",
+            "name": "channelId",
+            "description": "Tham chiếu đến kênh bán hàng mà đơn hàng được đặt qua.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "channel_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.store_id",
+            "name": "storeId",
+            "description": "Tham chiếu đến cửa hàng liên quan đến đơn hàng.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.chat_id",
+            "name": "chatId",
+            "description": "Tham chiếu đến cuộc chat liên quan; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "chat_id",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.agent_id",
+            "name": "agentId",
+            "description": "Tham chiếu đến agent liên quan; có thể không có giá trị.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "agent_id",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.ordered_at",
+            "name": "orderedAt",
+            "description": "Thời điểm đặt hàng, lưu dưới dạng TEXT.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "ordered_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.status",
+            "name": "status",
+            "description": "Trạng thái đơn hàng, thuộc một trong các giá trị: placed, paid, shipped, delivered, cancelled.",
+            "confidence": 0.95,
+            "source_table": "orders",
+            "source_column": "status",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.gross_amount",
+            "name": "grossAmount",
+            "description": "Tổng giá trị đơn hàng trước giảm giá, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "gross_amount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.discount_amount",
+            "name": "discountAmount",
+            "description": "Giá trị giảm giá áp dụng cho đơn hàng, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "discount_amount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:orders.shipping_fee",
+            "name": "shippingFee",
+            "description": "Phí vận chuyển của đơn hàng, không âm.",
+            "confidence": 0.9,
+            "source_table": "orders",
+            "source_column": "shipping_fee",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "100d20a9836f58a7d762acc4d88ed759e336fd6f68312f74642bd31087188057"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "support_tickets",
+      "source_columns": [
+        "order_id"
+      ],
+      "target_table": "orders",
+      "target_columns": [
+        "order_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:53bc33c7c9ae11d6c20d37c8:1"
+    },
+    {
+      "source_table": "support_tickets",
+      "source_columns": [
+        "customer_id"
+      ],
+      "target_table": "customers",
+      "target_columns": [
+        "customer_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:abffce64a780065887055a37:1"
+    }
+  ],
+  "context_fingerprint": "6819e13187c77173d8a9ec579ff136d114eeeffb5a36a976917bfab1e49c9b36"
+}

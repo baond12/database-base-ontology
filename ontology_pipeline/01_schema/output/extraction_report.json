@@ -1,0 +1,10 @@
+{
+  "tables": 20,
+  "columns": 157,
+  "foreign_keys": 31,
+  "source": {
+    "kind": "sqlite_read_only",
+    "file": "input/database.local.sqlite3",
+    "sha256": "948e4a1bd0b5bbb4c20e75ccfea6c4e3422c033fa44575ad615d0c3156e36916"
+  }
+}

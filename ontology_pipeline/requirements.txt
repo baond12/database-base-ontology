@@ -1,0 +1,5 @@
+requests>=2.31,<3
+jsonschema>=4.18,<5
+ipykernel>=6
+nbformat>=5
+nbclient>=0.10

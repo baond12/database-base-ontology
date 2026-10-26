@@ -1,0 +1,4 @@
+{
+  "addresses": "customer_id chỉ xác nhận liên kết FK tới customers.customer_id. Không khẳng định khách hàng sở hữu/tạo lập địa chỉ khi không có metadata. Dùng mô tả trung tính \"Tham chiếu đến khách hàng liên kết với địa chỉ\" để nhất quán với assumptions của Relation. Không suy diễn nguyên nhân của NULL.",
+  "categories": "parent_category_id có thể trỏ tới bất kỳ bản ghi nào, kể cả chính bản ghi hiện tại. Schema không có CHECK(parent_category_id <> category_id) và không chặn chu trình. Không dùng \"danh mục khác\" hoặc \"bản ghi khác\" như một điều kiện bắt buộc. Description nên nói tham chiếu category_id trong cùng bảng, có thể NULL; không khẳng định là root. Không dùng từ \"khác\" ở description của Class hoặc Property self-FK. Dùng câu Class: \"Bản ghi danh mục sản phẩm, có parent_category_id tham chiếu category_id trong cùng bảng; có thể không có tham chiếu.\" Đã kiểm tra SQLite cho phép parent_category_id bằng chính category_id."
+}

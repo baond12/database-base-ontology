@@ -1,0 +1,287 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:agents",
+    "name": "Agent",
+    "source_table": "agents",
+    "description": "Đại lý bán hàng trong hệ thống bán lẻ đa kênh, gắn với một cửa hàng và thuộc một nhóm (team), có trạng thái hoạt động.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:agents.agent_id",
+      "name": "agentId",
+      "description": "Mã định danh chính của đại lý (chìa khóa chính).",
+      "confidence": 0.98,
+      "source_table": "agents",
+      "source_column": "agent_id",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.agent_code",
+      "name": "agentCode",
+      "description": "Mã đại lý duy nhất, dùng để nhận diện trong nghiệp vụ.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "agent_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.full_name",
+      "name": "fullName",
+      "description": "Họ và tên đầy đủ của đại lý.",
+      "confidence": 0.97,
+      "source_table": "agents",
+      "source_column": "full_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.store_id",
+      "name": "storeId",
+      "description": "Mã cửa hàng mà đại lý được phân công, tham chiếu bảng stores.",
+      "confidence": 0.93,
+      "source_table": "agents",
+      "source_column": "store_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.email",
+      "name": "email",
+      "description": "Địa chỉ email của đại lý, duy nhất trong bảng.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "email",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.phone",
+      "name": "phone",
+      "description": "Số điện thoại liên hệ của đại lý.",
+      "confidence": 0.94,
+      "source_table": "agents",
+      "source_column": "phone",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.team",
+      "name": "team",
+      "description": "Tên nhóm (team) mà đại lý thuộc về.",
+      "confidence": 0.9,
+      "source_table": "agents",
+      "source_column": "team",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.status",
+      "name": "status",
+      "description": "Trạng thái của đại lý, giá trị hợp lệ: ACTIVE hoặc INACTIVE. Mặc định là ACTIVE.",
+      "confidence": 0.96,
+      "source_table": "agents",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "'ACTIVE'",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.created_at",
+      "name": "createdAt",
+      "description": "Thời điểm bản ghi đại lý được tạo, mặc định là CURRENT_TIMESTAMP.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "created_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "CURRENT_TIMESTAMP",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByAgentId",
+      "description": "Tra cứu một đại lý theo mã định danh chính agent_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "agentId",
+          "type": "string",
+          "required": true,
+          "source_column": "agent_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:agents.lookupByAgentId",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByStoreId",
+      "description": "Liệt kê các đại lý thuộc một cửa hàng theo store_id.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.94,
+      "method_id": "method:agents.listByStoreId",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByStatus",
+      "description": "Đếm số đại lý theo trạng thái (ACTIVE hoặc INACTIVE).",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:agents.countByStatus",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "agent_code được dùng làm mã nhận diện nghiệp vụ của đại lý, phân biệt với agent_id (chìa khóa kỹ thuật).",
+    "Cột team lưu tên nhóm dưới dạng chuỗi tự do, không tham chiếu bảng nào khác trong schema hiện tại.",
+    "created_at lưu dạng TEXT theo định dạng mặc định của CURRENT_TIMESTAMP trong SQLite (YYYY-MM-DD HH:MM:SS, UTC).",
+    "store_id có thể null, nghĩa là đại lý có thể chưa được phân công cửa hàng."
+  ],
+  "input_fingerprint": "63cd072b299b970f4253dde89325c531995187c8de573ebabb92edffe7093b24"
+}

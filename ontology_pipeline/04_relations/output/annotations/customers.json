@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:a283ee7a5099b23e1147b7d1:1",
+      "name": "customerRegion",
+      "description": "Bản ghi Customer tham chiếu bản ghi Region qua cột region_id, xác định vùng/khu vực mà khách hàng thuộc về.",
+      "confidence": 0.92,
+      "assumptions": []
+    }
+  ]
+}

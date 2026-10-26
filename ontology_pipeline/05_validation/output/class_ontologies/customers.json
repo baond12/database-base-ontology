@@ -1,0 +1,471 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:customers",
+    "name": "Customer",
+    "source_table": "customers",
+    "description": "Khách hàng trong hệ thống bán lẻ đa kênh, được phân loại theo phân khúc (Retail, VIP, Wholesale) và liên kết với một vùng/khu vực.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:customers.customer_id",
+      "name": "customerId",
+      "description": "Khóa chính của bản ghi khách hàng.",
+      "confidence": 0.95,
+      "source_table": "customers",
+      "source_column": "customer_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.customer_code",
+      "name": "customerCode",
+      "description": "Mã khách hàng duy nhất trong hệ thống, không trùng lặp.",
+      "confidence": 0.95,
+      "source_table": "customers",
+      "source_column": "customer_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.region_id",
+      "name": "regionId",
+      "description": "Tham chiếu đến vùng/khu vực mà khách hàng thuộc về.",
+      "confidence": 0.9,
+      "source_table": "customers",
+      "source_column": "region_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.customer_segment",
+      "name": "customerSegment",
+      "description": "Phân khúc khách hàng, giới hạn trong các giá trị: Retail, VIP, Wholesale.",
+      "confidence": 0.95,
+      "source_table": "customers",
+      "source_column": "customer_segment",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.joined_at",
+      "name": "joinedAt",
+      "description": "Thời điểm khách hàng tham gia hệ thống, lưu dưới dạng TEXT.",
+      "confidence": 0.85,
+      "source_table": "customers",
+      "source_column": "joined_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByCustomerId",
+      "description": "Tra cứu một khách hàng theo khóa chính customer_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:customers.lookupByCustomerId",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupByCustomerCode",
+      "description": "Tra cứu một khách hàng theo mã khách hàng duy nhất customer_code. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerCode",
+          "type": "string",
+          "required": true,
+          "source_column": "customer_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:customers.lookupByCustomerCode",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listCustomers",
+      "description": "Liệt kê khách hàng, có thể lọc theo region_id và/hoặc customer_segment.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.92,
+      "method_id": "method:customers.listCustomers",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countCustomers",
+      "description": "Đếm số khách hàng, có thể lọc theo region_id và/hoặc customer_segment.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id",
+        "customer_segment"
+      ],
+      "confidence": 0.92,
+      "method_id": "method:customers.countCustomers",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột joined_at có kiểu TEXT nhưng không có ràng buộc định dạng; không xác nhận định dạng cụ thể (ISO 8601, yyyy-MM-dd, v.v.) cho mọi giá trị.",
+    "customer_id là INTEGER PRIMARY KEY nhưng DDL không khai báo AUTOINCREMENT; không khẳng định giá trị được cấp tự động.",
+    "region_id tham chiếu regions(region_id) nhưng không có ràng buộc ON DELETE/ON UPDATE khác NO ACTION; không xác nhận hành vi khi vùng bị xóa."
+  ],
+  "input_fingerprint": "2120c88fc0afd61ab9d78b133a6ed06d2f48981aff4690d18e7fbf54cacd483f",
+  "relations": [
+    {
+      "relation_id": "fk:1a63e58c48c731ca43afd203:1",
+      "name": "chatCustomer",
+      "description": "Bản ghi Chat tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:chats.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "RESTRICT",
+        "match": "NONE",
+        "relation_id": "fk:1a63e58c48c731ca43afd203:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1",
+      "name": "addressToCustomer",
+      "description": "Bản ghi Address tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:addresses",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:addresses.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "addresses",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "CASCADE",
+        "match": "NONE",
+        "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a283ee7a5099b23e1147b7d1:1",
+      "name": "customerRegion",
+      "description": "Bản ghi Customer tham chiếu bản ghi Region qua cột region_id, xác định vùng/khu vực mà khách hàng thuộc về.",
+      "confidence": 0.92,
+      "assumptions": [],
+      "source_class_id": "class:customers",
+      "target_class_id": "class:regions",
+      "source_property_ids": [
+        "property:customers.region_id"
+      ],
+      "target_property_ids": [
+        "property:regions.region_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "customers",
+        "source_columns": [
+          "region_id"
+        ],
+        "target_table": "regions",
+        "target_columns": [
+          "region_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:a283ee7a5099b23e1147b7d1:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a59a4bf83f0bbb4455a60168:1",
+      "name": "orderCustomer",
+      "description": "Mỗi Order tham chiếu đến một Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:orders.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:a59a4bf83f0bbb4455a60168:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:abffce64a780065887055a37:1",
+      "name": "ticketCustomerReference",
+      "description": "Mỗi bản ghi SupportTicket tham chiếu một bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:support_tickets",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:support_tickets.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "support_tickets",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:abffce64a780065887055a37:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

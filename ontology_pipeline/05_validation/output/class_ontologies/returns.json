@@ -1,0 +1,339 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:returns",
+    "name": "Return",
+    "source_table": "returns",
+    "description": "Bản ghi yêu cầu trả hàng cho một order item, bao gồm số lượng trả, số tiền hoàn, trạng thái xử lý và thời điểm liên quan.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:returns.return_id",
+      "name": "returnId",
+      "description": "Khóa chính của bản ghi trả hàng.",
+      "confidence": 0.98,
+      "source_table": "returns",
+      "source_column": "return_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.order_item_id",
+      "name": "orderItemId",
+      "description": "Tham chiếu đến order_items, xác định order item được trả.",
+      "confidence": 0.95,
+      "source_table": "returns",
+      "source_column": "order_item_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.return_qty",
+      "name": "returnQty",
+      "description": "Số lượng sản phẩm được trả, luôn lớn hơn 0.",
+      "confidence": 0.95,
+      "source_table": "returns",
+      "source_column": "return_qty",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.refund_amount",
+      "name": "refundAmount",
+      "description": "Số tiền hoàn cho lần trả hàng, luôn lớn hơn hoặc bằng 0. Đơn vị tiền tệ không được schema xác định.",
+      "confidence": 0.9,
+      "source_table": "returns",
+      "source_column": "refund_amount",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.status",
+      "name": "status",
+      "description": "Trạng thái xử lý yêu cầu trả hàng: requested, approved hoặc rejected.",
+      "confidence": 0.97,
+      "source_table": "returns",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.requested_at",
+      "name": "requestedAt",
+      "description": "Thời điểm yêu cầu trả hàng được tạo, kiểu TEXT.",
+      "confidence": 0.9,
+      "source_table": "returns",
+      "source_column": "requested_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:returns.decided_at",
+      "name": "decidedAt",
+      "description": "Thời điểm quyết định (duyệt hoặc từ chối) yêu cầu trả hàng, kiểu TEXT, có thể null.",
+      "confidence": 0.88,
+      "source_table": "returns",
+      "source_column": "decided_at",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupReturn",
+      "description": "Tra cứu một bản ghi trả hàng theo return_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "returnId",
+          "type": "integer",
+          "required": true,
+          "source_column": "return_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "return_id",
+          "order_item_id",
+          "return_qty",
+          "refund_amount",
+          "status",
+          "requested_at",
+          "decided_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "return_id",
+        "order_item_id",
+        "return_qty",
+        "refund_amount",
+        "status",
+        "requested_at",
+        "decided_at"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:returns.lookupReturn",
+      "owner_class_id": "class:returns",
+      "source_table": "returns",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listReturnsByOrderItem",
+      "description": "Liệt kê các bản ghi trả hàng theo order_item_id, có thể lọc thêm theo status.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "orderItemId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_item_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "return_id",
+          "order_item_id",
+          "return_qty",
+          "refund_amount",
+          "status",
+          "requested_at",
+          "decided_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "return_id",
+        "order_item_id",
+        "return_qty",
+        "refund_amount",
+        "status",
+        "requested_at",
+        "decided_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:returns.listReturnsByOrderItem",
+      "owner_class_id": "class:returns",
+      "source_table": "returns",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countReturns",
+      "description": "Đếm số bản ghi trả hàng, có thể lọc theo status và order_item_id.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "orderItemId",
+          "type": "integer",
+          "required": false,
+          "source_column": "order_item_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "order_item_id"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:returns.countReturns",
+      "owner_class_id": "class:returns",
+      "source_table": "returns",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "aggregateRefundByStatus",
+      "description": "Tổng số tiền hoàn (sum refund_amount) nhóm theo status.",
+      "operation": "aggregate",
+      "input_parameters": [],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "totalRefundAmount",
+            "function": "sum",
+            "source_column": "refund_amount"
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "refund_amount"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:returns.aggregateRefundByStatus",
+      "owner_class_id": "class:returns",
+      "source_table": "returns",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Đơn vị tiền tệ của refund_amount không được schema xác định; chỉ biết là số nguyên không âm.",
+    "requested_at và decided_at có kiểu TEXT; định dạng cụ thể (ISO 8601, epoch, v.v.) không được schema quy định.",
+    "decided_at có thể null; schema không xác nhận điều kiện nào khiến cột này có giá trị hay không (ví dụ: chỉ khi status không còn requested).",
+    "Không có ràng buộc UNIQUE trên order_item_id, nên một order item có thể có nhiều bản ghi trả hàng."
+  ],
+  "input_fingerprint": "59a5c47d082d280455b382a325527cccb14276b74bc12fbe583d5bc5d7edcae7",
+  "relations": [
+    {
+      "relation_id": "fk:f4a7a6e7f495b00374e049a4:1",
+      "name": "returnToOrderItem",
+      "description": "Bản ghi Return tham chiếu bản ghi OrderItem qua cột order_item_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:returns",
+      "target_class_id": "class:order_items",
+      "source_property_ids": [
+        "property:returns.order_item_id"
+      ],
+      "target_property_ids": [
+        "property:order_items.order_item_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "returns",
+        "source_columns": [
+          "order_item_id"
+        ],
+        "target_table": "order_items",
+        "target_columns": [
+          "order_item_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:f4a7a6e7f495b00374e049a4:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

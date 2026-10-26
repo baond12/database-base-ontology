@@ -1,0 +1,195 @@
+{
+  "class_name": "Store",
+  "description": "Cửa hàng bán lẻ trong hệ thống omnichannel, bao gồm mã định danh, tên, khu vực, thành phố và ngày mở.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "store_id",
+      "name": "storeId",
+      "description": "Khóa chính của cửa hàng, kiểu INTEGER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "store_code",
+      "name": "storeCode",
+      "description": "Mã cửa hàng, duy nhất trong bảng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "store_name",
+      "name": "storeName",
+      "description": "Tên cửa hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "region_id",
+      "name": "regionId",
+      "description": "Tham chiếu đến vùng/khu vực mà cửa hàng thuộc về (regions.region_id).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "city",
+      "name": "city",
+      "description": "Thành phố nơi cửa hàng tọa lạc.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "opened_on",
+      "name": "openedOn",
+      "description": "Ngày mở cửa hàng, lưu dưới dạng TEXT.",
+      "confidence": 0.9
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupStore",
+      "description": "Tra cứu một cửa hàng theo khóa chính store_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "lookupStoreByCode",
+      "description": "Tra cứu một cửa hàng theo mã cửa hàng duy nhất store_code.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "storeCode",
+          "type": "string",
+          "required": true,
+          "source_column": "store_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listStoresByRegion",
+      "description": "Liệt kê các cửa hàng thuộc một vùng/khu vực được chỉ định bởi region_id.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": true,
+          "source_column": "region_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "countStores",
+      "description": "Đếm số cửa hàng, có thể lọc theo region_id và/hoặc city.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "city",
+          "type": "string",
+          "required": false,
+          "source_column": "city",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id",
+        "city"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "assumptions": [
+    "Cột opened_on có kiểu TEXT nhưng không có ràng buộc kiểm tra định dạng ngày; không xác nhận định dạng cụ thể (ISO 8601 hay khác).",
+    "store_code UNIQUE đảm bảo tối đa một cửa hàng cho mỗi mã, nhưng không đảm bảo mọi cửa hàng đều có mã theo quy tắc đặt tên cụ thể nào."
+  ]
+}

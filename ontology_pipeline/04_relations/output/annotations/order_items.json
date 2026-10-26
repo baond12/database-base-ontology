@@ -1,0 +1,27 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:05385e149a6ad8573cc0954b:1",
+      "name": "orderItemToProduct",
+      "description": "Mỗi OrderItem tham chiếu đến một Product qua cột product_id.",
+      "confidence": 0.97,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1",
+      "name": "orderItemToPromotion",
+      "description": "Mỗi OrderItem có thể tham chiếu đến một Promotion qua cột promotion_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Không xác nhận promotion đang hiệu lực tại thời điểm ghi nhận dòng hàng; FK chỉ thiết lập tham chiếu."
+      ]
+    },
+    {
+      "relation_id": "fk:8ee79468a0864b8cce923f9b:1",
+      "name": "orderItemToOrder",
+      "description": "Mỗi OrderItem tham chiếu đến một Order qua cột order_id.",
+      "confidence": 0.97,
+      "assumptions": []
+    }
+  ]
+}

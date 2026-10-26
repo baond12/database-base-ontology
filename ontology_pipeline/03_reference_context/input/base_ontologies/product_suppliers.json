@@ -1,0 +1,214 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:product_suppliers",
+    "name": "ProductSupplier",
+    "source_table": "product_suppliers",
+    "description": "Bản ghi liên kết giữa một sản phẩm và một nhà cung cấp, kèm cờ chỉ định nhà cung cấp chính. Khóa chính gồm (product_id, supplier_id), đảm bảo mỗi cặp sản phẩm–nhà cung cấp chỉ xuất hiện một lần.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:product_suppliers.product_id",
+      "name": "productId",
+      "description": "Mã sản phẩm, tham chiếu đến bảng products. Là một phần của khóa chính.",
+      "confidence": 0.98,
+      "source_table": "product_suppliers",
+      "source_column": "product_id",
+      "data_type": "VARCHAR(50)",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:product_suppliers.supplier_id",
+      "name": "supplierId",
+      "description": "Mã nhà cung cấp, tham chiếu đến bảng suppliers. Là một phần của khóa chính.",
+      "confidence": 0.98,
+      "source_table": "product_suppliers",
+      "source_column": "supplier_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 2,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:product_suppliers.is_primary",
+      "name": "isPrimary",
+      "description": "Cờ chỉ định nhà cung cấp này có phải là nhà cung cấp chính cho sản phẩm hay không (0 hoặc 1).",
+      "confidence": 0.95,
+      "source_table": "product_suppliers",
+      "source_column": "is_primary",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByProductAndSupplier",
+      "description": "Tra cứu bản ghi liên kết theo mã sản phẩm và mã nhà cung cấp (khóa chính). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        },
+        {
+          "name": "supplierId",
+          "type": "integer",
+          "required": true,
+          "source_column": "supplier_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "product_id",
+          "supplier_id",
+          "is_primary"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "supplier_id",
+        "is_primary"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:product_suppliers.lookupByProductAndSupplier",
+      "owner_class_id": "class:product_suppliers",
+      "source_table": "product_suppliers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByProduct",
+      "description": "Liệt kê tất cả nhà cung cấp liên kết với một sản phẩm, kèm cờ is_primary.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "product_id",
+          "supplier_id",
+          "is_primary"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "supplier_id",
+        "is_primary"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:product_suppliers.listByProduct",
+      "owner_class_id": "class:product_suppliers",
+      "source_table": "product_suppliers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listBySupplier",
+      "description": "Liệt kê tất cả sản phẩm liên kết với một nhà cung cấp, kèm cờ is_primary.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "supplierId",
+          "type": "integer",
+          "required": true,
+          "source_column": "supplier_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "product_id",
+          "supplier_id",
+          "is_primary"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "supplier_id",
+        "is_primary"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:product_suppliers.listBySupplier",
+      "owner_class_id": "class:product_suppliers",
+      "source_table": "product_suppliers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countBySupplier",
+      "description": "Đếm số bản ghi liên kết của một nhà cung cấp (tức số sản phẩm mà nhà cung cấp đó cung cấp).",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "supplierId",
+          "type": "integer",
+          "required": true,
+          "source_column": "supplier_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "supplier_id"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:product_suppliers.countBySupplier",
+      "owner_class_id": "class:product_suppliers",
+      "source_table": "product_suppliers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Bảng đóng vai trò bảng trung gian (junction) cho quan hệ nhiều-nhiều giữa products và suppliers.",
+    "Schema không có ràng buộc đảm bảo tối đa một nhà cung cấp có is_primary=1 cho mỗi sản phẩm; nhiều bản ghi cùng product_id có thể đồng thời có is_primary=1.",
+    "Giá trị is_primary=0 không nhất thiết có nghĩa là nhà cung cấp phụ hay dự phòng; schema chỉ phân biệt hai trạng thái 0 và 1."
+  ],
+  "input_fingerprint": "2c53559ea7bc5ce3c1a0d6985ac4a53902653ff22c4d24d06a73712b444d0d00"
+}

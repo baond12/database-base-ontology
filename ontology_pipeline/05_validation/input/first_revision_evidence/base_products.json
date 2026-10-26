@@ -1,0 +1,641 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:products",
+    "name": "Product",
+    "source_table": "products",
+    "description": "Đại diện một sản phẩm trong hệ thống bán lẻ đa kênh, bao gồm thông tin định danh, giá cả, tồn kho, thuộc tính mô tả và các tham chiếu đến thương hiệu, danh mục, khuyến mãi.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:products.product_id",
+      "name": "productId",
+      "description": "Mã định danh duy nhất của sản phẩm (khóa chính).",
+      "confidence": 0.98,
+      "source_table": "products",
+      "source_column": "product_id",
+      "data_type": "VARCHAR(50)",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.sku",
+      "name": "sku",
+      "description": "Mã SKU duy nhất của sản phẩm.",
+      "confidence": 0.97,
+      "source_table": "products",
+      "source_column": "sku",
+      "data_type": "VARCHAR(100)",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.name",
+      "name": "name",
+      "description": "Tên sản phẩm.",
+      "confidence": 0.98,
+      "source_table": "products",
+      "source_column": "name",
+      "data_type": "VARCHAR(255)",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.product_url",
+      "name": "productUrl",
+      "description": "URL trỏ đến trang chi tiết sản phẩm.",
+      "confidence": 0.93,
+      "source_table": "products",
+      "source_column": "product_url",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.brand_id",
+      "name": "brandId",
+      "description": "Mã thương hiệu liên kết (tham chiếu bảng brands).",
+      "confidence": 0.95,
+      "source_table": "products",
+      "source_column": "brand_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.category_id",
+      "name": "categoryId",
+      "description": "Mã danh mục liên kết (tham chiếu bảng categories).",
+      "confidence": 0.95,
+      "source_table": "products",
+      "source_column": "category_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.promotion_id",
+      "name": "promotionId",
+      "description": "Mã khuyến mãi liên kết (tham chiếu bảng promotions).",
+      "confidence": 0.95,
+      "source_table": "products",
+      "source_column": "promotion_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.original_price",
+      "name": "originalPrice",
+      "description": "Giá gốc của sản phẩm.",
+      "confidence": 0.93,
+      "source_table": "products",
+      "source_column": "original_price",
+      "data_type": "NUMERIC(12,2)",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.discount_price",
+      "name": "discountPrice",
+      "description": "Giá sau giảm của sản phẩm.",
+      "confidence": 0.93,
+      "source_table": "products",
+      "source_column": "discount_price",
+      "data_type": "NUMERIC(12,2)",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.currency",
+      "name": "currency",
+      "description": "Mã đơn vị tiền tệ, mặc định VND.",
+      "confidence": 0.92,
+      "source_table": "products",
+      "source_column": "currency",
+      "data_type": "VARCHAR(10)",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": "'VND'",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.discount_percentage",
+      "name": "discountPercentage",
+      "description": "Tỷ lệ giảm giá (phần trăm).",
+      "confidence": 0.92,
+      "source_table": "products",
+      "source_column": "discount_percentage",
+      "data_type": "NUMERIC(5,2)",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.is_in_stock",
+      "name": "isInStock",
+      "description": "Trạng thái còn hàng hay không.",
+      "confidence": 0.93,
+      "source_table": "products",
+      "source_column": "is_in_stock",
+      "data_type": "BOOLEAN",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.stock_quantity",
+      "name": "stockQuantity",
+      "description": "Số lượng tồn kho.",
+      "confidence": 0.93,
+      "source_table": "products",
+      "source_column": "stock_quantity",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.delivery_locations",
+      "name": "deliveryLocations",
+      "description": "Danh sách địa điểm giao hàng (định dạng JSON).",
+      "confidence": 0.9,
+      "source_table": "products",
+      "source_column": "delivery_locations",
+      "data_type": "JSONB",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.specifications",
+      "name": "specifications",
+      "description": "Thông số kỹ thuật của sản phẩm (định dạng JSON).",
+      "confidence": 0.9,
+      "source_table": "products",
+      "source_column": "specifications",
+      "data_type": "JSONB",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.warranty",
+      "name": "warranty",
+      "description": "Thông tin bảo hành (định dạng JSON).",
+      "confidence": 0.9,
+      "source_table": "products",
+      "source_column": "warranty",
+      "data_type": "JSONB",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.images",
+      "name": "images",
+      "description": "Danh sách hình ảnh sản phẩm (định dạng JSON).",
+      "confidence": 0.9,
+      "source_table": "products",
+      "source_column": "images",
+      "data_type": "JSONB",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.created_at",
+      "name": "createdAt",
+      "description": "Thời điểm bản ghi được tạo, mặc định là thời gian hiện tại.",
+      "confidence": 0.95,
+      "source_table": "products",
+      "source_column": "created_at",
+      "data_type": "TIMESTAMP",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": "CURRENT_TIMESTAMP",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.description",
+      "name": "description",
+      "description": "Mô tả chi tiết sản phẩm.",
+      "confidence": 0.95,
+      "source_table": "products",
+      "source_column": "description",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:products.description_embedding",
+      "name": "descriptionEmbedding",
+      "description": "Vector embedding của mô tả sản phẩm (định dạng BLOB).",
+      "confidence": 0.88,
+      "source_table": "products",
+      "source_column": "description_embedding",
+      "data_type": "BLOB",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByProductId",
+      "description": "Tra cứu một sản phẩm theo mã định danh (khóa chính). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "product_id",
+          "sku",
+          "name",
+          "product_url",
+          "brand_id",
+          "category_id",
+          "promotion_id",
+          "original_price",
+          "discount_price",
+          "currency",
+          "discount_percentage",
+          "is_in_stock",
+          "stock_quantity",
+          "delivery_locations",
+          "specifications",
+          "warranty",
+          "images",
+          "created_at",
+          "description",
+          "description_embedding"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "sku",
+        "name",
+        "product_url",
+        "brand_id",
+        "category_id",
+        "promotion_id",
+        "original_price",
+        "discount_price",
+        "currency",
+        "discount_percentage",
+        "is_in_stock",
+        "stock_quantity",
+        "delivery_locations",
+        "specifications",
+        "warranty",
+        "images",
+        "created_at",
+        "description",
+        "description_embedding"
+      ],
+      "confidence": 0.96,
+      "method_id": "method:products.lookupByProductId",
+      "owner_class_id": "class:products",
+      "source_table": "products",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupBySku",
+      "description": "Tra cứu một sản phẩm theo mã SKU (duy nhất toàn bảng). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true,
+          "source_column": "sku",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "product_id",
+          "sku",
+          "name",
+          "product_url",
+          "brand_id",
+          "category_id",
+          "promotion_id",
+          "original_price",
+          "discount_price",
+          "currency",
+          "discount_percentage",
+          "is_in_stock",
+          "stock_quantity",
+          "delivery_locations",
+          "specifications",
+          "warranty",
+          "images",
+          "created_at",
+          "description",
+          "description_embedding"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "sku",
+        "name",
+        "product_url",
+        "brand_id",
+        "category_id",
+        "promotion_id",
+        "original_price",
+        "discount_price",
+        "currency",
+        "discount_percentage",
+        "is_in_stock",
+        "stock_quantity",
+        "delivery_locations",
+        "specifications",
+        "warranty",
+        "images",
+        "created_at",
+        "description",
+        "description_embedding"
+      ],
+      "confidence": 0.96,
+      "method_id": "method:products.lookupBySku",
+      "owner_class_id": "class:products",
+      "source_table": "products",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listProducts",
+      "description": "Danh sách sản phẩm, có thể lọc theo thương hiệu, danh mục, trạng thái tồn kho và khoảng giá sau giảm.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "brandId",
+          "type": "integer",
+          "required": false,
+          "source_column": "brand_id",
+          "operator": "eq"
+        },
+        {
+          "name": "categoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "category_id",
+          "operator": "eq"
+        },
+        {
+          "name": "isInStock",
+          "type": "boolean",
+          "required": false,
+          "source_column": "is_in_stock",
+          "operator": "eq"
+        },
+        {
+          "name": "minDiscountPrice",
+          "type": "number",
+          "required": false,
+          "source_column": "discount_price",
+          "operator": "gte"
+        },
+        {
+          "name": "maxDiscountPrice",
+          "type": "number",
+          "required": false,
+          "source_column": "discount_price",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "product_id",
+          "sku",
+          "name",
+          "product_url",
+          "brand_id",
+          "category_id",
+          "promotion_id",
+          "original_price",
+          "discount_price",
+          "currency",
+          "discount_percentage",
+          "is_in_stock",
+          "stock_quantity",
+          "delivery_locations",
+          "specifications",
+          "warranty",
+          "images",
+          "created_at",
+          "description",
+          "description_embedding"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "sku",
+        "name",
+        "product_url",
+        "brand_id",
+        "category_id",
+        "promotion_id",
+        "original_price",
+        "discount_price",
+        "currency",
+        "discount_percentage",
+        "is_in_stock",
+        "stock_quantity",
+        "delivery_locations",
+        "specifications",
+        "warranty",
+        "images",
+        "created_at",
+        "description",
+        "description_embedding"
+      ],
+      "confidence": 0.92,
+      "method_id": "method:products.listProducts",
+      "owner_class_id": "class:products",
+      "source_table": "products",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countProducts",
+      "description": "Đếm tổng số sản phẩm, có thể lọc theo thương hiệu, danh mục và trạng thái tồn kho.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "brandId",
+          "type": "integer",
+          "required": false,
+          "source_column": "brand_id",
+          "operator": "eq"
+        },
+        {
+          "name": "categoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "category_id",
+          "operator": "eq"
+        },
+        {
+          "name": "isInStock",
+          "type": "boolean",
+          "required": false,
+          "source_column": "is_in_stock",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "brand_id",
+        "category_id",
+        "is_in_stock"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:products.countProducts",
+      "owner_class_id": "class:products",
+      "source_table": "products",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByCategory",
+      "description": "Đếm số sản phẩm theo từng danh mục (group by category_id).",
+      "operation": "aggregate",
+      "input_parameters": [],
+      "group_by": [
+        "category_id"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "category_id"
+        ],
+        "aggregations": [
+          {
+            "name": "productCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "category_id"
+      ],
+      "confidence": 0.88,
+      "method_id": "method:products.countByCategory",
+      "owner_class_id": "class:products",
+      "source_table": "products",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột currency có DEFAULT 'VND' nhưng nullable, nên không khẳng định mọi bản ghi đều dùng VND.",
+    "Các cột JSONB (delivery_locations, specifications, warranty, images) lưu dữ liệu cấu trúc nhưng schema bên trong không xác định được từ DDL.",
+    "Cột description_embedding là BLOB, có khả năng chứa vector embedding nhưng kích thước và thuật toán không xác định được từ schema.",
+    "Mối quan hệ giữa is_in_stock và stock_quantity (ví dụ: is_in_stock = (stock_quantity > 0)) không được khẳng định vì không có ràng buộc trong DDL.",
+    "Cột created_at có DEFAULT CURRENT_TIMESTAMP nhưng nullable, nên một số bản ghi có thể không có giá trị thời gian tạo."
+  ],
+  "input_fingerprint": "5511dce1671f4b310599aa8ed2959bcb405130c1cf37aa2484644b5c9ed19a23"
+}

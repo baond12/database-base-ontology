@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1",
+      "name": "addressToCustomer",
+      "description": "Bản ghi Address tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

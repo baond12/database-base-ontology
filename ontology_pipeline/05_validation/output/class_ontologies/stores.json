@@ -1,0 +1,443 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:stores",
+    "name": "Store",
+    "source_table": "stores",
+    "description": "Cửa hàng bán lẻ trong hệ thống omnichannel, bao gồm mã định danh, tên, khu vực, thành phố và ngày mở.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:stores.store_id",
+      "name": "storeId",
+      "description": "Khóa chính của cửa hàng, kiểu INTEGER.",
+      "confidence": 0.95,
+      "source_table": "stores",
+      "source_column": "store_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:stores.store_code",
+      "name": "storeCode",
+      "description": "Mã cửa hàng, duy nhất trong bảng.",
+      "confidence": 0.95,
+      "source_table": "stores",
+      "source_column": "store_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:stores.store_name",
+      "name": "storeName",
+      "description": "Tên cửa hàng.",
+      "confidence": 0.95,
+      "source_table": "stores",
+      "source_column": "store_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:stores.region_id",
+      "name": "regionId",
+      "description": "Tham chiếu đến vùng/khu vực mà cửa hàng thuộc về (regions.region_id).",
+      "confidence": 0.95,
+      "source_table": "stores",
+      "source_column": "region_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:stores.city",
+      "name": "city",
+      "description": "Thành phố nơi cửa hàng tọa lạc.",
+      "confidence": 0.95,
+      "source_table": "stores",
+      "source_column": "city",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:stores.opened_on",
+      "name": "openedOn",
+      "description": "Ngày mở cửa hàng, lưu dưới dạng TEXT.",
+      "confidence": 0.9,
+      "source_table": "stores",
+      "source_column": "opened_on",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupStore",
+      "description": "Tra cứu một cửa hàng theo khóa chính store_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": true,
+          "source_column": "store_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:stores.lookupStore",
+      "owner_class_id": "class:stores",
+      "source_table": "stores",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupStoreByCode",
+      "description": "Tra cứu một cửa hàng theo mã cửa hàng duy nhất store_code.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "storeCode",
+          "type": "string",
+          "required": true,
+          "source_column": "store_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:stores.lookupStoreByCode",
+      "owner_class_id": "class:stores",
+      "source_table": "stores",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listStoresByRegion",
+      "description": "Liệt kê các cửa hàng thuộc một vùng/khu vực được chỉ định bởi region_id.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": true,
+          "source_column": "region_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "store_id",
+          "store_code",
+          "store_name",
+          "region_id",
+          "city",
+          "opened_on"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "store_id",
+        "store_code",
+        "store_name",
+        "region_id",
+        "city",
+        "opened_on"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:stores.listStoresByRegion",
+      "owner_class_id": "class:stores",
+      "source_table": "stores",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countStores",
+      "description": "Đếm số cửa hàng, có thể lọc theo region_id và/hoặc city.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "city",
+          "type": "string",
+          "required": false,
+          "source_column": "city",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id",
+        "city"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:stores.countStores",
+      "owner_class_id": "class:stores",
+      "source_table": "stores",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột opened_on có kiểu TEXT nhưng không có ràng buộc kiểm tra định dạng ngày; không xác nhận định dạng cụ thể (ISO 8601 hay khác).",
+    "store_code UNIQUE đảm bảo tối đa một cửa hàng cho mỗi mã, nhưng không đảm bảo mọi cửa hàng đều có mã theo quy tắc đặt tên cụ thể nào."
+  ],
+  "input_fingerprint": "2e95c093adbac758935bacfa1d32bb8d8c090f7246184f0312cad360cb1da413",
+  "relations": [
+    {
+      "relation_id": "fk:25d84fb39fb2430a7849b37e:1",
+      "name": "agentStore",
+      "description": "Agent có thể tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:agents",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:agents.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "agents",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:25d84fb39fb2430a7849b37e:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:31c7cd7e496bc75c99a652eb:1",
+      "name": "orderStore",
+      "description": "Mỗi Order tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:orders.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:31c7cd7e496bc75c99a652eb:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:9018fc15e3b26510bd233872:1",
+      "name": "inventorySnapshotToStore",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:inventory_snapshots",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:inventory_snapshots.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "inventory_snapshots",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9018fc15e3b26510bd233872:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:f09377f1f9863f5d6e217f86:1",
+      "name": "storeRegion",
+      "description": "Bản ghi Store tham chiếu bản ghi Region qua cột region_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:stores",
+      "target_class_id": "class:regions",
+      "source_property_ids": [
+        "property:stores.region_id"
+      ],
+      "target_property_ids": [
+        "property:regions.region_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "stores",
+        "source_columns": [
+          "region_id"
+        ],
+        "target_table": "regions",
+        "target_columns": [
+          "region_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:f09377f1f9863f5d6e217f86:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

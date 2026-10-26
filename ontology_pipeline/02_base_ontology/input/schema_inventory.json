@@ -1,0 +1,2636 @@
+{
+  "database_id": "omnichannel_retail",
+  "tables": [
+    {
+      "name": "addresses",
+      "description": "",
+      "ddl": "CREATE TABLE addresses (\n  address_id TEXT NOT NULL PRIMARY KEY,\n  customer_id INTEGER NOT NULL REFERENCES customers(customer_id) ON UPDATE CASCADE ON DELETE CASCADE,\n  recipient_name TEXT,\n  phone TEXT,\n  formatted_address TEXT NOT NULL,\n  address_line TEXT,\n  ward TEXT,\n  district TEXT,\n  province TEXT,\n  country TEXT NOT NULL DEFAULT 'Vietnam',\n  latitude REAL CHECK(latitude BETWEEN -90 AND 90),\n  longitude REAL CHECK(longitude BETWEEN -180 AND 180),\n  google_place_id TEXT,\n  address_source TEXT NOT NULL DEFAULT 'CUSTOMER_INPUT'\n    CHECK(address_source IN ('MOCK','CUSTOMER_INPUT','GOOGLE_PLACES','GOOGLE_GEOCODING','OTHER')),\n  customer_confirmed_at TEXT,\n  google_last_checked_at TEXT,\n  is_default INTEGER NOT NULL DEFAULT 0 CHECK(is_default IN (0,1)),\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  updated_at TEXT\n)",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "recipient_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "phone",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "formatted_address",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "address_line",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ward",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "district",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "province",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "'Vietnam'",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "latitude",
+          "data_type": "REAL",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "longitude",
+          "data_type": "REAL",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "google_place_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "address_source",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "'CUSTOMER_INPUT'",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_confirmed_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "google_last_checked_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "is_default",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "0",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_addresses_customer",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "customer_id"
+          ],
+          "ddl": "CREATE INDEX idx_addresses_customer ON addresses(customer_id)"
+        },
+        {
+          "name": "idx_addresses_google_place",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "google_place_id"
+          ],
+          "ddl": "CREATE INDEX idx_addresses_google_place ON addresses(google_place_id)"
+        },
+        {
+          "name": "idx_addresses_one_default_per_customer",
+          "unique": true,
+          "partial": true,
+          "origin": "c",
+          "columns": [
+            "customer_id"
+          ],
+          "ddl": "CREATE UNIQUE INDEX idx_addresses_one_default_per_customer ON addresses(customer_id) WHERE is_default = 1"
+        },
+        {
+          "name": "sqlite_autoindex_addresses_1",
+          "unique": true,
+          "partial": false,
+          "origin": "pk",
+          "columns": [
+            "address_id"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "addresses",
+          "source_columns": [
+            "customer_id"
+          ],
+          "target_table": "customers",
+          "target_columns": [
+            "customer_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE",
+          "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1"
+        }
+      ]
+    },
+    {
+      "name": "agents",
+      "description": "",
+      "ddl": "CREATE TABLE agents (\n  agent_id TEXT NOT NULL PRIMARY KEY,\n  agent_code TEXT NOT NULL UNIQUE,\n  full_name TEXT NOT NULL,\n  store_id INTEGER REFERENCES stores(store_id),\n  email TEXT UNIQUE,\n  phone TEXT,\n  team TEXT,\n  status TEXT NOT NULL DEFAULT 'ACTIVE' CHECK(status IN ('ACTIVE','INACTIVE')),\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "columns": [
+        {
+          "name": "agent_id",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "agent_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "full_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "store_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "email",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "phone",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "team",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "'ACTIVE'",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "agent_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_agents_store",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "store_id"
+          ],
+          "ddl": "CREATE INDEX idx_agents_store ON agents(store_id)"
+        },
+        {
+          "name": "sqlite_autoindex_agents_1",
+          "unique": true,
+          "partial": false,
+          "origin": "pk",
+          "columns": [
+            "agent_id"
+          ],
+          "ddl": null
+        },
+        {
+          "name": "sqlite_autoindex_agents_2",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "agent_code"
+          ],
+          "ddl": null
+        },
+        {
+          "name": "sqlite_autoindex_agents_3",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "email"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "agents",
+          "source_columns": [
+            "store_id"
+          ],
+          "target_table": "stores",
+          "target_columns": [
+            "store_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:25d84fb39fb2430a7849b37e:1"
+        }
+      ]
+    },
+    {
+      "name": "brands",
+      "description": "",
+      "ddl": "CREATE TABLE brands (\n  brand_id INTEGER PRIMARY KEY,\n  brand_name TEXT NOT NULL UNIQUE\n)",
+      "columns": [
+        {
+          "name": "brand_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "brand_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "brand_id"
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_brands_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "brand_name"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "categories",
+      "description": "",
+      "ddl": "CREATE TABLE categories (\n  category_id INTEGER PRIMARY KEY,\n  category_name TEXT NOT NULL,\n  parent_category_id INTEGER REFERENCES categories(category_id)\n)",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "category_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "parent_category_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "category_id"
+      ],
+      "indexes": [],
+      "foreign_keys": [
+        {
+          "source_table": "categories",
+          "source_columns": [
+            "parent_category_id"
+          ],
+          "target_table": "categories",
+          "target_columns": [
+            "category_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:33afa20fb7359057d91517d8:1"
+        }
+      ]
+    },
+    {
+      "name": "channels",
+      "description": "",
+      "ddl": "CREATE TABLE channels (\n  channel_id INTEGER PRIMARY KEY,\n  channel_code TEXT NOT NULL UNIQUE,\n  channel_name TEXT NOT NULL,\n  channel_type TEXT NOT NULL CHECK(channel_type IN ('marketplace','web','offline','social','chat'))\n)",
+      "columns": [
+        {
+          "name": "channel_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "channel_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "channel_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "channel_type",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "channel_id"
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_channels_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "channel_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "chats",
+      "description": "",
+      "ddl": "CREATE TABLE chats (\n  chat_id TEXT NOT NULL PRIMARY KEY,\n  conversation_id TEXT NOT NULL,\n  agent_id TEXT REFERENCES agents(agent_id) ON UPDATE CASCADE ON DELETE SET NULL,\n  customer_id INTEGER NOT NULL REFERENCES customers(customer_id) ON UPDATE CASCADE ON DELETE RESTRICT,\n  product_id VARCHAR(50) REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE SET NULL,\n  channel_id INTEGER REFERENCES channels(channel_id),\n  chat_time TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  sender_type TEXT NOT NULL CHECK(sender_type IN ('AGENT','CUSTOMER','SYSTEM')),\n  content TEXT NOT NULL CHECK(length(trim(content)) > 0),\n  intent_label TEXT,\n  sentiment_label TEXT,\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "columns": [
+        {
+          "name": "chat_id",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "conversation_id",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "agent_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "product_id",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "channel_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "chat_time",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "sender_type",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "content",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "intent_label",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "sentiment_label",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "chat_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_chats_agent_time",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "agent_id",
+            "chat_time"
+          ],
+          "ddl": "CREATE INDEX idx_chats_agent_time ON chats(agent_id, chat_time)"
+        },
+        {
+          "name": "idx_chats_channel_time",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "channel_id",
+            "chat_time"
+          ],
+          "ddl": "CREATE INDEX idx_chats_channel_time ON chats(channel_id, chat_time)"
+        },
+        {
+          "name": "idx_chats_conversation_time",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "conversation_id",
+            "chat_time"
+          ],
+          "ddl": "CREATE INDEX idx_chats_conversation_time ON chats(conversation_id, chat_time)"
+        },
+        {
+          "name": "idx_chats_customer_time",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "customer_id",
+            "chat_time"
+          ],
+          "ddl": "CREATE INDEX idx_chats_customer_time ON chats(customer_id, chat_time)"
+        },
+        {
+          "name": "idx_chats_product",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "product_id"
+          ],
+          "ddl": "CREATE INDEX idx_chats_product ON chats(product_id)"
+        },
+        {
+          "name": "sqlite_autoindex_chats_1",
+          "unique": true,
+          "partial": false,
+          "origin": "pk",
+          "columns": [
+            "chat_id"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "chats",
+          "source_columns": [
+            "customer_id"
+          ],
+          "target_table": "customers",
+          "target_columns": [
+            "customer_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "RESTRICT",
+          "match": "NONE",
+          "relation_id": "fk:1a63e58c48c731ca43afd203:1"
+        },
+        {
+          "source_table": "chats",
+          "source_columns": [
+            "channel_id"
+          ],
+          "target_table": "channels",
+          "target_columns": [
+            "channel_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:2041d1b09c418baf39a64157:1"
+        },
+        {
+          "source_table": "chats",
+          "source_columns": [
+            "product_id"
+          ],
+          "target_table": "products",
+          "target_columns": [
+            "product_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE",
+          "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1"
+        },
+        {
+          "source_table": "chats",
+          "source_columns": [
+            "agent_id"
+          ],
+          "target_table": "agents",
+          "target_columns": [
+            "agent_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE",
+          "relation_id": "fk:afa1eddf108851d2045fcd06:1"
+        }
+      ]
+    },
+    {
+      "name": "customers",
+      "description": "",
+      "ddl": "CREATE TABLE customers (\n  customer_id INTEGER PRIMARY KEY,\n  customer_code TEXT NOT NULL UNIQUE,\n  region_id INTEGER NOT NULL REFERENCES regions(region_id),\n  customer_segment TEXT NOT NULL CHECK(customer_segment IN ('Retail','VIP','Wholesale')),\n  joined_at TEXT NOT NULL\n)",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_segment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "joined_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_customers_region",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "region_id"
+          ],
+          "ddl": "CREATE INDEX idx_customers_region ON customers(region_id)"
+        },
+        {
+          "name": "sqlite_autoindex_customers_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "customer_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "customers",
+          "source_columns": [
+            "region_id"
+          ],
+          "target_table": "regions",
+          "target_columns": [
+            "region_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:a283ee7a5099b23e1147b7d1:1"
+        }
+      ]
+    },
+    {
+      "name": "inventory_snapshots",
+      "description": "",
+      "ddl": "CREATE TABLE inventory_snapshots (\n  snapshot_id INTEGER PRIMARY KEY,\n  store_id INTEGER NOT NULL REFERENCES stores(store_id),\n  product_id VARCHAR(50) NOT NULL REFERENCES products(product_id),\n  snapshot_date TEXT NOT NULL,\n  qty_on_hand INTEGER NOT NULL CHECK(qty_on_hand >= 0),\n  qty_reserved INTEGER NOT NULL CHECK(qty_reserved >= 0 AND qty_reserved <= qty_on_hand),\n  UNIQUE(store_id, product_id, snapshot_date)\n)",
+      "columns": [
+        {
+          "name": "snapshot_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "store_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "product_id",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "snapshot_date",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "qty_on_hand",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "qty_reserved",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "snapshot_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_inventory_asof",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "store_id",
+            "product_id",
+            "snapshot_date"
+          ],
+          "ddl": "CREATE INDEX idx_inventory_asof ON inventory_snapshots(store_id, product_id, snapshot_date)"
+        },
+        {
+          "name": "sqlite_autoindex_inventory_snapshots_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "store_id",
+            "product_id",
+            "snapshot_date"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "inventory_snapshots",
+          "source_columns": [
+            "product_id"
+          ],
+          "target_table": "products",
+          "target_columns": [
+            "product_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:414459466aa044594654457b:1"
+        },
+        {
+          "source_table": "inventory_snapshots",
+          "source_columns": [
+            "store_id"
+          ],
+          "target_table": "stores",
+          "target_columns": [
+            "store_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:9018fc15e3b26510bd233872:1"
+        }
+      ]
+    },
+    {
+      "name": "order_items",
+      "description": "",
+      "ddl": "CREATE TABLE order_items (\n  order_item_id INTEGER PRIMARY KEY,\n  order_id INTEGER NOT NULL REFERENCES orders(order_id),\n  product_id VARCHAR(50) NOT NULL REFERENCES products(product_id),\n  quantity INTEGER NOT NULL CHECK(quantity > 0),\n  unit_price INTEGER NOT NULL CHECK(unit_price >= 0),\n  line_discount INTEGER NOT NULL CHECK(line_discount >= 0),\n  promotion_id INTEGER REFERENCES promotions(promotion_id)\n)",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "product_id",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "unit_price",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "line_discount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "promotion_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "order_item_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_items_order",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "order_id"
+          ],
+          "ddl": "CREATE INDEX idx_items_order ON order_items(order_id)"
+        },
+        {
+          "name": "idx_items_product",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "product_id"
+          ],
+          "ddl": "CREATE INDEX idx_items_product ON order_items(product_id)"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "order_items",
+          "source_columns": [
+            "product_id"
+          ],
+          "target_table": "products",
+          "target_columns": [
+            "product_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:05385e149a6ad8573cc0954b:1"
+        },
+        {
+          "source_table": "order_items",
+          "source_columns": [
+            "promotion_id"
+          ],
+          "target_table": "promotions",
+          "target_columns": [
+            "promotion_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1"
+        },
+        {
+          "source_table": "order_items",
+          "source_columns": [
+            "order_id"
+          ],
+          "target_table": "orders",
+          "target_columns": [
+            "order_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:8ee79468a0864b8cce923f9b:1"
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "description": "",
+      "ddl": "CREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  order_code TEXT NOT NULL UNIQUE,\n  customer_id INTEGER NOT NULL REFERENCES customers(customer_id),\n  channel_id INTEGER NOT NULL REFERENCES channels(channel_id),\n  store_id INTEGER NOT NULL REFERENCES stores(store_id),\n  chat_id TEXT REFERENCES chats(chat_id) ON UPDATE CASCADE ON DELETE SET NULL,\n  agent_id TEXT REFERENCES agents(agent_id) ON UPDATE CASCADE ON DELETE SET NULL,\n  ordered_at TEXT NOT NULL,\n  status TEXT NOT NULL CHECK(status IN ('placed','paid','shipped','delivered','cancelled')),\n  gross_amount INTEGER NOT NULL CHECK(gross_amount >= 0),\n  discount_amount INTEGER NOT NULL CHECK(discount_amount >= 0),\n  shipping_fee INTEGER NOT NULL CHECK(shipping_fee >= 0)\n)",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "channel_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "store_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "chat_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "agent_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ordered_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "gross_amount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "discount_amount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "shipping_fee",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "order_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_orders_agent",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "agent_id"
+          ],
+          "ddl": "CREATE INDEX idx_orders_agent ON orders(agent_id)"
+        },
+        {
+          "name": "idx_orders_channel",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "channel_id"
+          ],
+          "ddl": "CREATE INDEX idx_orders_channel ON orders(channel_id)"
+        },
+        {
+          "name": "idx_orders_chat",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "chat_id"
+          ],
+          "ddl": "CREATE INDEX idx_orders_chat ON orders(chat_id)"
+        },
+        {
+          "name": "idx_orders_customer",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "customer_id"
+          ],
+          "ddl": "CREATE INDEX idx_orders_customer ON orders(customer_id)"
+        },
+        {
+          "name": "idx_orders_time_status",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "ordered_at",
+            "status"
+          ],
+          "ddl": "CREATE INDEX idx_orders_time_status ON orders(ordered_at, status)"
+        },
+        {
+          "name": "sqlite_autoindex_orders_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "order_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "orders",
+          "source_columns": [
+            "channel_id"
+          ],
+          "target_table": "channels",
+          "target_columns": [
+            "channel_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:06a913a6b3fcac6b9086f05b:1"
+        },
+        {
+          "source_table": "orders",
+          "source_columns": [
+            "store_id"
+          ],
+          "target_table": "stores",
+          "target_columns": [
+            "store_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:31c7cd7e496bc75c99a652eb:1"
+        },
+        {
+          "source_table": "orders",
+          "source_columns": [
+            "chat_id"
+          ],
+          "target_table": "chats",
+          "target_columns": [
+            "chat_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE",
+          "relation_id": "fk:925c89136854bd14425db972:1"
+        },
+        {
+          "source_table": "orders",
+          "source_columns": [
+            "customer_id"
+          ],
+          "target_table": "customers",
+          "target_columns": [
+            "customer_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:a59a4bf83f0bbb4455a60168:1"
+        },
+        {
+          "source_table": "orders",
+          "source_columns": [
+            "agent_id"
+          ],
+          "target_table": "agents",
+          "target_columns": [
+            "agent_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE",
+          "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1"
+        }
+      ]
+    },
+    {
+      "name": "payments",
+      "description": "",
+      "ddl": "CREATE TABLE payments (\n  payment_id INTEGER PRIMARY KEY,\n  order_id INTEGER NOT NULL REFERENCES orders(order_id),\n  payment_method TEXT NOT NULL,\n  status TEXT NOT NULL CHECK(status IN ('pending','failed','success')),\n  amount INTEGER NOT NULL CHECK(amount >= 0),\n  paid_at TEXT\n)",
+      "columns": [
+        {
+          "name": "payment_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "payment_method",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "amount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "paid_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "payment_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_payments_order_status",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "order_id",
+            "status"
+          ],
+          "ddl": "CREATE INDEX idx_payments_order_status ON payments(order_id, status)"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "payments",
+          "source_columns": [
+            "order_id"
+          ],
+          "target_table": "orders",
+          "target_columns": [
+            "order_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1"
+        }
+      ]
+    },
+    {
+      "name": "product_suppliers",
+      "description": "",
+      "ddl": "CREATE TABLE product_suppliers (\n  product_id VARCHAR(50) NOT NULL REFERENCES products(product_id),\n  supplier_id INTEGER NOT NULL REFERENCES suppliers(supplier_id),\n  is_primary INTEGER NOT NULL CHECK(is_primary IN (0,1)),\n  PRIMARY KEY (product_id, supplier_id)\n)",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "supplier_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 2,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "is_primary",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "supplier_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_product_suppliers_supplier",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "supplier_id"
+          ],
+          "ddl": "CREATE INDEX idx_product_suppliers_supplier ON product_suppliers(supplier_id)"
+        },
+        {
+          "name": "sqlite_autoindex_product_suppliers_1",
+          "unique": true,
+          "partial": false,
+          "origin": "pk",
+          "columns": [
+            "product_id",
+            "supplier_id"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "product_suppliers",
+          "source_columns": [
+            "supplier_id"
+          ],
+          "target_table": "suppliers",
+          "target_columns": [
+            "supplier_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:cd91edcec0e36c30be311da1:1"
+        },
+        {
+          "source_table": "product_suppliers",
+          "source_columns": [
+            "product_id"
+          ],
+          "target_table": "products",
+          "target_columns": [
+            "product_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:d1f0a36d2d90280a4a594471:1"
+        }
+      ]
+    },
+    {
+      "name": "products",
+      "description": "",
+      "ddl": "CREATE TABLE products (\n  product_id VARCHAR(50) NOT NULL PRIMARY KEY,\n  sku VARCHAR(100) UNIQUE NOT NULL,\n  name VARCHAR(255) NOT NULL,\n  product_url TEXT,\n  brand_id INTEGER REFERENCES brands(brand_id),\n  category_id INTEGER REFERENCES categories(category_id),\n  promotion_id INTEGER REFERENCES promotions(promotion_id),\n  original_price NUMERIC(12,2),\n  discount_price NUMERIC(12,2),\n  currency VARCHAR(10) DEFAULT 'VND',\n  discount_percentage NUMERIC(5,2),\n  is_in_stock BOOLEAN,\n  stock_quantity INTEGER,\n  delivery_locations JSONB,\n  specifications JSONB,\n  warranty JSONB,\n  images JSONB,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  description TEXT,\n  description_embedding BLOB\n)",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "sku",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "product_url",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "brand_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "category_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "promotion_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "original_price",
+          "data_type": "NUMERIC(12,2)",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "discount_price",
+          "data_type": "NUMERIC(12,2)",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": "'VND'",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "discount_percentage",
+          "data_type": "NUMERIC(5,2)",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "is_in_stock",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "stock_quantity",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "delivery_locations",
+          "data_type": "JSONB",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "specifications",
+          "data_type": "JSONB",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "warranty",
+          "data_type": "JSONB",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "images",
+          "data_type": "JSONB",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "description_embedding",
+          "data_type": "BLOB",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "product_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_products_brand",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "brand_id"
+          ],
+          "ddl": "CREATE INDEX idx_products_brand ON products(brand_id)"
+        },
+        {
+          "name": "idx_products_category",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "category_id"
+          ],
+          "ddl": "CREATE INDEX idx_products_category ON products(category_id)"
+        },
+        {
+          "name": "idx_products_price",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "discount_price"
+          ],
+          "ddl": "CREATE INDEX idx_products_price ON products(discount_price)"
+        },
+        {
+          "name": "idx_products_promotion",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "promotion_id"
+          ],
+          "ddl": "CREATE INDEX idx_products_promotion ON products(promotion_id)"
+        },
+        {
+          "name": "idx_products_stock",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "is_in_stock"
+          ],
+          "ddl": "CREATE INDEX idx_products_stock ON products(is_in_stock)"
+        },
+        {
+          "name": "sqlite_autoindex_products_1",
+          "unique": true,
+          "partial": false,
+          "origin": "pk",
+          "columns": [
+            "product_id"
+          ],
+          "ddl": null
+        },
+        {
+          "name": "sqlite_autoindex_products_2",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "sku"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "products",
+          "source_columns": [
+            "brand_id"
+          ],
+          "target_table": "brands",
+          "target_columns": [
+            "brand_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:1ca4934b55d522a257faee39:1"
+        },
+        {
+          "source_table": "products",
+          "source_columns": [
+            "promotion_id"
+          ],
+          "target_table": "promotions",
+          "target_columns": [
+            "promotion_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:3282f4e3a36f192ee4a91cef:1"
+        },
+        {
+          "source_table": "products",
+          "source_columns": [
+            "category_id"
+          ],
+          "target_table": "categories",
+          "target_columns": [
+            "category_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:b9167cb8ed2a5bffc6cbd46d:1"
+        }
+      ]
+    },
+    {
+      "name": "promotions",
+      "description": "",
+      "ddl": "CREATE TABLE promotions (\n  promotion_id INTEGER PRIMARY KEY,\n  promo_code TEXT NOT NULL UNIQUE,\n  promo_name TEXT NOT NULL,\n  start_date TEXT NOT NULL,\n  end_date TEXT NOT NULL,\n  discount_pct INTEGER NOT NULL CHECK(discount_pct BETWEEN 0 AND 100)\n)",
+      "columns": [
+        {
+          "name": "promotion_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "promo_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "promo_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "start_date",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "end_date",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "discount_pct",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "promotion_id"
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_promotions_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "promo_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "regions",
+      "description": "",
+      "ddl": "CREATE TABLE regions (\n  region_id INTEGER PRIMARY KEY,\n  region_code TEXT NOT NULL UNIQUE,\n  region_name TEXT NOT NULL\n)",
+      "columns": [
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "region_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "region_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "region_id"
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_regions_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "region_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "returns",
+      "description": "",
+      "ddl": "CREATE TABLE returns (\n  return_id INTEGER PRIMARY KEY,\n  order_item_id INTEGER NOT NULL REFERENCES order_items(order_item_id),\n  return_qty INTEGER NOT NULL CHECK(return_qty > 0),\n  refund_amount INTEGER NOT NULL CHECK(refund_amount >= 0),\n  status TEXT NOT NULL CHECK(status IN ('requested','approved','rejected')),\n  requested_at TEXT NOT NULL,\n  decided_at TEXT\n)",
+      "columns": [
+        {
+          "name": "return_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_item_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "return_qty",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "refund_amount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "requested_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "decided_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "return_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_returns_item_status",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "order_item_id",
+            "status"
+          ],
+          "ddl": "CREATE INDEX idx_returns_item_status ON returns(order_item_id, status)"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "returns",
+          "source_columns": [
+            "order_item_id"
+          ],
+          "target_table": "order_items",
+          "target_columns": [
+            "order_item_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:f4a7a6e7f495b00374e049a4:1"
+        }
+      ]
+    },
+    {
+      "name": "shipments",
+      "description": "",
+      "ddl": "CREATE TABLE shipments (\n  shipment_id INTEGER PRIMARY KEY,\n  order_id INTEGER NOT NULL UNIQUE REFERENCES orders(order_id),\n  shipping_address_id TEXT REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE SET NULL,\n  carrier TEXT NOT NULL,\n  shipped_at TEXT NOT NULL,\n  delivered_at TEXT,\n  shipping_status TEXT NOT NULL CHECK(shipping_status IN ('in_transit','delivered')),\n  ship_to_recipient_name TEXT,\n  ship_to_phone TEXT,\n  ship_to_formatted_address TEXT,\n  ship_to_ward TEXT,\n  ship_to_district TEXT,\n  ship_to_province TEXT,\n  ship_to_country TEXT DEFAULT 'Vietnam',\n  ship_to_latitude REAL CHECK(ship_to_latitude BETWEEN -90 AND 90),\n  ship_to_longitude REAL CHECK(ship_to_longitude BETWEEN -180 AND 180)\n)",
+      "columns": [
+        {
+          "name": "shipment_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "shipping_address_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "carrier",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "shipped_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "delivered_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "shipping_status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_recipient_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_phone",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_formatted_address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_ward",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_district",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_province",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": "'Vietnam'",
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_latitude",
+          "data_type": "REAL",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "ship_to_longitude",
+          "data_type": "REAL",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "shipment_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_shipments_address",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "shipping_address_id"
+          ],
+          "ddl": "CREATE INDEX idx_shipments_address ON shipments(shipping_address_id)"
+        },
+        {
+          "name": "sqlite_autoindex_shipments_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "order_id"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "shipments",
+          "source_columns": [
+            "order_id"
+          ],
+          "target_table": "orders",
+          "target_columns": [
+            "order_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:9a76f77e9b1a623d2e3e18e6:1"
+        },
+        {
+          "source_table": "shipments",
+          "source_columns": [
+            "shipping_address_id"
+          ],
+          "target_table": "addresses",
+          "target_columns": [
+            "address_id"
+          ],
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE",
+          "relation_id": "fk:d9ddede139a63485027dafa6:1"
+        }
+      ]
+    },
+    {
+      "name": "stores",
+      "description": "",
+      "ddl": "CREATE TABLE stores (\n  store_id INTEGER PRIMARY KEY,\n  store_code TEXT NOT NULL UNIQUE,\n  store_name TEXT NOT NULL,\n  region_id INTEGER NOT NULL REFERENCES regions(region_id),\n  city TEXT NOT NULL,\n  opened_on TEXT NOT NULL\n)",
+      "columns": [
+        {
+          "name": "store_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "store_code",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "store_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "opened_on",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "store_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_stores_region",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "region_id"
+          ],
+          "ddl": "CREATE INDEX idx_stores_region ON stores(region_id)"
+        },
+        {
+          "name": "sqlite_autoindex_stores_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "store_code"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "stores",
+          "source_columns": [
+            "region_id"
+          ],
+          "target_table": "regions",
+          "target_columns": [
+            "region_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:f09377f1f9863f5d6e217f86:1"
+        }
+      ]
+    },
+    {
+      "name": "suppliers",
+      "description": "",
+      "ddl": "CREATE TABLE suppliers (\n  supplier_id INTEGER PRIMARY KEY,\n  supplier_name TEXT NOT NULL UNIQUE,\n  region_id INTEGER NOT NULL REFERENCES regions(region_id)\n)",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "supplier_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "supplier_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_suppliers_region",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "region_id"
+          ],
+          "ddl": "CREATE INDEX idx_suppliers_region ON suppliers(region_id)"
+        },
+        {
+          "name": "sqlite_autoindex_suppliers_1",
+          "unique": true,
+          "partial": false,
+          "origin": "u",
+          "columns": [
+            "supplier_name"
+          ],
+          "ddl": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "suppliers",
+          "source_columns": [
+            "region_id"
+          ],
+          "target_table": "regions",
+          "target_columns": [
+            "region_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:10a35090f252896640d3ee73:1"
+        }
+      ]
+    },
+    {
+      "name": "support_tickets",
+      "description": "",
+      "ddl": "CREATE TABLE support_tickets (\n  ticket_id INTEGER PRIMARY KEY,\n  order_id INTEGER REFERENCES orders(order_id),\n  customer_id INTEGER NOT NULL REFERENCES customers(customer_id),\n  issue_type TEXT NOT NULL,\n  priority TEXT NOT NULL,\n  status TEXT NOT NULL CHECK(status IN ('open','in_progress','resolved')),\n  created_at TEXT NOT NULL,\n  resolved_at TEXT\n)",
+      "columns": [
+        {
+          "name": "ticket_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 1,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "issue_type",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "priority",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "data_type": "TEXT",
+          "nullable": false,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        },
+        {
+          "name": "resolved_at",
+          "data_type": "TEXT",
+          "nullable": true,
+          "primary_key_position": 0,
+          "default": null,
+          "generated": false,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "ticket_id"
+      ],
+      "indexes": [
+        {
+          "name": "idx_tickets_created",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "created_at"
+          ],
+          "ddl": "CREATE INDEX idx_tickets_created ON support_tickets(created_at)"
+        },
+        {
+          "name": "idx_tickets_customer",
+          "unique": false,
+          "partial": false,
+          "origin": "c",
+          "columns": [
+            "customer_id"
+          ],
+          "ddl": "CREATE INDEX idx_tickets_customer ON support_tickets(customer_id)"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "source_table": "support_tickets",
+          "source_columns": [
+            "order_id"
+          ],
+          "target_table": "orders",
+          "target_columns": [
+            "order_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:53bc33c7c9ae11d6c20d37c8:1"
+        },
+        {
+          "source_table": "support_tickets",
+          "source_columns": [
+            "customer_id"
+          ],
+          "target_table": "customers",
+          "target_columns": [
+            "customer_id"
+          ],
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE",
+          "relation_id": "fk:abffce64a780065887055a37:1"
+        }
+      ]
+    }
+  ],
+  "schema_fingerprint": "44e327672eac86558de0b08db5c37c34affcea318c16a5509253fce233377256",
+  "source": {
+    "kind": "sqlite_read_only",
+    "file": "input/database.local.sqlite3",
+    "sha256": "948e4a1bd0b5bbb4c20e75ccfea6c4e3422c033fa44575ad615d0c3156e36916"
+  }
+}

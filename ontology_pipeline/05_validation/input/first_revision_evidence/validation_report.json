@@ -1,0 +1,48 @@
+{
+  "structural_status": "PASS",
+  "findings": [],
+  "counts": {
+    "classes": 20,
+    "properties": 157,
+    "methods": 83,
+    "relations": 31
+  },
+  "runtime_readiness": "NOT_IMPLEMENTED",
+  "human_review_status": "PENDING",
+  "ai_review_status": "COMPLETED",
+  "ai_review_findings": [
+    {
+      "table": "agents",
+      "severity": "MEDIUM",
+      "location": "base.class.description",
+      "reason": "Mô tả class khẳng định đại lý 'gắn với một cửa hàng và thuộc một nhóm (team)' như một đặc tính luôn đúng, nhưng cả store_id và team đều nullable trong schema, nghĩa là không phải mọi bản ghi đều có giá trị cho hai cột này.",
+      "evidence": "Class description: 'gắn với một cửa hàng và thuộc một nhóm (team)'. DDL: 'store_id INTEGER REFERENCES stores(store_id)' (nullable), 'team TEXT' (nullable). Assumption chỉ đề cập store_id có thể null, không đề cập team.",
+      "suggestion": "Sửa description thành dạng mô tả khả năng, ví dụ: 'có thể gắn với một cửa hàng và có thể thuộc một nhóm (team)', hoặc thêm cụm 'nếu đã được phân công' để phản ánh tính nullable của cả hai cột."
+    },
+    {
+      "table": "orders",
+      "severity": "MEDIUM",
+      "location": "base.properties[6].description",
+      "reason": "Mô tả property khẳng định vai trò cụ thể ('nhân viên xử lý đơn hàng') trong khi assumption của relation orderAgent tự ghi nhận vai trò đó chưa được xác nhận — mâu thuẫn nội tại.",
+      "evidence": "Property agentId description: \"Định danh nhân viên xử lý đơn hàng, tham chiếu bảng agents; có thể null.\" | Relation orderAgent assumptions[0]: \"Vai trò cụ thể của đại lý đối với đơn hàng (xử lý, hỗ trợ, hay khác) chưa được metadata xác nhận.\"",
+      "suggestion": "Sửa description property agentId thành trung lập, ví dụ: \"Định danh agent liên quan đến đơn hàng, tham chiếu bảng agents; có thể null.\" — giữ vai trò cụ thể ở mức assumption thay vì khẳng định trong description."
+    },
+    {
+      "table": "regions",
+      "severity": "MEDIUM",
+      "location": "base.class.description",
+      "reason": "Mô tả class khẳng định bản ghi 'được xác định duy nhất bởi mã khu vực' (region_code), trong khi khóa chính thực tế là region_id. region_code chỉ là cột UNIQUE phụ, không phải định danh chính.",
+      "evidence": "Class description: 'được xác định duy nhất bởi mã khu vực.' DDL: 'region_id INTEGER PRIMARY KEY, region_code TEXT NOT NULL UNIQUE'",
+      "suggestion": "Sửa description thành 'được xác định duy nhất bởi region_id (khóa chính), đồng thời có mã khu vực (region_code) duy nhất dùng làm định danh nghiệp vụ' để phản ánh đúng vai trò của từng cột."
+    },
+    {
+      "table": "regions",
+      "severity": "LOW",
+      "location": "relations[1].description",
+      "reason": "Mô tả relation customerRegion dùng tên 'regionId' (camelCase – tên property) trong khi relation supplierRegion (index 0) dùng 'region_id' (snake_case – tên cột DDL). Gây không nhất quán trong cách tham chiếu cột giữa các relation cùng trỏ về cùng một cột.",
+      "evidence": "customerRegion: 'qua cột regionId' | supplierRegion: 'qua cột region_id' | storeRegion: 'qua cột regionId'",
+      "suggestion": "Thống nhất dùng tên cột DDL (region_id) trong description của cả ba relation để tránh nhầm lẫn với tên property."
+    }
+  ],
+  "semantic_status": "REVIEW_REQUIRED"
+}

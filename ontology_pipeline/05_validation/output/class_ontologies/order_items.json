@@ -1,0 +1,492 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:order_items",
+    "name": "OrderItem",
+    "source_table": "order_items",
+    "description": "Một dòng hàng trong đơn hàng, ghi nhận sản phẩm, số lượng, giá đơn vị và giảm giá áp dụng cho dòng đó.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:order_items.order_item_id",
+      "name": "orderItemId",
+      "description": "Khóa chính nhận diện duy nhất một dòng hàng trong đơn.",
+      "confidence": 0.98,
+      "source_table": "order_items",
+      "source_column": "order_item_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.order_id",
+      "name": "orderId",
+      "description": "Tham chiếu đến đơn hàng mà dòng hàng này thuộc về.",
+      "confidence": 0.97,
+      "source_table": "order_items",
+      "source_column": "order_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.product_id",
+      "name": "productId",
+      "description": "Tham chiếu đến sản phẩm được ghi nhận trong dòng hàng này.",
+      "confidence": 0.97,
+      "source_table": "order_items",
+      "source_column": "product_id",
+      "data_type": "VARCHAR(50)",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.quantity",
+      "name": "quantity",
+      "description": "Số lượng sản phẩm trong dòng hàng, luôn lớn hơn 0.",
+      "confidence": 0.98,
+      "source_table": "order_items",
+      "source_column": "quantity",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.unit_price",
+      "name": "unitPrice",
+      "description": "Giá đơn vị của sản phẩm tại thời điểm ghi nhận dòng hàng, không âm.",
+      "confidence": 0.95,
+      "source_table": "order_items",
+      "source_column": "unit_price",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.line_discount",
+      "name": "lineDiscount",
+      "description": "Giá trị giảm giá áp dụng cho dòng hàng này, không âm.",
+      "confidence": 0.95,
+      "source_table": "order_items",
+      "source_column": "line_discount",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:order_items.promotion_id",
+      "name": "promotionId",
+      "description": "Tham chiếu tùy chọn đến promotion liên quan đến dòng hàng; có thể không có.",
+      "confidence": 0.95,
+      "source_table": "order_items",
+      "source_column": "promotion_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupOrderItem",
+      "description": "Tra cứu một dòng hàng theo khóa chính orderItemId, trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "orderItemId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_item_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "order_item_id",
+          "order_id",
+          "product_id",
+          "quantity",
+          "unit_price",
+          "line_discount",
+          "promotion_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "order_item_id",
+        "order_id",
+        "product_id",
+        "quantity",
+        "unit_price",
+        "line_discount",
+        "promotion_id"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:order_items.lookupOrderItem",
+      "owner_class_id": "class:order_items",
+      "source_table": "order_items",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByOrder",
+      "description": "Liệt kê các dòng hàng thuộc một đơn hàng được chỉ định bởi orderId.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "order_item_id",
+          "order_id",
+          "product_id",
+          "quantity",
+          "unit_price",
+          "line_discount",
+          "promotion_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "order_id",
+        "order_item_id",
+        "product_id",
+        "quantity",
+        "unit_price",
+        "line_discount",
+        "promotion_id"
+      ],
+      "confidence": 0.96,
+      "method_id": "method:order_items.listByOrder",
+      "owner_class_id": "class:order_items",
+      "source_table": "order_items",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByProduct",
+      "description": "Liệt kê các dòng hàng liên quan đến một sản phẩm được chỉ định bởi productId.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "source_column": "product_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "order_item_id",
+          "order_id",
+          "product_id",
+          "quantity",
+          "unit_price",
+          "line_discount",
+          "promotion_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "product_id",
+        "order_item_id",
+        "order_id",
+        "quantity",
+        "unit_price",
+        "line_discount",
+        "promotion_id"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:order_items.listByProduct",
+      "owner_class_id": "class:order_items",
+      "source_table": "order_items",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByOrder",
+      "description": "Đếm số dòng hàng thuộc một đơn hàng được chỉ định bởi orderId.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "order_id"
+      ],
+      "confidence": 0.96,
+      "method_id": "method:order_items.countByOrder",
+      "owner_class_id": "class:order_items",
+      "source_table": "order_items",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "sumQuantityByProduct",
+      "description": "Tổng số lượng (sum quantity) nhóm theo productId, trả về tổng quantity cho từng sản phẩm.",
+      "operation": "aggregate",
+      "input_parameters": [],
+      "group_by": [
+        "product_id"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "product_id"
+        ],
+        "aggregations": [
+          {
+            "name": "totalQuantity",
+            "function": "sum",
+            "source_column": "quantity"
+          }
+        ]
+      },
+      "source_columns": [
+        "product_id",
+        "quantity"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:order_items.sumQuantityByProduct",
+      "owner_class_id": "class:order_items",
+      "source_table": "order_items",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "unit_price và line_discount có kiểu INTEGER nhưng đơn vị tiền tệ cụ thể (đồng, cent, v.v.) không được xác định trong schema.",
+    "promotion_id nullable nghĩa là dòng hàng có thể không liên kết với promotion; NULL chỉ chứng minh không có tham chiếu, không xác nhận lý do.",
+    "order_item_id là INTEGER PRIMARY KEY; DDL không chứa AUTOINCREMENT.",
+    "Không có ràng buộc UNIQUE nào ngoài khóa chính, nên cùng một sản phẩm có thể xuất hiện nhiều lần trong cùng một đơn hàng."
+  ],
+  "input_fingerprint": "49e5e2d885abb592d879a03a24d8f4280ef3e3dc0540a6696e0f42acecc221d0",
+  "relations": [
+    {
+      "relation_id": "fk:05385e149a6ad8573cc0954b:1",
+      "name": "orderItemToProduct",
+      "description": "Mỗi OrderItem tham chiếu đến một Product qua cột product_id.",
+      "confidence": 0.97,
+      "assumptions": [],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:order_items.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:05385e149a6ad8573cc0954b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1",
+      "name": "orderItemToPromotion",
+      "description": "Mỗi OrderItem có thể tham chiếu đến một Promotion qua cột promotion_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Không xác nhận promotion đang hiệu lực tại thời điểm ghi nhận dòng hàng; FK chỉ thiết lập tham chiếu."
+      ],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:promotions",
+      "source_property_ids": [
+        "property:order_items.promotion_id"
+      ],
+      "target_property_ids": [
+        "property:promotions.promotion_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "promotion_id"
+        ],
+        "target_table": "promotions",
+        "target_columns": [
+          "promotion_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:8ee79468a0864b8cce923f9b:1",
+      "name": "orderItemToOrder",
+      "description": "Mỗi OrderItem tham chiếu đến một Order qua cột order_id.",
+      "confidence": 0.97,
+      "assumptions": [],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:order_items.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:8ee79468a0864b8cce923f9b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:f4a7a6e7f495b00374e049a4:1",
+      "name": "returnToOrderItem",
+      "description": "Bản ghi Return tham chiếu bản ghi OrderItem qua cột order_item_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:returns",
+      "target_class_id": "class:order_items",
+      "source_property_ids": [
+        "property:returns.order_item_id"
+      ],
+      "target_property_ids": [
+        "property:order_items.order_item_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "returns",
+        "source_columns": [
+          "order_item_id"
+        ],
+        "target_table": "order_items",
+        "target_columns": [
+          "order_item_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:f4a7a6e7f495b00374e049a4:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:53bc33c7c9ae11d6c20d37c8:1",
+      "name": "ticketOrderReference",
+      "description": "Mỗi bản ghi SupportTicket có thể tham chiếu một bản ghi Order qua cột order_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Cột order_id nullable; metadata không xác nhận điều kiện nghiệp vụ nào quyết định khi nào vé hỗ trợ liên kết với đơn hàng."
+      ]
+    },
+    {
+      "relation_id": "fk:abffce64a780065887055a37:1",
+      "name": "ticketCustomerReference",
+      "description": "Mỗi bản ghi SupportTicket tham chiếu một bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

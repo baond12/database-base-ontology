@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:25d84fb39fb2430a7849b37e:1",
+      "name": "agentStore",
+      "description": "Agent có thể tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

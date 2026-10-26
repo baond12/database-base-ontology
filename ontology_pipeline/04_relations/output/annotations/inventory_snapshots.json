@@ -1,0 +1,18 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:414459466aa044594654457b:1",
+      "name": "inventorySnapshotToProduct",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:9018fc15e3b26510bd233872:1",
+      "name": "inventorySnapshotToStore",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

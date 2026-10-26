@@ -1,0 +1,158 @@
+{
+  "status": "PASS",
+  "checks": 38,
+  "results": [
+    {
+      "check": "Self-FK cho phép tham chiếu chính bản ghi",
+      "status": "PASS"
+    },
+    {
+      "check": "Metadata làm thay đổi fingerprint",
+      "status": "PASS"
+    },
+    {
+      "check": "Metadata null chuẩn hóa thành chuỗi rỗng",
+      "status": "PASS"
+    },
+    {
+      "check": "TEXT PRIMARY KEY rowid vẫn nullable",
+      "status": "PASS"
+    },
+    {
+      "check": "INTEGER PRIMARY KEY không nullable",
+      "status": "PASS"
+    },
+    {
+      "check": "STRICT PRIMARY KEY không nullable",
+      "status": "PASS"
+    },
+    {
+      "check": "WITHOUT ROWID PRIMARY KEY không nullable",
+      "status": "PASS"
+    },
+    {
+      "check": "Generated column được giữ",
+      "status": "PASS"
+    },
+    {
+      "check": "FK ghép suy ra đủ PK đích",
+      "status": "PASS"
+    },
+    {
+      "check": "FK nullable có min=0",
+      "status": "PASS"
+    },
+    {
+      "check": "FK ghép UNIQUE có max ngược=1",
+      "status": "PASS"
+    },
+    {
+      "check": "Partial UNIQUE không tạo 1-1 toàn bảng",
+      "status": "PASS"
+    },
+    {
+      "check": "FK NOT NULL có min=1",
+      "status": "PASS"
+    },
+    {
+      "check": "Expression UNIQUE không thành khóa cột",
+      "status": "PASS"
+    },
+    {
+      "check": "FK khác hoa/thường được chuẩn hóa",
+      "status": "PASS"
+    },
+    {
+      "check": "FK trùng nội dung vẫn có IDs riêng",
+      "status": "PASS"
+    },
+    {
+      "check": "Lookup equality theo PK được chấp nhận",
+      "status": "PASS"
+    },
+    {
+      "check": "Lookup range theo PK bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Lookup thiếu required key bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Cột khai báo dư bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Method ngoài bảng bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Sai parameter type bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Aggregate có group đúng được chấp nhận",
+      "status": "PASS"
+    },
+    {
+      "check": "Aggregate thiếu cột nhóm bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Aggregate nhóm trả scalar bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "SUM trên TEXT bị chặn",
+      "status": "PASS"
+    },
+    {
+      "check": "Artifacts thật qua structural validator",
+      "status": "PASS"
+    },
+    {
+      "check": "Property vật lý bị sửa được phát hiện",
+      "status": "PASS"
+    },
+    {
+      "check": "Cardinality bị sửa được phát hiện",
+      "status": "PASS"
+    },
+    {
+      "check": "Context bị sửa được phát hiện",
+      "status": "PASS"
+    },
+    {
+      "check": "Relation thiếu được phát hiện",
+      "status": "PASS"
+    },
+    {
+      "check": "Self-FK chỉ có một Relation toàn cục",
+      "status": "PASS"
+    },
+    {
+      "check": "Context self không tự lặp Class",
+      "status": "PASS"
+    },
+    {
+      "check": "API grammar bỏ uniqueItems không được hỗ trợ",
+      "status": "PASS"
+    },
+    {
+      "check": "Contract local vẫn giữ uniqueItems",
+      "status": "PASS"
+    },
+    {
+      "check": "Chuyển schema API không sửa contract local",
+      "status": "PASS"
+    },
+    {
+      "check": "Validator local bắt array trùng",
+      "status": "PASS"
+    },
+    {
+      "check": "Mô tả self-FK không loại bỏ tự tham chiếu",
+      "status": "PASS"
+    }
+  ]
+}

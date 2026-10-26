@@ -1,0 +1,367 @@
+{
+  "class_name": "Shipment",
+  "description": "Bản ghi đại diện cho một lô hàng được gửi đi, liên kết với một đơn hàng và chứa thông tin người nhận, đơn vị vận chuyển, trạng thái vận chuyển cùng địa chỉ giao hàng.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "shipment_id",
+      "name": "shipmentId",
+      "description": "Khóa chính nhận diện duy nhất một bản ghi shipment.",
+      "confidence": 0.99
+    },
+    {
+      "column_name": "order_id",
+      "name": "orderId",
+      "description": "Tham chiếu đến đơn hàng liên quan. Mỗi đơn hàng tối đa có một shipment (ràng buộc UNIQUE).",
+      "confidence": 0.97
+    },
+    {
+      "column_name": "shipping_address_id",
+      "name": "shippingAddressId",
+      "description": "Tham chiếu đến địa chỉ giao hàng trong bảng addresses. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "carrier",
+      "name": "carrier",
+      "description": "Tên đơn vị vận chuyển thực hiện việc giao hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "shipped_at",
+      "name": "shippedAt",
+      "description": "Thời điểm lô hàng được gửi đi, lưu dưới dạng TEXT.",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "delivered_at",
+      "name": "deliveredAt",
+      "description": "Thời điểm lô hàng được giao đến, lưu dưới dạng TEXT. Có thể không có giá trị (NULL).",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "shipping_status",
+      "name": "shippingStatus",
+      "description": "Trạng thái vận chuyển, cho phép các giá trị: 'in_transit' hoặc 'delivered'.",
+      "confidence": 0.97
+    },
+    {
+      "column_name": "ship_to_recipient_name",
+      "name": "shipToRecipientName",
+      "description": "Họ tên người nhận hàng. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_phone",
+      "name": "shipToPhone",
+      "description": "Số điện thoại người nhận hàng. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_formatted_address",
+      "name": "shipToFormattedAddress",
+      "description": "Địa chỉ giao hàng đã định dạng đầy đủ. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_ward",
+      "name": "shipToWard",
+      "description": "Phường/xã của địa chỉ giao hàng. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_district",
+      "name": "shipToDistrict",
+      "description": "Quận/huyện của địa chỉ giao hàng. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_province",
+      "name": "shipToProvince",
+      "description": "Tỉnh/thành phố của địa chỉ giao hàng. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_country",
+      "name": "shipToCountry",
+      "description": "Quốc gia của địa chỉ giao hàng. Giá trị mặc định là 'Vietnam'. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_latitude",
+      "name": "shipToLatitude",
+      "description": "Vĩ độ của địa chỉ giao hàng, giá trị trong khoảng [-90, 90]. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "ship_to_longitude",
+      "name": "shipToLongitude",
+      "description": "Kinh độ của địa chỉ giao hàng, giá trị trong khoảng [-180, 180]. Có thể không có giá trị (NULL).",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByShipmentId",
+      "description": "Tra cứu một shipment theo shipment_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "shipmentId",
+          "type": "integer",
+          "required": true,
+          "source_column": "shipment_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "shipment_id",
+          "order_id",
+          "shipping_address_id",
+          "carrier",
+          "shipped_at",
+          "delivered_at",
+          "shipping_status",
+          "ship_to_recipient_name",
+          "ship_to_phone",
+          "ship_to_formatted_address",
+          "ship_to_ward",
+          "ship_to_district",
+          "ship_to_province",
+          "ship_to_country",
+          "ship_to_latitude",
+          "ship_to_longitude"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "shipment_id",
+        "order_id",
+        "shipping_address_id",
+        "carrier",
+        "shipped_at",
+        "delivered_at",
+        "shipping_status",
+        "ship_to_recipient_name",
+        "ship_to_phone",
+        "ship_to_formatted_address",
+        "ship_to_ward",
+        "ship_to_district",
+        "ship_to_province",
+        "ship_to_country",
+        "ship_to_latitude",
+        "ship_to_longitude"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "name": "lookupByOrderId",
+      "description": "Tra cứu shipment theo order_id. Do order_id có ràng buộc UNIQUE, trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "shipment_id",
+          "order_id",
+          "shipping_address_id",
+          "carrier",
+          "shipped_at",
+          "delivered_at",
+          "shipping_status",
+          "ship_to_recipient_name",
+          "ship_to_phone",
+          "ship_to_formatted_address",
+          "ship_to_ward",
+          "ship_to_district",
+          "ship_to_province",
+          "ship_to_country",
+          "ship_to_latitude",
+          "ship_to_longitude"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "shipment_id",
+        "order_id",
+        "shipping_address_id",
+        "carrier",
+        "shipped_at",
+        "delivered_at",
+        "shipping_status",
+        "ship_to_recipient_name",
+        "ship_to_phone",
+        "ship_to_formatted_address",
+        "ship_to_ward",
+        "ship_to_district",
+        "ship_to_province",
+        "ship_to_country",
+        "ship_to_latitude",
+        "ship_to_longitude"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "name": "listByShippingStatus",
+      "description": "Danh sách shipments, có thể lọc theo shipping_status.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "shippingStatus",
+          "type": "string",
+          "required": false,
+          "source_column": "shipping_status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "shipment_id",
+          "order_id",
+          "shipping_address_id",
+          "carrier",
+          "shipped_at",
+          "delivered_at",
+          "shipping_status",
+          "ship_to_recipient_name",
+          "ship_to_phone",
+          "ship_to_formatted_address",
+          "ship_to_ward",
+          "ship_to_district",
+          "ship_to_province",
+          "ship_to_country",
+          "ship_to_latitude",
+          "ship_to_longitude"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "shipment_id",
+        "order_id",
+        "shipping_address_id",
+        "carrier",
+        "shipped_at",
+        "delivered_at",
+        "shipping_status",
+        "ship_to_recipient_name",
+        "ship_to_phone",
+        "ship_to_formatted_address",
+        "ship_to_ward",
+        "ship_to_district",
+        "ship_to_province",
+        "ship_to_country",
+        "ship_to_latitude",
+        "ship_to_longitude"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "countByShippingStatus",
+      "description": "Đếm số lượng shipments, có thể lọc theo shipping_status.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "shippingStatus",
+          "type": "string",
+          "required": false,
+          "source_column": "shipping_status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "shipping_status"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listByCarrier",
+      "description": "Danh sách shipments, có thể lọc theo tên đơn vị vận chuyển (carrier).",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "carrier",
+          "type": "string",
+          "required": false,
+          "source_column": "carrier",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "shipment_id",
+          "order_id",
+          "shipping_address_id",
+          "carrier",
+          "shipped_at",
+          "delivered_at",
+          "shipping_status",
+          "ship_to_recipient_name",
+          "ship_to_phone",
+          "ship_to_formatted_address",
+          "ship_to_ward",
+          "ship_to_district",
+          "ship_to_province",
+          "ship_to_country",
+          "ship_to_latitude",
+          "ship_to_longitude"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "shipment_id",
+        "order_id",
+        "shipping_address_id",
+        "carrier",
+        "shipped_at",
+        "delivered_at",
+        "shipping_status",
+        "ship_to_recipient_name",
+        "ship_to_phone",
+        "ship_to_formatted_address",
+        "ship_to_ward",
+        "ship_to_district",
+        "ship_to_province",
+        "ship_to_country",
+        "ship_to_latitude",
+        "ship_to_longitude"
+      ],
+      "confidence": 0.93
+    }
+  ],
+  "assumptions": [
+    "shipped_at và delivered_at lưu dưới dạng TEXT; định dạng cụ thể (ISO 8601, epoch, v.v.) không được schema xác nhận.",
+    "delivered_at có thể là NULL; schema không xác nhận nguyên nhân (chưa giao, chưa cập nhật, hay lý do khác).",
+    "order_id UNIQUE đảm bảo tối đa một shipment mỗi order, nhưng không đảm bảo mọi order đều có shipment tương ứng.",
+    "shipping_address_id có thể là NULL do ON DELETE SET NULL; khi NULL, không có tham chiếu địa chỉ trong bảng addresses.",
+    "ship_to_country có DEFAULT 'Vietnam' nhưng vẫn nullable; không phải mọi bản ghi đều có giá trị 'Vietnam'.",
+    "Các cột ship_to_* (recipient_name, phone, formatted_address, ward, district, province, country, latitude, longitude) là thông tin địa chỉ người nhận được lưu trực tiếp trên shipment, không nhất thiết trùng với địa chỉ trong bảng addresses."
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:categories",
+    "name": "Category",
+    "source_table": "categories",
+    "description": "Đại diện cho một danh mục sản phẩm trong hệ thống bán lẻ đa kênh, có cấu trúc phân cấp qua tham chiếu tự đến danh mục cha.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:categories.category_id",
+      "name": "categoryId",
+      "description": "Mã định danh duy nhất của danh mục, khóa chính.",
+      "confidence": 0.98,
+      "source_table": "categories",
+      "source_column": "category_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:categories.category_name",
+      "name": "categoryName",
+      "description": "Tên hiển thị của danh mục.",
+      "confidence": 0.95,
+      "source_table": "categories",
+      "source_column": "category_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:categories.parent_category_id",
+      "name": "parentCategoryId",
+      "description": "Mã danh mục cha trong cấu trúc phân cấp; null nếu là danh mục cấp trên cùng.",
+      "confidence": 0.9,
+      "source_table": "categories",
+      "source_column": "parent_category_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupCategoryById",
+      "description": "Tra cứu một danh mục theo mã định danh duy nhất.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "categoryId",
+          "type": "integer",
+          "required": true,
+          "source_column": "category_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:categories.lookupCategoryById",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listCategories",
+      "description": "Liệt kê danh mục, có thể lọc theo mã danh mục cha để lấy các danh mục con.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "parent_category_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:categories.listCategories",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countCategories",
+      "description": "Đếm số danh mục, có thể lọc theo mã danh mục cha.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_column": "parent_category_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "parent_category_id"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:categories.countCategories",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột parent_category_id có giá trị null được diễn giải là danh mục cấp trên cùng (root), dựa trên tính nullable và tham chiếu tự đến; không có ràng buộc EXCLUDE hay CHECK xác nhận điều này trong DDL.",
+    "Cấu trúc phân cấp có thể có nhiều cấp (không giới hạn độ sâu) vì không có ràng buộc ngăn chặn vòng lặp trong schema."
+  ],
+  "input_fingerprint": "cca72114cf49304a60049992766cfb99a0498b82188b2789ce409d567ebba1f7"
+}

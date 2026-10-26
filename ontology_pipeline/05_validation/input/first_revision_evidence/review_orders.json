@@ -1,0 +1,12 @@
+{
+  "table_name": "orders",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "location": "base.properties[6].description",
+      "reason": "Mô tả property khẳng định vai trò cụ thể ('nhân viên xử lý đơn hàng') trong khi assumption của relation orderAgent tự ghi nhận vai trò đó chưa được xác nhận — mâu thuẫn nội tại.",
+      "evidence": "Property agentId description: \"Định danh nhân viên xử lý đơn hàng, tham chiếu bảng agents; có thể null.\" | Relation orderAgent assumptions[0]: \"Vai trò cụ thể của đại lý đối với đơn hàng (xử lý, hỗ trợ, hay khác) chưa được metadata xác nhận.\"",
+      "suggestion": "Sửa description property agentId thành trung lập, ví dụ: \"Định danh agent liên quan đến đơn hàng, tham chiếu bảng agents; có thể null.\" — giữ vai trò cụ thể ở mức assumption thay vì khẳng định trong description."
+    }
+  ]
+}

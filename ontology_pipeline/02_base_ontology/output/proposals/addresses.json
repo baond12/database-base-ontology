@@ -1,0 +1,329 @@
+{
+  "class_name": "Address",
+  "description": "Bản ghi địa chỉ liên kết với một khách hàng, chứa thông tin vị trí (địa chỉ định dạng, cấu trúc hành chính, tọa độ), nguồn tạo và cờ mặc định.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "address_id",
+      "name": "addressId",
+      "description": "Định danh duy nhất của bản ghi địa chỉ.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "customer_id",
+      "name": "customerId",
+      "description": "Tham chiếu đến khách hàng liên kết với địa chỉ.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "recipient_name",
+      "name": "recipientName",
+      "description": "Tên người nhận tại địa chỉ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "phone",
+      "name": "phone",
+      "description": "Số điện thoại liên quan đến địa chỉ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "formatted_address",
+      "name": "formattedAddress",
+      "description": "Địa chỉ đã định dạng đầy đủ.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "address_line",
+      "name": "addressLine",
+      "description": "Chi tiết đường hoặc số nhà của địa chỉ.",
+      "confidence": 0.88
+    },
+    {
+      "column_name": "ward",
+      "name": "ward",
+      "description": "Phường hoặc xã của địa chỉ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "district",
+      "name": "district",
+      "description": "Quận hoặc huyện của địa chỉ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "province",
+      "name": "province",
+      "description": "Tỉnh hoặc thành phố của địa chỉ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "country",
+      "name": "country",
+      "description": "Quốc gia của địa chỉ, giá trị mặc định là 'Vietnam'.",
+      "confidence": 0.92
+    },
+    {
+      "column_name": "latitude",
+      "name": "latitude",
+      "description": "Vĩ độ của địa chỉ, giá trị trong khoảng [-90, 90].",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "longitude",
+      "name": "longitude",
+      "description": "Kinh độ của địa chỉ, giá trị trong khoảng [-180, 180].",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "google_place_id",
+      "name": "googlePlaceId",
+      "description": "Định danh nơi chốn từ Google Places.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "address_source",
+      "name": "addressSource",
+      "description": "Nguồn tạo địa chỉ, một trong: MOCK, CUSTOMER_INPUT, GOOGLE_PLACES, GOOGLE_GEOCODING, OTHER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "customer_confirmed_at",
+      "name": "customerConfirmedAt",
+      "description": "Thời điểm khách hàng xác nhận địa chỉ.",
+      "confidence": 0.88
+    },
+    {
+      "column_name": "google_last_checked_at",
+      "name": "googleLastCheckedAt",
+      "description": "Thời điểm cuối cùng kiểm tra địa chỉ với Google.",
+      "confidence": 0.88
+    },
+    {
+      "column_name": "is_default",
+      "name": "isDefault",
+      "description": "Cờ chỉ định đây là địa chỉ mặc định (0 hoặc 1). Tối đa một địa chỉ mặc định cho mỗi khách hàng.",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "created_at",
+      "name": "createdAt",
+      "description": "Thời điểm tạo bản ghi, giá trị mặc định là CURRENT_TIMESTAMP.",
+      "confidence": 0.92
+    },
+    {
+      "column_name": "updated_at",
+      "name": "updatedAt",
+      "description": "Thời điểm cập nhật lần cuối của bản ghi.",
+      "confidence": 0.9
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByAddressId",
+      "description": "Tra cứu một bản ghi địa chỉ theo định danh duy nhất.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "addressId",
+          "type": "string",
+          "required": true,
+          "source_column": "address_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "address_id",
+          "customer_id",
+          "recipient_name",
+          "phone",
+          "formatted_address",
+          "address_line",
+          "ward",
+          "district",
+          "province",
+          "country",
+          "latitude",
+          "longitude",
+          "google_place_id",
+          "address_source",
+          "customer_confirmed_at",
+          "google_last_checked_at",
+          "is_default",
+          "created_at",
+          "updated_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "address_id",
+        "customer_id",
+        "recipient_name",
+        "phone",
+        "formatted_address",
+        "address_line",
+        "ward",
+        "district",
+        "province",
+        "country",
+        "latitude",
+        "longitude",
+        "google_place_id",
+        "address_source",
+        "customer_confirmed_at",
+        "google_last_checked_at",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listByCustomer",
+      "description": "Liệt kê các địa chỉ của một khách hàng, có thể lọc theo cờ mặc định.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        },
+        {
+          "name": "isDefault",
+          "type": "integer",
+          "required": false,
+          "source_column": "is_default",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "address_id",
+          "customer_id",
+          "recipient_name",
+          "phone",
+          "formatted_address",
+          "address_line",
+          "ward",
+          "district",
+          "province",
+          "country",
+          "latitude",
+          "longitude",
+          "google_place_id",
+          "address_source",
+          "customer_confirmed_at",
+          "google_last_checked_at",
+          "is_default",
+          "created_at",
+          "updated_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "address_id",
+        "customer_id",
+        "recipient_name",
+        "phone",
+        "formatted_address",
+        "address_line",
+        "ward",
+        "district",
+        "province",
+        "country",
+        "latitude",
+        "longitude",
+        "google_place_id",
+        "address_source",
+        "customer_confirmed_at",
+        "google_last_checked_at",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ],
+      "confidence": 0.93
+    },
+    {
+      "name": "countByCustomer",
+      "description": "Đếm số bản ghi địa chỉ của một khách hàng.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "customer_id"
+      ],
+      "confidence": 0.93
+    },
+    {
+      "name": "listBySource",
+      "description": "Liệt kê các địa chỉ theo nguồn tạo.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "addressSource",
+          "type": "string",
+          "required": true,
+          "source_column": "address_source",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "address_id",
+          "customer_id",
+          "formatted_address",
+          "address_source",
+          "is_default",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "address_id",
+        "customer_id",
+        "formatted_address",
+        "address_source",
+        "is_default",
+        "created_at"
+      ],
+      "confidence": 0.88
+    }
+  ],
+  "assumptions": [
+    "address_id là TEXT, không xác nhận định dạng cụ thể (UUID, slug, v.v.).",
+    "customer_confirmed_at và google_last_checked_at là TEXT, không xác nhận định dạng thời gian cụ thể.",
+    "created_at mặc định CURRENT_TIMESTAMP nhưng kiểu TEXT, không đảm bảo mọi bản ghi đều có cùng định dạng thời gian.",
+    "country mặc định 'Vietnam' nhưng không có CHECK constraint, có thể chứa giá trị khác.",
+    "Partial unique index đảm bảo tối đa một địa chỉ mặc định mỗi khách hàng, nhưng không đảm bảo mọi khách hàng đều có địa chỉ mặc định.",
+    "phone không có constraint về định dạng số điện thoại.",
+    "latitude và longitude nullable, không xác nhận mọi địa chỉ đều có tọa độ."
+  ]
+}

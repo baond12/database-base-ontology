@@ -1,0 +1,101 @@
+{
+  "class_name": "Brand",
+  "description": "Thương hiệu trong hệ thống bán lẻ đa kênh, được xác định duy nhất bởi tên thương hiệu.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "brand_id",
+      "name": "brandId",
+      "description": "Khóa chính của thương hiệu, kiểu INTEGER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "brand_name",
+      "name": "brandName",
+      "description": "Tên thương hiệu, bắt buộc và duy nhất trong bảng.",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupBrand",
+      "description": "Tra cứu một thương hiệu theo brand_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "brandId",
+          "type": "integer",
+          "required": true,
+          "source_column": "brand_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "brand_id",
+          "brand_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "brand_id",
+        "brand_name"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listBrands",
+      "description": "Liệt kê các thương hiệu, có thể lọc theo tên thương hiệu (chứa chuỗi).",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "brandName",
+          "type": "string",
+          "required": false,
+          "source_column": "brand_name",
+          "operator": "contains"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "brand_id",
+          "brand_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "brand_id",
+        "brand_name"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "name": "countBrands",
+      "description": "Đếm tổng số thương hiệu trong bảng.",
+      "operation": "count",
+      "input_parameters": [],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [],
+      "confidence": 0.95
+    }
+  ],
+  "assumptions": [
+    "brand_id là khóa chính INTEGER.",
+    "brand_name có ràng buộc UNIQUE toàn bảng, đảm bảo mỗi tên thương hiệu chỉ xuất hiện một lần."
+  ]
+}

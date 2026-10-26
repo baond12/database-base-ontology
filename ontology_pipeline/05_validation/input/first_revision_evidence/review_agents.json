@@ -1,0 +1,12 @@
+{
+  "table_name": "agents",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "location": "base.class.description",
+      "reason": "Mô tả class khẳng định đại lý 'gắn với một cửa hàng và thuộc một nhóm (team)' như một đặc tính luôn đúng, nhưng cả store_id và team đều nullable trong schema, nghĩa là không phải mọi bản ghi đều có giá trị cho hai cột này.",
+      "evidence": "Class description: 'gắn với một cửa hàng và thuộc một nhóm (team)'. DDL: 'store_id INTEGER REFERENCES stores(store_id)' (nullable), 'team TEXT' (nullable). Assumption chỉ đề cập store_id có thể null, không đề cập team.",
+      "suggestion": "Sửa description thành dạng mô tả khả năng, ví dụ: 'có thể gắn với một cửa hàng và có thể thuộc một nhóm (team)', hoặc thêm cụm 'nếu đã được phân công' để phản ánh tính nullable của cả hai cột."
+    }
+  ]
+}

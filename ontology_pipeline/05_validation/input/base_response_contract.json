@@ -1,0 +1,224 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "class_name",
+    "description",
+    "confidence",
+    "properties",
+    "methods",
+    "assumptions"
+  ],
+  "properties": {
+    "class_name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "column_name",
+          "name",
+          "description",
+          "confidence"
+        ],
+        "properties": {
+          "column_name": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][A-Za-z0-9]*$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description",
+          "operation",
+          "input_parameters",
+          "group_by",
+          "output",
+          "source_columns",
+          "confidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][A-Za-z0-9]*$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operation": {
+            "enum": [
+              "list",
+              "lookup",
+              "count",
+              "aggregate"
+            ]
+          },
+          "input_parameters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "type",
+                "required",
+                "source_column",
+                "operator"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z][A-Za-z0-9]*$"
+                },
+                "type": {
+                  "enum": [
+                    "string",
+                    "integer",
+                    "number",
+                    "boolean"
+                  ]
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "source_column": {
+                  "type": "string"
+                },
+                "operator": {
+                  "enum": [
+                    "eq",
+                    "gte",
+                    "lte",
+                    "contains"
+                  ]
+                }
+              }
+            }
+          },
+          "group_by": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "output": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "source_columns",
+              "aggregations"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "rows",
+                  "object",
+                  "scalar"
+                ]
+              },
+              "source_columns": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "aggregations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "name",
+                    "function",
+                    "source_column"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[a-z][A-Za-z0-9]*$"
+                    },
+                    "function": {
+                      "enum": [
+                        "count",
+                        "sum",
+                        "avg",
+                        "min",
+                        "max"
+                      ]
+                    },
+                    "source_column": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "source_columns": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

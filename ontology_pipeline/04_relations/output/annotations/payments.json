@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1",
+      "name": "paymentOrder",
+      "description": "Bản ghi Payment tham chiếu bản ghi Order qua cột order_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

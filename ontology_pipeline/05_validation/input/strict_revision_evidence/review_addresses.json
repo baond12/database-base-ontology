@@ -1,0 +1,12 @@
+{
+  "table_name": "addresses",
+  "findings": [
+    {
+      "severity": "LOW",
+      "location": "base.properties[1].description",
+      "reason": "Mô tả property customerId khẳng định khách hàng 'sở hữu' địa chỉ, trong khi assumption của relation addressToCustomer explicitly phủ nhận việc xác nhận vai trò sở hữu. Hai phát biểu mâu thuẫn nội tại trong ontology.",
+      "evidence": "Property description: 'Tham chiếu đến khách hàng sở hữu địa chỉ này.' | Relation assumption: 'Khóa ngoại chỉ khẳng định sự tham chiếu; không xác nhận vai trò sở hữu hay tạo lập giữa hai thực thể.'",
+      "suggestion": "Thay 'sở hữu' bằng diễn đạt trung tính hơn, ví dụ: 'Tham chiếu đến khách hàng liên kết với địa chỉ này.' để nhất quán với assumption của relation."
+    }
+  ]
+}

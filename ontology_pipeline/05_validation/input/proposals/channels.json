@@ -1,0 +1,163 @@
+{
+  "class_name": "Channel",
+  "description": "Kênh bán hàng trong hệ thống omnichannel, bao gồm các loại: marketplace, web, offline, social, chat.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "channel_id",
+      "name": "channelId",
+      "description": "Khóa chính của kênh bán hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "channel_code",
+      "name": "channelCode",
+      "description": "Mã định danh duy nhất của kênh bán hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "channel_name",
+      "name": "channelName",
+      "description": "Tên hiển thị của kênh bán hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "channel_type",
+      "name": "channelType",
+      "description": "Loại kênh bán hàng, một trong các giá trị: marketplace, web, offline, social, chat.",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupChannelById",
+      "description": "Tra cứu một kênh bán hàng theo khóa chính channel_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "channelId",
+          "type": "integer",
+          "required": true,
+          "source_column": "channel_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "lookupChannelByCode",
+      "description": "Tra cứu một kênh bán hàng theo mã kênh channel_code duy nhất.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "channelCode",
+          "type": "string",
+          "required": true,
+          "source_column": "channel_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listChannels",
+      "description": "Danh sách kênh bán hàng, có thể lọc theo loại kênh.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "channelType",
+          "type": "string",
+          "required": false,
+          "source_column": "channel_type",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "countChannels",
+      "description": "Đếm số kênh bán hàng, có thể lọc theo loại kênh.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "channelType",
+          "type": "string",
+          "required": false,
+          "source_column": "channel_type",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "channel_type"
+      ],
+      "confidence": 0.95
+    }
+  ],
+  "assumptions": [
+    "channel_code được dùng làm mã tham chiếu nghiệp vụ cho kênh, không có thêm thông tin về định dạng cụ thể.",
+    "Bảng không có cột thời gian tạo/sửa, không thể xác định thứ tự thời gian của các kênh."
+  ]
+}

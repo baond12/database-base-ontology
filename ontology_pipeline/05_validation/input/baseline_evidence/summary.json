@@ -1,0 +1,21 @@
+{
+  "status": "FAILED_AT_RELATIONS",
+  "model": "qwen/qwen3.6-27b",
+  "thinking_requested": true,
+  "source_sha256": "948e4a1bd0b5bbb4c20e75ccfea6c4e3422c033fa44575ad615d0c3156e36916",
+  "base_classes_completed": 20,
+  "properties": 157,
+  "methods": 102,
+  "relation_groups_completed": 5,
+  "http_responses": 29,
+  "thinking_observed_responses": 29,
+  "failure_table": "inventory_snapshots",
+  "failure": "Malformed JSON in both attempts; finish_reason=stop",
+  "source_code_commit": "c9fb019",
+  "llm_overrides": {
+    "enable_thinking": true,
+    "max_tokens": 16000,
+    "proxy_mode": "none",
+    "read_timeout": 300
+  }
+}

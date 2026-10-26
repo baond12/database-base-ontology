@@ -1,0 +1,311 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:channels",
+    "name": "Channel",
+    "source_table": "channels",
+    "description": "Kênh bán hàng trong hệ thống omnichannel, bao gồm các loại: marketplace, web, offline, social, chat.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:channels.channel_id",
+      "name": "channelId",
+      "description": "Khóa chính của kênh bán hàng.",
+      "confidence": 0.95,
+      "source_table": "channels",
+      "source_column": "channel_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:channels.channel_code",
+      "name": "channelCode",
+      "description": "Mã định danh duy nhất của kênh bán hàng.",
+      "confidence": 0.95,
+      "source_table": "channels",
+      "source_column": "channel_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:channels.channel_name",
+      "name": "channelName",
+      "description": "Tên hiển thị của kênh bán hàng.",
+      "confidence": 0.95,
+      "source_table": "channels",
+      "source_column": "channel_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:channels.channel_type",
+      "name": "channelType",
+      "description": "Loại kênh bán hàng, một trong các giá trị: marketplace, web, offline, social, chat.",
+      "confidence": 0.95,
+      "source_table": "channels",
+      "source_column": "channel_type",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupChannelById",
+      "description": "Tra cứu một kênh bán hàng theo khóa chính channel_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "channelId",
+          "type": "integer",
+          "required": true,
+          "source_column": "channel_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:channels.lookupChannelById",
+      "owner_class_id": "class:channels",
+      "source_table": "channels",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupChannelByCode",
+      "description": "Tra cứu một kênh bán hàng theo mã kênh channel_code duy nhất.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "channelCode",
+          "type": "string",
+          "required": true,
+          "source_column": "channel_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:channels.lookupChannelByCode",
+      "owner_class_id": "class:channels",
+      "source_table": "channels",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listChannels",
+      "description": "Danh sách kênh bán hàng, có thể lọc theo loại kênh.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "channelType",
+          "type": "string",
+          "required": false,
+          "source_column": "channel_type",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "channel_id",
+          "channel_code",
+          "channel_name",
+          "channel_type"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "channel_id",
+        "channel_code",
+        "channel_name",
+        "channel_type"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:channels.listChannels",
+      "owner_class_id": "class:channels",
+      "source_table": "channels",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countChannels",
+      "description": "Đếm số kênh bán hàng, có thể lọc theo loại kênh.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "channelType",
+          "type": "string",
+          "required": false,
+          "source_column": "channel_type",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "channel_type"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:channels.countChannels",
+      "owner_class_id": "class:channels",
+      "source_table": "channels",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "channel_code được dùng làm mã tham chiếu nghiệp vụ cho kênh, không có thêm thông tin về định dạng cụ thể.",
+    "Bảng không có cột thời gian tạo/sửa, không thể xác định thứ tự thời gian của các kênh."
+  ],
+  "input_fingerprint": "646f28a46d8c17a1e2761b2c5e875e3bc8a07fcf352b0286a381b5295ec46a26",
+  "relations": [
+    {
+      "relation_id": "fk:06a913a6b3fcac6b9086f05b:1",
+      "name": "orderChannel",
+      "description": "Mỗi Order tham chiếu đến một Channel qua cột channel_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:channels",
+      "source_property_ids": [
+        "property:orders.channel_id"
+      ],
+      "target_property_ids": [
+        "property:channels.channel_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "channel_id"
+        ],
+        "target_table": "channels",
+        "target_columns": [
+          "channel_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:06a913a6b3fcac6b9086f05b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:2041d1b09c418baf39a64157:1",
+      "name": "chatChannel",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Channel qua cột channel_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:channels",
+      "source_property_ids": [
+        "property:chats.channel_id"
+      ],
+      "target_property_ids": [
+        "property:channels.channel_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "channel_id"
+        ],
+        "target_table": "channels",
+        "target_columns": [
+          "channel_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:2041d1b09c418baf39a64157:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

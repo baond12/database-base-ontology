@@ -1,0 +1,278 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:customers",
+    "name": "Customer",
+    "source_table": "customers",
+    "description": "Đại diện cho một khách hàng trong hệ thống bán lẻ đa kênh, bao gồm mã định danh, khu vực, phân khúc và thời điểm tham gia.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:customers.customer_id",
+      "name": "customerId",
+      "description": "Định danh chính (surrogate key) của khách hàng, tự động tăng.",
+      "confidence": 0.95,
+      "source_table": "customers",
+      "source_column": "customer_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.customer_code",
+      "name": "customerCode",
+      "description": "Mã khách hàng duy nhất dùng trong nghiệp vụ, không trùng lặp.",
+      "confidence": 0.93,
+      "source_table": "customers",
+      "source_column": "customer_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.region_id",
+      "name": "regionId",
+      "description": "Định danh khu vực mà khách hàng thuộc về, tham chiếu bảng regions.",
+      "confidence": 0.92,
+      "source_table": "customers",
+      "source_column": "region_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.customer_segment",
+      "name": "customerSegment",
+      "description": "Phân khúc khách hàng, một trong các giá trị: Retail, VIP, Wholesale.",
+      "confidence": 0.95,
+      "source_table": "customers",
+      "source_column": "customer_segment",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:customers.joined_at",
+      "name": "joinedAt",
+      "description": "Thời điểm khách hàng tham gia hệ thống, lưu dưới dạng chuỗi văn bản.",
+      "confidence": 0.88,
+      "source_table": "customers",
+      "source_column": "joined_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByCustomerId",
+      "description": "Tra cứu một khách hàng theo định danh chính customer_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:customers.lookupByCustomerId",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupByCustomerCode",
+      "description": "Tra cứu một khách hàng theo mã khách hàng duy nhất customer_code. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerCode",
+          "type": "string",
+          "required": true,
+          "source_column": "customer_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:customers.lookupByCustomerCode",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listCustomers",
+      "description": "Danh sách khách hàng, có thể lọc theo khu vực, phân khúc và khoảng thời gian tham gia.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        },
+        {
+          "name": "joinedAtFrom",
+          "type": "string",
+          "required": false,
+          "source_column": "joined_at",
+          "operator": "gte"
+        },
+        {
+          "name": "joinedAtTo",
+          "type": "string",
+          "required": false,
+          "source_column": "joined_at",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:customers.listCustomers",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countCustomers",
+      "description": "Đếm số khách hàng, có thể lọc theo khu vực và phân khúc.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id",
+        "customer_segment"
+      ],
+      "confidence": 0.92,
+      "method_id": "method:customers.countCustomers",
+      "owner_class_id": "class:customers",
+      "source_table": "customers",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Cột joined_at lưu giá trị ngày/thời gian dưới dạng TEXT; định dạng cụ thể (ISO 8601, yyyy-MM-dd, v.v.) không được xác định trong schema.",
+    "customer_id là INTEGER PRIMARY KEY nhưng không có từ khóa AUTOINCREMENT; việc tự động tăng là hành vi mặc định của SQLite cho INTEGER PRIMARY KEY.",
+    "customer_code được đảm bảo duy nhất bởi ràng buộc UNIQUE, không phải bằng logic ứng dụng."
+  ],
+  "input_fingerprint": "2120c88fc0afd61ab9d78b133a6ed06d2f48981aff4690d18e7fbf54cacd483f"
+}

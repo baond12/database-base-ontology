@@ -1,0 +1,472 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:orders",
+    "name": "Order",
+    "source_table": "orders",
+    "description": "Đại diện một đơn hàng trong hệ thống bán lẻ đa kênh, bao gồm thông tin khách hàng, kênh, cửa hàng, trạng thái và các giá trị tài chính.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:orders.order_id",
+      "name": "orderId",
+      "description": "Khóa chính của đơn hàng, kiểu INTEGER.",
+      "confidence": 0.95,
+      "source_table": "orders",
+      "source_column": "order_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.order_code",
+      "name": "orderCode",
+      "description": "Mã đơn hàng duy nhất trong toàn bảng.",
+      "confidence": 0.95,
+      "source_table": "orders",
+      "source_column": "order_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.customer_id",
+      "name": "customerId",
+      "description": "Tham chiếu đến khách hàng liên quan đến đơn hàng.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "customer_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.channel_id",
+      "name": "channelId",
+      "description": "Tham chiếu đến kênh bán hàng mà đơn hàng được đặt qua.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "channel_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.store_id",
+      "name": "storeId",
+      "description": "Tham chiếu đến cửa hàng liên quan đến đơn hàng.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "store_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.chat_id",
+      "name": "chatId",
+      "description": "Tham chiếu đến cuộc chat liên quan; có thể không có giá trị.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "chat_id",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.agent_id",
+      "name": "agentId",
+      "description": "Tham chiếu đến agent liên quan; có thể không có giá trị.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "agent_id",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.ordered_at",
+      "name": "orderedAt",
+      "description": "Thời điểm đặt hàng, lưu dưới dạng TEXT.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "ordered_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.status",
+      "name": "status",
+      "description": "Trạng thái đơn hàng, thuộc một trong các giá trị: placed, paid, shipped, delivered, cancelled.",
+      "confidence": 0.95,
+      "source_table": "orders",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.gross_amount",
+      "name": "grossAmount",
+      "description": "Tổng giá trị đơn hàng trước giảm giá, không âm.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "gross_amount",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.discount_amount",
+      "name": "discountAmount",
+      "description": "Giá trị giảm giá áp dụng cho đơn hàng, không âm.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "discount_amount",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:orders.shipping_fee",
+      "name": "shippingFee",
+      "description": "Phí vận chuyển của đơn hàng, không âm.",
+      "confidence": 0.9,
+      "source_table": "orders",
+      "source_column": "shipping_fee",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByOrderId",
+      "description": "Tra cứu một đơn hàng theo khóa chính order_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "orderId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "order_id",
+          "order_code",
+          "customer_id",
+          "channel_id",
+          "store_id",
+          "chat_id",
+          "agent_id",
+          "ordered_at",
+          "status",
+          "gross_amount",
+          "discount_amount",
+          "shipping_fee"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "order_id",
+        "order_code",
+        "customer_id",
+        "channel_id",
+        "store_id",
+        "chat_id",
+        "agent_id",
+        "ordered_at",
+        "status",
+        "gross_amount",
+        "discount_amount",
+        "shipping_fee"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:orders.lookupByOrderId",
+      "owner_class_id": "class:orders",
+      "source_table": "orders",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupByOrderCode",
+      "description": "Tra cứu một đơn hàng theo mã đơn hàng duy nhất order_code. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "orderCode",
+          "type": "string",
+          "required": true,
+          "source_column": "order_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "order_id",
+          "order_code",
+          "customer_id",
+          "channel_id",
+          "store_id",
+          "chat_id",
+          "agent_id",
+          "ordered_at",
+          "status",
+          "gross_amount",
+          "discount_amount",
+          "shipping_fee"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "order_id",
+        "order_code",
+        "customer_id",
+        "channel_id",
+        "store_id",
+        "chat_id",
+        "agent_id",
+        "ordered_at",
+        "status",
+        "gross_amount",
+        "discount_amount",
+        "shipping_fee"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:orders.lookupByOrderCode",
+      "owner_class_id": "class:orders",
+      "source_table": "orders",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listOrders",
+      "description": "Danh sách đơn hàng, có thể lọc theo trạng thái, khách hàng, kênh, cửa hàng và khoảng thời gian đặt hàng.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": false,
+          "source_column": "customer_id",
+          "operator": "eq"
+        },
+        {
+          "name": "channelId",
+          "type": "integer",
+          "required": false,
+          "source_column": "channel_id",
+          "operator": "eq"
+        },
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "orderedAtGte",
+          "type": "string",
+          "required": false,
+          "source_column": "ordered_at",
+          "operator": "gte"
+        },
+        {
+          "name": "orderedAtLte",
+          "type": "string",
+          "required": false,
+          "source_column": "ordered_at",
+          "operator": "lte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "order_id",
+          "order_code",
+          "customer_id",
+          "channel_id",
+          "store_id",
+          "chat_id",
+          "agent_id",
+          "ordered_at",
+          "status",
+          "gross_amount",
+          "discount_amount",
+          "shipping_fee"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "order_id",
+        "order_code",
+        "customer_id",
+        "channel_id",
+        "store_id",
+        "chat_id",
+        "agent_id",
+        "ordered_at",
+        "status",
+        "gross_amount",
+        "discount_amount",
+        "shipping_fee"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:orders.listOrders",
+      "owner_class_id": "class:orders",
+      "source_table": "orders",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countOrders",
+      "description": "Đếm số đơn hàng, có thể lọc theo trạng thái và khách hàng.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": false,
+          "source_column": "customer_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "customer_id"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:orders.countOrders",
+      "owner_class_id": "class:orders",
+      "source_table": "orders",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "sumGrossAmountByStatus",
+      "description": "Tổng gross_amount theo từng trạng thái đơn hàng.",
+      "operation": "aggregate",
+      "input_parameters": [],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "totalGrossAmount",
+            "function": "sum",
+            "source_column": "gross_amount"
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "gross_amount"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:orders.sumGrossAmountByStatus",
+      "owner_class_id": "class:orders",
+      "source_table": "orders",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "Đơn vị tiền tệ của gross_amount, discount_amount và shipping_fee không được xác định trong schema; chỉ biết là giá trị INTEGER không âm.",
+    "Định dạng cụ thể của giá trị TEXT trong cột ordered_at không được quy định bởi schema; không thể khẳng định định dạng hay timezone.",
+    "chat_id và agent_id có thể là NULL, nghĩa là đơn hàng có thể không liên kết với chat hay agent nào.",
+    "order_id là khóa chính INTEGER nhưng DDL không khai báo AUTOINCREMENT; không khẳng định giá trị được cấp tự động."
+  ],
+  "input_fingerprint": "100d20a9836f58a7d762acc4d88ed759e336fd6f68312f74642bd31087188057"
+}

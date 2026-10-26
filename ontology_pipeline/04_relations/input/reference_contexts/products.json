@@ -1,0 +1,1125 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:products",
+  "current": {
+    "class": {
+      "class_id": "class:products",
+      "name": "Product",
+      "source_table": "products",
+      "description": "Sản phẩm trong hệ thống bán lẻ đa kênh, bao gồm thông tin định danh, giá, tồn kho, tham chiếu thương hiệu/danh mục/khuyến mãi và các trường dữ liệu mở rộng dạng JSONB.",
+      "metadata_description": "",
+      "confidence": 0.92,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:products.product_id",
+        "name": "productId",
+        "description": "Mã định danh duy nhất của sản phẩm, khóa chính.",
+        "confidence": 0.98,
+        "source_table": "products",
+        "source_column": "product_id",
+        "data_type": "VARCHAR(50)",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.sku",
+        "name": "sku",
+        "description": "Mã SKU duy nhất của sản phẩm.",
+        "confidence": 0.97,
+        "source_table": "products",
+        "source_column": "sku",
+        "data_type": "VARCHAR(100)",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.name",
+        "name": "name",
+        "description": "Tên sản phẩm.",
+        "confidence": 0.98,
+        "source_table": "products",
+        "source_column": "name",
+        "data_type": "VARCHAR(255)",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.product_url",
+        "name": "productUrl",
+        "description": "URL liên kết đến trang sản phẩm.",
+        "confidence": 0.92,
+        "source_table": "products",
+        "source_column": "product_url",
+        "data_type": "TEXT",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.brand_id",
+        "name": "brandId",
+        "description": "Tham chiếu đến thương hiệu liên quan (brands.brand_id).",
+        "confidence": 0.95,
+        "source_table": "products",
+        "source_column": "brand_id",
+        "data_type": "INTEGER",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.category_id",
+        "name": "categoryId",
+        "description": "Tham chiếu đến danh mục liên quan (categories.category_id).",
+        "confidence": 0.95,
+        "source_table": "products",
+        "source_column": "category_id",
+        "data_type": "INTEGER",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.promotion_id",
+        "name": "promotionId",
+        "description": "Tham chiếu đến chương trình khuyến mãi liên quan (promotions.promotion_id).",
+        "confidence": 0.93,
+        "source_table": "products",
+        "source_column": "promotion_id",
+        "data_type": "INTEGER",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.original_price",
+        "name": "originalPrice",
+        "description": "Giá gốc của sản phẩm.",
+        "confidence": 0.93,
+        "source_table": "products",
+        "source_column": "original_price",
+        "data_type": "NUMERIC(12,2)",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.discount_price",
+        "name": "discountPrice",
+        "description": "Giá sau giảm của sản phẩm.",
+        "confidence": 0.93,
+        "source_table": "products",
+        "source_column": "discount_price",
+        "data_type": "NUMERIC(12,2)",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.currency",
+        "name": "currency",
+        "description": "Mã đơn vị tiền tệ, giá trị mặc định 'VND'.",
+        "confidence": 0.9,
+        "source_table": "products",
+        "source_column": "currency",
+        "data_type": "VARCHAR(10)",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": "'VND'",
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.discount_percentage",
+        "name": "discountPercentage",
+        "description": "Tỷ lệ giảm giá.",
+        "confidence": 0.9,
+        "source_table": "products",
+        "source_column": "discount_percentage",
+        "data_type": "NUMERIC(5,2)",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.is_in_stock",
+        "name": "isInStock",
+        "description": "Trạng thái có hàng trong kho.",
+        "confidence": 0.92,
+        "source_table": "products",
+        "source_column": "is_in_stock",
+        "data_type": "BOOLEAN",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.stock_quantity",
+        "name": "stockQuantity",
+        "description": "Số lượng tồn kho.",
+        "confidence": 0.92,
+        "source_table": "products",
+        "source_column": "stock_quantity",
+        "data_type": "INTEGER",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.delivery_locations",
+        "name": "deliveryLocations",
+        "description": "Thông tin địa điểm giao hàng, kiểu khai báo JSONB.",
+        "confidence": 0.85,
+        "source_table": "products",
+        "source_column": "delivery_locations",
+        "data_type": "JSONB",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.specifications",
+        "name": "specifications",
+        "description": "Thông tin thông số kỹ thuật, kiểu khai báo JSONB.",
+        "confidence": 0.85,
+        "source_table": "products",
+        "source_column": "specifications",
+        "data_type": "JSONB",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.warranty",
+        "name": "warranty",
+        "description": "Thông tin bảo hành, kiểu khai báo JSONB.",
+        "confidence": 0.85,
+        "source_table": "products",
+        "source_column": "warranty",
+        "data_type": "JSONB",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.images",
+        "name": "images",
+        "description": "Thông tin hình ảnh sản phẩm, kiểu khai báo JSONB.",
+        "confidence": 0.85,
+        "source_table": "products",
+        "source_column": "images",
+        "data_type": "JSONB",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.created_at",
+        "name": "createdAt",
+        "description": "Thời điểm tạo bản ghi, giá trị mặc định CURRENT_TIMESTAMP.",
+        "confidence": 0.92,
+        "source_table": "products",
+        "source_column": "created_at",
+        "data_type": "TIMESTAMP",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": "CURRENT_TIMESTAMP",
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.description",
+        "name": "description",
+        "description": "Mô tả chi tiết sản phẩm.",
+        "confidence": 0.95,
+        "source_table": "products",
+        "source_column": "description",
+        "data_type": "TEXT",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:products.description_embedding",
+        "name": "descriptionEmbedding",
+        "description": "Dữ liệu embedding của mô tả, kiểu BLOB.",
+        "confidence": 0.82,
+        "source_table": "products",
+        "source_column": "description_embedding",
+        "data_type": "BLOB",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "5511dce1671f4b310599aa8ed2959bcb405130c1cf37aa2484644b5c9ed19a23"
+  },
+  "references": [
+    {
+      "class_id": "class:brands",
+      "ontology": {
+        "class": {
+          "class_id": "class:brands",
+          "name": "Brand",
+          "source_table": "brands",
+          "description": "Thương hiệu trong hệ thống bán lẻ đa kênh, được xác định duy nhất bởi tên thương hiệu.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:brands.brand_id",
+            "name": "brandId",
+            "description": "Khóa chính của thương hiệu, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "brands",
+            "source_column": "brand_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:brands.brand_name",
+            "name": "brandName",
+            "description": "Tên thương hiệu, bắt buộc và duy nhất trong bảng.",
+            "confidence": 0.95,
+            "source_table": "brands",
+            "source_column": "brand_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "ca8750f0f131a6d060cbe93cef31823c3455f7b67e7c76d91a1186738b6e27f8"
+      }
+    },
+    {
+      "class_id": "class:categories",
+      "ontology": {
+        "class": {
+          "class_id": "class:categories",
+          "name": "Category",
+          "source_table": "categories",
+          "description": "Bản ghi danh mục sản phẩm, có parent_category_id tham chiếu category_id trong cùng bảng; có thể không có tham chiếu.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:categories.category_id",
+            "name": "categoryId",
+            "description": "Khóa chính của danh mục, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "categories",
+            "source_column": "category_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:categories.category_name",
+            "name": "categoryName",
+            "description": "Tên của danh mục, bắt buộc có giá trị.",
+            "confidence": 0.95,
+            "source_table": "categories",
+            "source_column": "category_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:categories.parent_category_id",
+            "name": "parentCategoryId",
+            "description": "Tham chiếu category_id trong cùng bảng, có thể NULL.",
+            "confidence": 0.95,
+            "source_table": "categories",
+            "source_column": "parent_category_id",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "cca72114cf49304a60049992766cfb99a0498b82188b2789ce409d567ebba1f7"
+      }
+    },
+    {
+      "class_id": "class:chats",
+      "ontology": {
+        "class": {
+          "class_id": "class:chats",
+          "name": "Chat",
+          "source_table": "chats",
+          "description": "Một tin nhắn trong hội thoại, ghi nhận nội dung, người gửi, thời điểm và các nhãn phân tích (intent, sentiment) liên quan.",
+          "metadata_description": "",
+          "confidence": 0.92,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:chats.chat_id",
+            "name": "chatId",
+            "description": "Định danh duy nhất của tin nhắn, khóa chính.",
+            "confidence": 0.98,
+            "source_table": "chats",
+            "source_column": "chat_id",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.conversation_id",
+            "name": "conversationId",
+            "description": "Định danh hội thoại mà tin nhắn thuộc về, nhóm nhiều tin nhắn thành một cuộc trò chuyện.",
+            "confidence": 0.95,
+            "source_table": "chats",
+            "source_column": "conversation_id",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.agent_id",
+            "name": "agentId",
+            "description": "Tham chiếu đến agent liên quan đến tin nhắn, có thể trống.",
+            "confidence": 0.93,
+            "source_table": "chats",
+            "source_column": "agent_id",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.customer_id",
+            "name": "customerId",
+            "description": "Tham chiếu đến customer liên quan đến tin nhắn.",
+            "confidence": 0.95,
+            "source_table": "chats",
+            "source_column": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.product_id",
+            "name": "productId",
+            "description": "Tham chiếu đến sản phẩm liên quan đến tin nhắn, có thể trống.",
+            "confidence": 0.93,
+            "source_table": "chats",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.channel_id",
+            "name": "channelId",
+            "description": "Tham chiếu đến kênh giao tiếp mà tin nhắn được gửi qua, có thể trống.",
+            "confidence": 0.93,
+            "source_table": "chats",
+            "source_column": "channel_id",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.chat_time",
+            "name": "chatTime",
+            "description": "Thời điểm tin nhắn được gửi. Giá trị mặc định là CURRENT_TIMESTAMP khi không chỉ định.",
+            "confidence": 0.92,
+            "source_table": "chats",
+            "source_column": "chat_time",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": "CURRENT_TIMESTAMP",
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.sender_type",
+            "name": "senderType",
+            "description": "Loại người gửi tin nhắn, một trong các giá trị: AGENT, CUSTOMER, SYSTEM.",
+            "confidence": 0.97,
+            "source_table": "chats",
+            "source_column": "sender_type",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.content",
+            "name": "content",
+            "description": "Nội dung tin nhắn, không được rỗng sau khi loại bỏ khoảng trắng đầu cuối.",
+            "confidence": 0.97,
+            "source_table": "chats",
+            "source_column": "content",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.intent_label",
+            "name": "intentLabel",
+            "description": "Nhãn ý định (intent) được gán cho tin nhắn, có thể trống.",
+            "confidence": 0.9,
+            "source_table": "chats",
+            "source_column": "intent_label",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.sentiment_label",
+            "name": "sentimentLabel",
+            "description": "Nhãn cảm xúc (sentiment) được gán cho tin nhắn, có thể trống.",
+            "confidence": 0.9,
+            "source_table": "chats",
+            "source_column": "sentiment_label",
+            "data_type": "TEXT",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:chats.created_at",
+            "name": "createdAt",
+            "description": "Thời điểm bản ghi được tạo trong hệ thống. Giá trị mặc định là CURRENT_TIMESTAMP khi không chỉ định.",
+            "confidence": 0.92,
+            "source_table": "chats",
+            "source_column": "created_at",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": "CURRENT_TIMESTAMP",
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "b7d506927c22310f077463bc9cc2a55fc92409989e468a28fb4974ce27f0e217"
+      }
+    },
+    {
+      "class_id": "class:inventory_snapshots",
+      "ontology": {
+        "class": {
+          "class_id": "class:inventory_snapshots",
+          "name": "InventorySnapshot",
+          "source_table": "inventory_snapshots",
+          "description": "Bản ghi chụp trạng thái tồn kho của một sản phẩm tại một cửa hàng vào một ngày cụ thể. Mỗi tổ hợp (cửa hàng, sản phẩm, ngày) tối đa một bản ghi.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:inventory_snapshots.snapshot_id",
+            "name": "snapshotId",
+            "description": "Khóa chính INTEGER của bản ghi snapshot tồn kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "snapshot_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.store_id",
+            "name": "storeId",
+            "description": "Tham chiếu đến cửa hàng (stores.store_id) nơi sản phẩm được lưu kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.product_id",
+            "name": "productId",
+            "description": "Tham chiếu đến sản phẩm (products.product_id) được chụp tồn kho.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.snapshot_date",
+            "name": "snapshotDate",
+            "description": "Ngày chụp snapshot tồn kho, kiểu TEXT. Định dạng cụ thể không được schema xác nhận.",
+            "confidence": 0.9,
+            "source_table": "inventory_snapshots",
+            "source_column": "snapshot_date",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.qty_on_hand",
+            "name": "qtyOnHand",
+            "description": "Số lượng tồn kho thực tế tại thời điểm snapshot, không âm.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "qty_on_hand",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:inventory_snapshots.qty_reserved",
+            "name": "qtyReserved",
+            "description": "Số lượng đã đặt giữ tại thời điểm snapshot, không âm và không vượt quá qty_on_hand.",
+            "confidence": 0.95,
+            "source_table": "inventory_snapshots",
+            "source_column": "qty_reserved",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "532254a7a5b9de27ad3736a4f9715453d777fec8f7e2d11f1fdba9e7ab95fd6b"
+      }
+    },
+    {
+      "class_id": "class:order_items",
+      "ontology": {
+        "class": {
+          "class_id": "class:order_items",
+          "name": "OrderItem",
+          "source_table": "order_items",
+          "description": "Một dòng hàng trong đơn hàng, ghi nhận sản phẩm, số lượng, giá đơn vị và giảm giá áp dụng cho dòng đó.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:order_items.order_item_id",
+            "name": "orderItemId",
+            "description": "Khóa chính nhận diện duy nhất một dòng hàng trong đơn.",
+            "confidence": 0.98,
+            "source_table": "order_items",
+            "source_column": "order_item_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.order_id",
+            "name": "orderId",
+            "description": "Tham chiếu đến đơn hàng mà dòng hàng này thuộc về.",
+            "confidence": 0.97,
+            "source_table": "order_items",
+            "source_column": "order_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.product_id",
+            "name": "productId",
+            "description": "Tham chiếu đến sản phẩm được ghi nhận trong dòng hàng này.",
+            "confidence": 0.97,
+            "source_table": "order_items",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.quantity",
+            "name": "quantity",
+            "description": "Số lượng sản phẩm trong dòng hàng, luôn lớn hơn 0.",
+            "confidence": 0.98,
+            "source_table": "order_items",
+            "source_column": "quantity",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.unit_price",
+            "name": "unitPrice",
+            "description": "Giá đơn vị của sản phẩm tại thời điểm ghi nhận dòng hàng, không âm.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "unit_price",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.line_discount",
+            "name": "lineDiscount",
+            "description": "Giá trị giảm giá áp dụng cho dòng hàng này, không âm.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "line_discount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.promotion_id",
+            "name": "promotionId",
+            "description": "Tham chiếu tùy chọn đến promotion liên quan đến dòng hàng; có thể không có.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "promotion_id",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "49e5e2d885abb592d879a03a24d8f4280ef3e3dc0540a6696e0f42acecc221d0"
+      }
+    },
+    {
+      "class_id": "class:product_suppliers",
+      "ontology": {
+        "class": {
+          "class_id": "class:product_suppliers",
+          "name": "ProductSupplier",
+          "source_table": "product_suppliers",
+          "description": "Bản ghi liên kết giữa một sản phẩm và một nhà cung cấp, kèm cờ chỉ định nhà cung cấp chính. Khóa chính gồm (product_id, supplier_id), đảm bảo mỗi cặp sản phẩm–nhà cung cấp chỉ xuất hiện một lần.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:product_suppliers.product_id",
+            "name": "productId",
+            "description": "Mã sản phẩm, tham chiếu đến bảng products. Là một phần của khóa chính.",
+            "confidence": 0.98,
+            "source_table": "product_suppliers",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:product_suppliers.supplier_id",
+            "name": "supplierId",
+            "description": "Mã nhà cung cấp, tham chiếu đến bảng suppliers. Là một phần của khóa chính.",
+            "confidence": 0.98,
+            "source_table": "product_suppliers",
+            "source_column": "supplier_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 2,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:product_suppliers.is_primary",
+            "name": "isPrimary",
+            "description": "Cờ chỉ định nhà cung cấp này có phải là nhà cung cấp chính cho sản phẩm hay không (0 hoặc 1).",
+            "confidence": 0.95,
+            "source_table": "product_suppliers",
+            "source_column": "is_primary",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "2c53559ea7bc5ce3c1a0d6985ac4a53902653ff22c4d24d06a73712b444d0d00"
+      }
+    },
+    {
+      "class_id": "class:promotions",
+      "ontology": {
+        "class": {
+          "class_id": "class:promotions",
+          "name": "Promotion",
+          "source_table": "promotions",
+          "description": "Bản ghi khuyến mãi bao gồm mã, tên, khoảng thời gian áp dụng và mức giảm giá phần trăm.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:promotions.promotion_id",
+            "name": "promotionId",
+            "description": "Khóa chính của bản ghi khuyến mãi.",
+            "confidence": 0.95,
+            "source_table": "promotions",
+            "source_column": "promotion_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:promotions.promo_code",
+            "name": "promoCode",
+            "description": "Mã khuyến mãi, duy nhất trong bảng.",
+            "confidence": 0.95,
+            "source_table": "promotions",
+            "source_column": "promo_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:promotions.promo_name",
+            "name": "promoName",
+            "description": "Tên hiển thị của chương trình khuyến mãi.",
+            "confidence": 0.9,
+            "source_table": "promotions",
+            "source_column": "promo_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:promotions.start_date",
+            "name": "startDate",
+            "description": "Ngày bắt đầu áp dụng khuyến mãi, kiểu TEXT.",
+            "confidence": 0.9,
+            "source_table": "promotions",
+            "source_column": "start_date",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:promotions.end_date",
+            "name": "endDate",
+            "description": "Ngày kết thúc áp dụng khuyến mãi, kiểu TEXT.",
+            "confidence": 0.9,
+            "source_table": "promotions",
+            "source_column": "end_date",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:promotions.discount_pct",
+            "name": "discountPct",
+            "description": "Mức giảm giá theo phần trăm, giới hạn từ 0 đến 100.",
+            "confidence": 0.95,
+            "source_table": "promotions",
+            "source_column": "discount_pct",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "4acfd9d33125575325f5811e9a5d26d8180daf8aa8d0df8cadf4e7526e01aa38"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "chats",
+      "source_columns": [
+        "product_id"
+      ],
+      "target_table": "products",
+      "target_columns": [
+        "product_id"
+      ],
+      "on_update": "CASCADE",
+      "on_delete": "SET NULL",
+      "match": "NONE",
+      "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1"
+    },
+    {
+      "source_table": "inventory_snapshots",
+      "source_columns": [
+        "product_id"
+      ],
+      "target_table": "products",
+      "target_columns": [
+        "product_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:414459466aa044594654457b:1"
+    },
+    {
+      "source_table": "order_items",
+      "source_columns": [
+        "product_id"
+      ],
+      "target_table": "products",
+      "target_columns": [
+        "product_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:05385e149a6ad8573cc0954b:1"
+    },
+    {
+      "source_table": "product_suppliers",
+      "source_columns": [
+        "product_id"
+      ],
+      "target_table": "products",
+      "target_columns": [
+        "product_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:d1f0a36d2d90280a4a594471:1"
+    },
+    {
+      "source_table": "products",
+      "source_columns": [
+        "brand_id"
+      ],
+      "target_table": "brands",
+      "target_columns": [
+        "brand_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:1ca4934b55d522a257faee39:1"
+    },
+    {
+      "source_table": "products",
+      "source_columns": [
+        "promotion_id"
+      ],
+      "target_table": "promotions",
+      "target_columns": [
+        "promotion_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:3282f4e3a36f192ee4a91cef:1"
+    },
+    {
+      "source_table": "products",
+      "source_columns": [
+        "category_id"
+      ],
+      "target_table": "categories",
+      "target_columns": [
+        "category_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:b9167cb8ed2a5bffc6cbd46d:1"
+    }
+  ],
+  "context_fingerprint": "ad93754277cad9242181b356ec4635d3fbee944014d9df656766396eb104b3cc"
+}

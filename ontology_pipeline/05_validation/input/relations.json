@@ -1,0 +1,1291 @@
+{
+  "database_id": "omnichannel_retail",
+  "schema_fingerprint": "44e327672eac86558de0b08db5c37c34affcea318c16a5509253fce233377256",
+  "relations": [
+    {
+      "relation_id": "fk:05385e149a6ad8573cc0954b:1",
+      "name": "orderItemToProduct",
+      "description": "Mỗi OrderItem tham chiếu đến một Product qua cột product_id.",
+      "confidence": 0.97,
+      "assumptions": [],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:order_items.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:05385e149a6ad8573cc0954b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:06a913a6b3fcac6b9086f05b:1",
+      "name": "orderChannel",
+      "description": "Mỗi Order tham chiếu đến một Channel qua cột channel_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:channels",
+      "source_property_ids": [
+        "property:orders.channel_id"
+      ],
+      "target_property_ids": [
+        "property:channels.channel_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "channel_id"
+        ],
+        "target_table": "channels",
+        "target_columns": [
+          "channel_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:06a913a6b3fcac6b9086f05b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1",
+      "name": "orderItemToPromotion",
+      "description": "Mỗi OrderItem có thể tham chiếu đến một Promotion qua cột promotion_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Không xác nhận promotion đang hiệu lực tại thời điểm ghi nhận dòng hàng; FK chỉ thiết lập tham chiếu."
+      ],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:promotions",
+      "source_property_ids": [
+        "property:order_items.promotion_id"
+      ],
+      "target_property_ids": [
+        "property:promotions.promotion_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "promotion_id"
+        ],
+        "target_table": "promotions",
+        "target_columns": [
+          "promotion_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:08ffae6a50df6cf4ff3141aa:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:10a35090f252896640d3ee73:1",
+      "name": "supplierRegion",
+      "description": "Bản ghi Supplier tham chiếu bản ghi Region qua cột region_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:suppliers",
+      "target_class_id": "class:regions",
+      "source_property_ids": [
+        "property:suppliers.region_id"
+      ],
+      "target_property_ids": [
+        "property:regions.region_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "suppliers",
+        "source_columns": [
+          "region_id"
+        ],
+        "target_table": "regions",
+        "target_columns": [
+          "region_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:10a35090f252896640d3ee73:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:1a63e58c48c731ca43afd203:1",
+      "name": "chatCustomer",
+      "description": "Bản ghi Chat tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:chats.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "RESTRICT",
+        "match": "NONE",
+        "relation_id": "fk:1a63e58c48c731ca43afd203:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:1ca4934b55d522a257faee39:1",
+      "name": "productBrand",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Brand qua cột brand_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:products",
+      "target_class_id": "class:brands",
+      "source_property_ids": [
+        "property:products.brand_id"
+      ],
+      "target_property_ids": [
+        "property:brands.brand_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "products",
+        "source_columns": [
+          "brand_id"
+        ],
+        "target_table": "brands",
+        "target_columns": [
+          "brand_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:1ca4934b55d522a257faee39:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:2041d1b09c418baf39a64157:1",
+      "name": "chatChannel",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Channel qua cột channel_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:channels",
+      "source_property_ids": [
+        "property:chats.channel_id"
+      ],
+      "target_property_ids": [
+        "property:channels.channel_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "channel_id"
+        ],
+        "target_table": "channels",
+        "target_columns": [
+          "channel_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:2041d1b09c418baf39a64157:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:25d84fb39fb2430a7849b37e:1",
+      "name": "agentStore",
+      "description": "Agent có thể tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:agents",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:agents.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "agents",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:25d84fb39fb2430a7849b37e:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1",
+      "name": "addressToCustomer",
+      "description": "Bản ghi Address tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:addresses",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:addresses.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "addresses",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "CASCADE",
+        "match": "NONE",
+        "relation_id": "fk:2e45f5ca331b9fd3cb8e0c9e:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:31c7cd7e496bc75c99a652eb:1",
+      "name": "orderStore",
+      "description": "Mỗi Order tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:orders.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:31c7cd7e496bc75c99a652eb:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:3282f4e3a36f192ee4a91cef:1",
+      "name": "productPromotion",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Promotion qua cột promotion_id.",
+      "confidence": 0.93,
+      "assumptions": [
+        "Khóa ngoại chỉ thiết lập tham chiếu; không xác nhận khuyến mãi đang hiệu lực tại thời điểm truy vấn."
+      ],
+      "source_class_id": "class:products",
+      "target_class_id": "class:promotions",
+      "source_property_ids": [
+        "property:products.promotion_id"
+      ],
+      "target_property_ids": [
+        "property:promotions.promotion_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "products",
+        "source_columns": [
+          "promotion_id"
+        ],
+        "target_table": "promotions",
+        "target_columns": [
+          "promotion_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:3282f4e3a36f192ee4a91cef:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:33afa20fb7359057d91517d8:1",
+      "name": "parentCategory",
+      "description": "Bản ghi Category có thể tham chiếu một bản ghi Category khác trong cùng bảng qua cột parent_category_id trỏ đến cột category_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Tên cột parent_category_id gợi ý cấu trúc phân cấp, nhưng ràng buộc FK chỉ thiết lập tham chiếu tự thân, không đảm bảo cây không chu trình."
+      ],
+      "source_class_id": "class:categories",
+      "target_class_id": "class:categories",
+      "source_property_ids": [
+        "property:categories.parent_category_id"
+      ],
+      "target_property_ids": [
+        "property:categories.category_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "categories",
+        "source_columns": [
+          "parent_category_id"
+        ],
+        "target_table": "categories",
+        "target_columns": [
+          "category_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:33afa20fb7359057d91517d8:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:414459466aa044594654457b:1",
+      "name": "inventorySnapshotToProduct",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:inventory_snapshots",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:inventory_snapshots.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "inventory_snapshots",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:414459466aa044594654457b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:53bc33c7c9ae11d6c20d37c8:1",
+      "name": "ticketOrderReference",
+      "description": "Mỗi bản ghi SupportTicket có thể tham chiếu một bản ghi Order qua cột order_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Cột order_id nullable; metadata không xác nhận điều kiện nghiệp vụ nào quyết định khi nào vé hỗ trợ liên kết với đơn hàng."
+      ],
+      "source_class_id": "class:support_tickets",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:support_tickets.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "support_tickets",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:53bc33c7c9ae11d6c20d37c8:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:8ee79468a0864b8cce923f9b:1",
+      "name": "orderItemToOrder",
+      "description": "Mỗi OrderItem tham chiếu đến một Order qua cột order_id.",
+      "confidence": 0.97,
+      "assumptions": [],
+      "source_class_id": "class:order_items",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:order_items.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "order_items",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:8ee79468a0864b8cce923f9b:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:9018fc15e3b26510bd233872:1",
+      "name": "inventorySnapshotToStore",
+      "description": "Bản ghi InventorySnapshot tham chiếu bản ghi Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:inventory_snapshots",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:inventory_snapshots.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "inventory_snapshots",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9018fc15e3b26510bd233872:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:925c89136854bd14425db972:1",
+      "name": "orderChat",
+      "description": "Mỗi Order có thể tham chiếu đến một Chat qua cột chat_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh chat gây ra đơn hàng."
+      ],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:chats",
+      "source_property_ids": [
+        "property:orders.chat_id"
+      ],
+      "target_property_ids": [
+        "property:chats.chat_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "chat_id"
+        ],
+        "target_table": "chats",
+        "target_columns": [
+          "chat_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:925c89136854bd14425db972:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:9a76f77e9b1a623d2e3e18e6:1",
+      "name": "shipmentToOrder",
+      "description": "Bản ghi Shipment tham chiếu đến bản ghi Order qua cột order_id. Mỗi đơn hàng tối đa có một shipment (ràng buộc UNIQUE trên cột order_id trong bảng shipments).",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:shipments",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:shipments.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      "source_fk": {
+        "source_table": "shipments",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9a76f77e9b1a623d2e3e18e6:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1",
+      "name": "paymentOrder",
+      "description": "Bản ghi Payment tham chiếu bản ghi Order qua cột order_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:payments",
+      "target_class_id": "class:orders",
+      "source_property_ids": [
+        "property:payments.order_id"
+      ],
+      "target_property_ids": [
+        "property:orders.order_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "payments",
+        "source_columns": [
+          "order_id"
+        ],
+        "target_table": "orders",
+        "target_columns": [
+          "order_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:9c05e33bf33fe400ab58dcc6:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a283ee7a5099b23e1147b7d1:1",
+      "name": "customerRegion",
+      "description": "Bản ghi Customer tham chiếu bản ghi Region qua cột region_id, xác định vùng/khu vực mà khách hàng thuộc về.",
+      "confidence": 0.92,
+      "assumptions": [],
+      "source_class_id": "class:customers",
+      "target_class_id": "class:regions",
+      "source_property_ids": [
+        "property:customers.region_id"
+      ],
+      "target_property_ids": [
+        "property:regions.region_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "customers",
+        "source_columns": [
+          "region_id"
+        ],
+        "target_table": "regions",
+        "target_columns": [
+          "region_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:a283ee7a5099b23e1147b7d1:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1",
+      "name": "chatProduct",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:chats.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:a59a4bf83f0bbb4455a60168:1",
+      "name": "orderCustomer",
+      "description": "Mỗi Order tham chiếu đến một Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:orders.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:a59a4bf83f0bbb4455a60168:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:abffce64a780065887055a37:1",
+      "name": "ticketCustomerReference",
+      "description": "Mỗi bản ghi SupportTicket tham chiếu một bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:support_tickets",
+      "target_class_id": "class:customers",
+      "source_property_ids": [
+        "property:support_tickets.customer_id"
+      ],
+      "target_property_ids": [
+        "property:customers.customer_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "support_tickets",
+        "source_columns": [
+          "customer_id"
+        ],
+        "target_table": "customers",
+        "target_columns": [
+          "customer_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:abffce64a780065887055a37:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:afa1eddf108851d2045fcd06:1",
+      "name": "chatAgent",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Agent qua cột agent_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:agents",
+      "source_property_ids": [
+        "property:chats.agent_id"
+      ],
+      "target_property_ids": [
+        "property:agents.agent_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "agent_id"
+        ],
+        "target_table": "agents",
+        "target_columns": [
+          "agent_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:afa1eddf108851d2045fcd06:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:b9167cb8ed2a5bffc6cbd46d:1",
+      "name": "productCategory",
+      "description": "Bản ghi Product có thể tham chiếu bản ghi Category qua cột category_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:products",
+      "target_class_id": "class:categories",
+      "source_property_ids": [
+        "property:products.category_id"
+      ],
+      "target_property_ids": [
+        "property:categories.category_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "products",
+        "source_columns": [
+          "category_id"
+        ],
+        "target_table": "categories",
+        "target_columns": [
+          "category_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:b9167cb8ed2a5bffc6cbd46d:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:cd91edcec0e36c30be311da1:1",
+      "name": "productSupplierToSupplier",
+      "description": "Bản ghi ProductSupplier tham chiếu đến bản ghi Supplier qua cột supplier_id. Mỗi bản ghi ProductSupplier tham chiếu đúng một bản ghi Supplier; một bản ghi Supplier có thể được tham chiếu bởi nhiều bản ghi ProductSupplier.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:product_suppliers",
+      "target_class_id": "class:suppliers",
+      "source_property_ids": [
+        "property:product_suppliers.supplier_id"
+      ],
+      "target_property_ids": [
+        "property:suppliers.supplier_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "product_suppliers",
+        "source_columns": [
+          "supplier_id"
+        ],
+        "target_table": "suppliers",
+        "target_columns": [
+          "supplier_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:cd91edcec0e36c30be311da1:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:d1f0a36d2d90280a4a594471:1",
+      "name": "productSupplierToProduct",
+      "description": "Bản ghi ProductSupplier tham chiếu đến bản ghi Product qua cột product_id. Mỗi bản ghi ProductSupplier tham chiếu đúng một bản ghi Product; một bản ghi Product có thể được tham chiếu bởi nhiều bản ghi ProductSupplier.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:product_suppliers",
+      "target_class_id": "class:products",
+      "source_property_ids": [
+        "property:product_suppliers.product_id"
+      ],
+      "target_property_ids": [
+        "property:products.product_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "product_suppliers",
+        "source_columns": [
+          "product_id"
+        ],
+        "target_table": "products",
+        "target_columns": [
+          "product_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:d1f0a36d2d90280a4a594471:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1",
+      "name": "orderAgent",
+      "description": "Mỗi Order có thể tham chiếu đến một Agent qua cột agent_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh agent tạo hoặc chốt đơn hàng."
+      ],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:agents",
+      "source_property_ids": [
+        "property:orders.agent_id"
+      ],
+      "target_property_ids": [
+        "property:agents.agent_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "agent_id"
+        ],
+        "target_table": "agents",
+        "target_columns": [
+          "agent_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:d9ddede139a63485027dafa6:1",
+      "name": "shipmentToAddress",
+      "description": "Bản ghi Shipment có thể tham chiếu đến bản ghi Address qua cột shipping_address_id.",
+      "confidence": 0.93,
+      "assumptions": [
+        "Cột shipping_address_id được hiểu là địa chỉ giao hàng của lô hàng, dựa trên tên cột và ngữ cảnh bảng shipments."
+      ],
+      "source_class_id": "class:shipments",
+      "target_class_id": "class:addresses",
+      "source_property_ids": [
+        "property:shipments.shipping_address_id"
+      ],
+      "target_property_ids": [
+        "property:addresses.address_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "shipments",
+        "source_columns": [
+          "shipping_address_id"
+        ],
+        "target_table": "addresses",
+        "target_columns": [
+          "address_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:d9ddede139a63485027dafa6:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:f09377f1f9863f5d6e217f86:1",
+      "name": "storeRegion",
+      "description": "Bản ghi Store tham chiếu bản ghi Region qua cột region_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:stores",
+      "target_class_id": "class:regions",
+      "source_property_ids": [
+        "property:stores.region_id"
+      ],
+      "target_property_ids": [
+        "property:regions.region_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "stores",
+        "source_columns": [
+          "region_id"
+        ],
+        "target_table": "regions",
+        "target_columns": [
+          "region_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:f09377f1f9863f5d6e217f86:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:f4a7a6e7f495b00374e049a4:1",
+      "name": "returnToOrderItem",
+      "description": "Bản ghi Return tham chiếu bản ghi OrderItem qua cột order_item_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:returns",
+      "target_class_id": "class:order_items",
+      "source_property_ids": [
+        "property:returns.order_item_id"
+      ],
+      "target_property_ids": [
+        "property:order_items.order_item_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 1,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "returns",
+        "source_columns": [
+          "order_item_id"
+        ],
+        "target_table": "order_items",
+        "target_columns": [
+          "order_item_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:f4a7a6e7f495b00374e049a4:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

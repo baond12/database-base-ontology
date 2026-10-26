@@ -1,0 +1,191 @@
+{
+  "class_name": "Customer",
+  "description": "Khách hàng trong hệ thống bán lẻ đa kênh, được phân loại theo phân khúc (Retail, VIP, Wholesale) và liên kết với một vùng/khu vực.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "customer_id",
+      "name": "customerId",
+      "description": "Khóa chính của bản ghi khách hàng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "customer_code",
+      "name": "customerCode",
+      "description": "Mã khách hàng duy nhất trong hệ thống, không trùng lặp.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "region_id",
+      "name": "regionId",
+      "description": "Tham chiếu đến vùng/khu vực mà khách hàng thuộc về.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "customer_segment",
+      "name": "customerSegment",
+      "description": "Phân khúc khách hàng, giới hạn trong các giá trị: Retail, VIP, Wholesale.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "joined_at",
+      "name": "joinedAt",
+      "description": "Thời điểm khách hàng tham gia hệ thống, lưu dưới dạng TEXT.",
+      "confidence": 0.85
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByCustomerId",
+      "description": "Tra cứu một khách hàng theo khóa chính customer_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "lookupByCustomerCode",
+      "description": "Tra cứu một khách hàng theo mã khách hàng duy nhất customer_code. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "customerCode",
+          "type": "string",
+          "required": true,
+          "source_column": "customer_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listCustomers",
+      "description": "Liệt kê khách hàng, có thể lọc theo region_id và/hoặc customer_segment.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "customer_id",
+          "customer_code",
+          "region_id",
+          "customer_segment",
+          "joined_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "customer_id",
+        "customer_code",
+        "region_id",
+        "customer_segment",
+        "joined_at"
+      ],
+      "confidence": 0.92
+    },
+    {
+      "name": "countCustomers",
+      "description": "Đếm số khách hàng, có thể lọc theo region_id và/hoặc customer_segment.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": false,
+          "source_column": "region_id",
+          "operator": "eq"
+        },
+        {
+          "name": "customerSegment",
+          "type": "string",
+          "required": false,
+          "source_column": "customer_segment",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_id",
+        "customer_segment"
+      ],
+      "confidence": 0.92
+    }
+  ],
+  "assumptions": [
+    "Cột joined_at có kiểu TEXT nhưng không có ràng buộc định dạng; không xác nhận định dạng cụ thể (ISO 8601, yyyy-MM-dd, v.v.) cho mọi giá trị.",
+    "customer_id là INTEGER PRIMARY KEY nhưng DDL không khai báo AUTOINCREMENT; không khẳng định giá trị được cấp tự động.",
+    "region_id tham chiếu regions(region_id) nhưng không có ràng buộc ON DELETE/ON UPDATE khác NO ACTION; không xác nhận hành vi khi vùng bị xóa."
+  ]
+}

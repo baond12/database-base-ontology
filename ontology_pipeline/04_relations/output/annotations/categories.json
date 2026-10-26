@@ -1,0 +1,13 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:33afa20fb7359057d91517d8:1",
+      "name": "parentCategory",
+      "description": "Bản ghi Category có thể tham chiếu một bản ghi Category khác trong cùng bảng qua cột parent_category_id trỏ đến cột category_id.",
+      "confidence": 0.95,
+      "assumptions": [
+        "Tên cột parent_category_id gợi ý cấu trúc phân cấp, nhưng ràng buộc FK chỉ thiết lập tham chiếu tự thân, không đảm bảo cây không chu trình."
+      ]
+    }
+  ]
+}

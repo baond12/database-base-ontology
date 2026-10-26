@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:10a35090f252896640d3ee73:1",
+      "name": "supplierRegion",
+      "description": "Bản ghi Supplier tham chiếu bản ghi Region qua cột region_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

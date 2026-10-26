@@ -1,0 +1,220 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:suppliers",
+  "current": {
+    "class": {
+      "class_id": "class:suppliers",
+      "name": "Supplier",
+      "source_table": "suppliers",
+      "description": "Nhà cung cấp trong hệ thống bán lẻ đa kênh, mỗi nhà cung cấp có tên duy nhất và thuộc về một vùng/khu vực.",
+      "metadata_description": "",
+      "confidence": 0.92,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:suppliers.supplier_id",
+        "name": "supplierId",
+        "description": "Khóa chính của nhà cung cấp, kiểu INTEGER.",
+        "confidence": 0.95,
+        "source_table": "suppliers",
+        "source_column": "supplier_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:suppliers.supplier_name",
+        "name": "supplierName",
+        "description": "Tên nhà cung cấp, bắt buộc và duy nhất trong bảng.",
+        "confidence": 0.95,
+        "source_table": "suppliers",
+        "source_column": "supplier_name",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:suppliers.region_id",
+        "name": "regionId",
+        "description": "Tham chiếu đến vùng/khu vực mà nhà cung cấp thuộc về, bắt buộc.",
+        "confidence": 0.9,
+        "source_table": "suppliers",
+        "source_column": "region_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "a09f567e7ea311d559416587c115d3b86cbec69ee532d5c8edf9d28db1192ca4"
+  },
+  "references": [
+    {
+      "class_id": "class:product_suppliers",
+      "ontology": {
+        "class": {
+          "class_id": "class:product_suppliers",
+          "name": "ProductSupplier",
+          "source_table": "product_suppliers",
+          "description": "Bản ghi liên kết giữa một sản phẩm và một nhà cung cấp, kèm cờ chỉ định nhà cung cấp chính. Khóa chính gồm (product_id, supplier_id), đảm bảo mỗi cặp sản phẩm–nhà cung cấp chỉ xuất hiện một lần.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:product_suppliers.product_id",
+            "name": "productId",
+            "description": "Mã sản phẩm, tham chiếu đến bảng products. Là một phần của khóa chính.",
+            "confidence": 0.98,
+            "source_table": "product_suppliers",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:product_suppliers.supplier_id",
+            "name": "supplierId",
+            "description": "Mã nhà cung cấp, tham chiếu đến bảng suppliers. Là một phần của khóa chính.",
+            "confidence": 0.98,
+            "source_table": "product_suppliers",
+            "source_column": "supplier_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 2,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:product_suppliers.is_primary",
+            "name": "isPrimary",
+            "description": "Cờ chỉ định nhà cung cấp này có phải là nhà cung cấp chính cho sản phẩm hay không (0 hoặc 1).",
+            "confidence": 0.95,
+            "source_table": "product_suppliers",
+            "source_column": "is_primary",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "2c53559ea7bc5ce3c1a0d6985ac4a53902653ff22c4d24d06a73712b444d0d00"
+      }
+    },
+    {
+      "class_id": "class:regions",
+      "ontology": {
+        "class": {
+          "class_id": "class:regions",
+          "name": "Region",
+          "source_table": "regions",
+          "description": "Khu vực địa lý trong hệ thống bán lẻ đa kênh, được định danh bằng mã vùng duy nhất.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:regions.region_id",
+            "name": "regionId",
+            "description": "Khóa chính của khu vực, kiểu INTEGER.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:regions.region_code",
+            "name": "regionCode",
+            "description": "Mã vùng duy nhất, không trùng lặp trong bảng.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_code",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:regions.region_name",
+            "name": "regionName",
+            "description": "Tên hiển thị của khu vực.",
+            "confidence": 0.95,
+            "source_table": "regions",
+            "source_column": "region_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "7c2e9e0a28d0710ca0ed1cd83e12a39f6ef7e7eef09b6738b6a7568289209073"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "product_suppliers",
+      "source_columns": [
+        "supplier_id"
+      ],
+      "target_table": "suppliers",
+      "target_columns": [
+        "supplier_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:cd91edcec0e36c30be311da1:1"
+    },
+    {
+      "source_table": "suppliers",
+      "source_columns": [
+        "region_id"
+      ],
+      "target_table": "regions",
+      "target_columns": [
+        "region_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:10a35090f252896640d3ee73:1"
+    }
+  ],
+  "context_fingerprint": "ac7cbd6a3faca47a711ea95bc627b4cdbefda0191ad5855aab16ab8cc077be0b"
+}

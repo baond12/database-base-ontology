@@ -1,0 +1,142 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:brands",
+    "name": "Brand",
+    "source_table": "brands",
+    "description": "Thương hiệu trong hệ thống bán lẻ đa kênh, được xác định duy nhất bởi tên thương hiệu.",
+    "metadata_description": "",
+    "confidence": 0.95,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:brands.brand_id",
+      "name": "brandId",
+      "description": "Khóa chính của thương hiệu, kiểu INTEGER.",
+      "confidence": 0.95,
+      "source_table": "brands",
+      "source_column": "brand_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:brands.brand_name",
+      "name": "brandName",
+      "description": "Tên thương hiệu, bắt buộc và duy nhất trong bảng.",
+      "confidence": 0.95,
+      "source_table": "brands",
+      "source_column": "brand_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupBrand",
+      "description": "Tra cứu một thương hiệu theo brand_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "brandId",
+          "type": "integer",
+          "required": true,
+          "source_column": "brand_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "brand_id",
+          "brand_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "brand_id",
+        "brand_name"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:brands.lookupBrand",
+      "owner_class_id": "class:brands",
+      "source_table": "brands",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listBrands",
+      "description": "Liệt kê các thương hiệu, có thể lọc theo tên thương hiệu (chứa chuỗi).",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "brandName",
+          "type": "string",
+          "required": false,
+          "source_column": "brand_name",
+          "operator": "contains"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "brand_id",
+          "brand_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "brand_id",
+        "brand_name"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:brands.listBrands",
+      "owner_class_id": "class:brands",
+      "source_table": "brands",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countBrands",
+      "description": "Đếm tổng số thương hiệu trong bảng.",
+      "operation": "count",
+      "input_parameters": [],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [],
+      "confidence": 0.95,
+      "method_id": "method:brands.countBrands",
+      "owner_class_id": "class:brands",
+      "source_table": "brands",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "brand_id là khóa chính INTEGER.",
+    "brand_name có ràng buộc UNIQUE toàn bảng, đảm bảo mỗi tên thương hiệu chỉ xuất hiện một lần."
+  ],
+  "input_fingerprint": "ca8750f0f131a6d060cbe93cef31823c3455f7b67e7c76d91a1186738b6e27f8"
+}

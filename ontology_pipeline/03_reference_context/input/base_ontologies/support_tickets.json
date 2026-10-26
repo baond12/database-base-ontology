@@ -1,0 +1,332 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:support_tickets",
+    "name": "SupportTicket",
+    "source_table": "support_tickets",
+    "description": "Vé hỗ trợ khách hàng, ghi nhận một vấn đề do khách hàng phản ánh, có thể liên kết với một đơn hàng và được phân loại theo loại vấn đề, mức ưu tiên và trạng thái xử lý.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:support_tickets.ticket_id",
+      "name": "ticketId",
+      "description": "Khóa chính định danh vé hỗ trợ.",
+      "confidence": 1.0,
+      "source_table": "support_tickets",
+      "source_column": "ticket_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.order_id",
+      "name": "orderId",
+      "description": "Tham chiếu đến đơn hàng liên quan (nếu có).",
+      "confidence": 0.95,
+      "source_table": "support_tickets",
+      "source_column": "order_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.customer_id",
+      "name": "customerId",
+      "description": "Tham chiếu đến khách hàng liên quan đến vé hỗ trợ.",
+      "confidence": 0.95,
+      "source_table": "support_tickets",
+      "source_column": "customer_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.issue_type",
+      "name": "issueType",
+      "description": "Loại vấn đề được ghi nhận trong vé hỗ trợ.",
+      "confidence": 0.9,
+      "source_table": "support_tickets",
+      "source_column": "issue_type",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.priority",
+      "name": "priority",
+      "description": "Mức ưu tiên xử lý của vé hỗ trợ.",
+      "confidence": 0.9,
+      "source_table": "support_tickets",
+      "source_column": "priority",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.status",
+      "name": "status",
+      "description": "Trạng thái xử lý của vé hỗ trợ. Giá trị hợp lệ theo ràng buộc: open, in_progress, resolved.",
+      "confidence": 0.95,
+      "source_table": "support_tickets",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.created_at",
+      "name": "createdAt",
+      "description": "Thời điểm vé hỗ trợ được tạo.",
+      "confidence": 0.9,
+      "source_table": "support_tickets",
+      "source_column": "created_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:support_tickets.resolved_at",
+      "name": "resolvedAt",
+      "description": "Thời điểm vé hỗ trợ được giải quyết (nếu có).",
+      "confidence": 0.9,
+      "source_table": "support_tickets",
+      "source_column": "resolved_at",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByTicketId",
+      "description": "Tra cứu một vé hỗ trợ theo khóa chính ticketId.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "ticketId",
+          "type": "integer",
+          "required": true,
+          "source_column": "ticket_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.98,
+      "method_id": "method:support_tickets.lookupByTicketId",
+      "owner_class_id": "class:support_tickets",
+      "source_table": "support_tickets",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByCustomer",
+      "description": "Liệt kê các vé hỗ trợ của một khách hàng, có thể lọc thêm theo trạng thái.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:support_tickets.listByCustomer",
+      "owner_class_id": "class:support_tickets",
+      "source_table": "support_tickets",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listByStatus",
+      "description": "Liệt kê các vé hỗ trợ theo trạng thái, có thể lọc thêm theo mức ưu tiên.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "priority",
+          "type": "string",
+          "required": false,
+          "source_column": "priority",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:support_tickets.listByStatus",
+      "owner_class_id": "class:support_tickets",
+      "source_table": "support_tickets",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countByStatus",
+      "description": "Đếm số vé hỗ trợ theo từng trạng thái, có thể lọc theo mức ưu tiên.",
+      "operation": "aggregate",
+      "input_parameters": [
+        {
+          "name": "priority",
+          "type": "string",
+          "required": false,
+          "source_column": "priority",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "ticketCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "priority"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:support_tickets.countByStatus",
+      "owner_class_id": "class:support_tickets",
+      "source_table": "support_tickets",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "order_id nullable nghĩa là một vé hỗ trợ có thể không liên kết với đơn hàng nào; schema không xác nhận điều kiện bắt buộc liên kết.",
+    "resolved_at nullable nghĩa là không phải mọi vé đều có giá trị thời điểm giải quyết; schema không xác nhận mối quan hệ giữa resolved_at có giá trị và status = 'resolved'.",
+    "issue_type và priority là TEXT không có CHECK constraint, tập giá trị hợp lệ không được schema xác định.",
+    "created_at và resolved_at là TEXT không có ràng buộc định dạng trong schema; không thể khẳng định định dạng thời gian cụ thể."
+  ],
+  "input_fingerprint": "adf3faf538d40ad9377a3d1c71570baccb5f9e432b0f26ed484c3ea895a6fd6e"
+}

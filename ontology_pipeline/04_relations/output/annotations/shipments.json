@@ -1,0 +1,20 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:9a76f77e9b1a623d2e3e18e6:1",
+      "name": "shipmentToOrder",
+      "description": "Bản ghi Shipment tham chiếu đến bản ghi Order qua cột order_id. Mỗi đơn hàng tối đa có một shipment (ràng buộc UNIQUE trên cột order_id trong bảng shipments).",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:d9ddede139a63485027dafa6:1",
+      "name": "shipmentToAddress",
+      "description": "Bản ghi Shipment có thể tham chiếu đến bản ghi Address qua cột shipping_address_id.",
+      "confidence": 0.93,
+      "assumptions": [
+        "Cột shipping_address_id được hiểu là địa chỉ giao hàng của lô hàng, dựa trên tên cột và ngữ cảnh bảng shipments."
+      ]
+    }
+  ]
+}

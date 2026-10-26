@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Only ontology_pipeline.ipynb and ontology_pipeline folder copied",
+  "external_repo_source": false,
+  "secret_file": false,
+  "sqlite_with_rows": false,
+  "network_allowed": false,
+  "schema_source": "schema_sql_in_memory",
+  "same_schema_fingerprint": true,
+  "counts": {
+    "classes": 20,
+    "properties": 157,
+    "methods": 82,
+    "relations": 31
+  },
+  "regression_checks": 38,
+  "executed_code_cells": 15
+}

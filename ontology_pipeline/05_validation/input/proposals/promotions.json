@@ -1,0 +1,188 @@
+{
+  "class_name": "Promotion",
+  "description": "Bản ghi khuyến mãi bao gồm mã, tên, khoảng thời gian áp dụng và mức giảm giá phần trăm.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "promotion_id",
+      "name": "promotionId",
+      "description": "Khóa chính của bản ghi khuyến mãi.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "promo_code",
+      "name": "promoCode",
+      "description": "Mã khuyến mãi, duy nhất trong bảng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "promo_name",
+      "name": "promoName",
+      "description": "Tên hiển thị của chương trình khuyến mãi.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "start_date",
+      "name": "startDate",
+      "description": "Ngày bắt đầu áp dụng khuyến mãi, kiểu TEXT.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "end_date",
+      "name": "endDate",
+      "description": "Ngày kết thúc áp dụng khuyến mãi, kiểu TEXT.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "discount_pct",
+      "name": "discountPct",
+      "description": "Mức giảm giá theo phần trăm, giới hạn từ 0 đến 100.",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByPromotionId",
+      "description": "Tra cứu một bản ghi khuyến mãi theo khóa chính promotion_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "promotionId",
+          "type": "integer",
+          "required": true,
+          "source_column": "promotion_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "promotion_id",
+          "promo_code",
+          "promo_name",
+          "start_date",
+          "end_date",
+          "discount_pct"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "promotion_id",
+        "promo_code",
+        "promo_name",
+        "start_date",
+        "end_date",
+        "discount_pct"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "lookupByPromoCode",
+      "description": "Tra cứu một bản ghi khuyến mãi theo mã khuyến mãi duy nhất.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "promoCode",
+          "type": "string",
+          "required": true,
+          "source_column": "promo_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "promotion_id",
+          "promo_code",
+          "promo_name",
+          "start_date",
+          "end_date",
+          "discount_pct"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "promotion_id",
+        "promo_code",
+        "promo_name",
+        "start_date",
+        "end_date",
+        "discount_pct"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listPromotions",
+      "description": "Liệt kê các bản ghi khuyến mãi, có thể lọc theo mức giảm giá tối thiểu.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "discountPctMin",
+          "type": "integer",
+          "required": false,
+          "source_column": "discount_pct",
+          "operator": "gte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "promotion_id",
+          "promo_code",
+          "promo_name",
+          "start_date",
+          "end_date",
+          "discount_pct"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "promotion_id",
+        "promo_code",
+        "promo_name",
+        "start_date",
+        "end_date",
+        "discount_pct"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "name": "countPromotions",
+      "description": "Đếm số bản ghi khuyến mãi, có thể lọc theo mức giảm giá tối thiểu.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "discountPctMin",
+          "type": "integer",
+          "required": false,
+          "source_column": "discount_pct",
+          "operator": "gte"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "discount_pct"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "assumptions": [
+    "start_date và end_date có kiểu TEXT; định dạng cụ thể (ISO 8601, DD/MM/YYYY, v.v.) không được schema xác nhận.",
+    "promotion_id là khóa chính INTEGER nhưng DDL không khai báo AUTOINCREMENT; SQLite có thể cấp rowid khi ứng dụng không chỉ định giá trị.",
+    "discount_pct được ràng buộc CHECK giữa 0 và 100, nhưng không có bằng chứng về đơn vị tiền tệ hay cách áp dụng giảm giá vào giá sản phẩm."
+  ]
+}

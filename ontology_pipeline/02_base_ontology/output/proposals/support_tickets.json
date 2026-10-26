@@ -1,0 +1,232 @@
+{
+  "class_name": "SupportTicket",
+  "description": "Vé hỗ trợ khách hàng, ghi nhận một vấn đề do khách hàng phản ánh, có thể liên kết với một đơn hàng và được phân loại theo loại vấn đề, mức ưu tiên và trạng thái xử lý.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "ticket_id",
+      "name": "ticketId",
+      "description": "Khóa chính định danh vé hỗ trợ.",
+      "confidence": 1.0
+    },
+    {
+      "column_name": "order_id",
+      "name": "orderId",
+      "description": "Tham chiếu đến đơn hàng liên quan (nếu có).",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "customer_id",
+      "name": "customerId",
+      "description": "Tham chiếu đến khách hàng liên quan đến vé hỗ trợ.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "issue_type",
+      "name": "issueType",
+      "description": "Loại vấn đề được ghi nhận trong vé hỗ trợ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "priority",
+      "name": "priority",
+      "description": "Mức ưu tiên xử lý của vé hỗ trợ.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "status",
+      "name": "status",
+      "description": "Trạng thái xử lý của vé hỗ trợ. Giá trị hợp lệ theo ràng buộc: open, in_progress, resolved.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "created_at",
+      "name": "createdAt",
+      "description": "Thời điểm vé hỗ trợ được tạo.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "resolved_at",
+      "name": "resolvedAt",
+      "description": "Thời điểm vé hỗ trợ được giải quyết (nếu có).",
+      "confidence": 0.9
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByTicketId",
+      "description": "Tra cứu một vé hỗ trợ theo khóa chính ticketId.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "ticketId",
+          "type": "integer",
+          "required": true,
+          "source_column": "ticket_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.98
+    },
+    {
+      "name": "listByCustomer",
+      "description": "Liệt kê các vé hỗ trợ của một khách hàng, có thể lọc thêm theo trạng thái.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "customerId",
+          "type": "integer",
+          "required": true,
+          "source_column": "customer_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listByStatus",
+      "description": "Liệt kê các vé hỗ trợ theo trạng thái, có thể lọc thêm theo mức ưu tiên.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "priority",
+          "type": "string",
+          "required": false,
+          "source_column": "priority",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "ticket_id",
+          "order_id",
+          "customer_id",
+          "issue_type",
+          "priority",
+          "status",
+          "created_at",
+          "resolved_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "ticket_id",
+        "order_id",
+        "customer_id",
+        "issue_type",
+        "priority",
+        "status",
+        "created_at",
+        "resolved_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "countByStatus",
+      "description": "Đếm số vé hỗ trợ theo từng trạng thái, có thể lọc theo mức ưu tiên.",
+      "operation": "aggregate",
+      "input_parameters": [
+        {
+          "name": "priority",
+          "type": "string",
+          "required": false,
+          "source_column": "priority",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "ticketCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "priority"
+      ],
+      "confidence": 0.93
+    }
+  ],
+  "assumptions": [
+    "order_id nullable nghĩa là một vé hỗ trợ có thể không liên kết với đơn hàng nào; schema không xác nhận điều kiện bắt buộc liên kết.",
+    "resolved_at nullable nghĩa là không phải mọi vé đều có giá trị thời điểm giải quyết; schema không xác nhận mối quan hệ giữa resolved_at có giá trị và status = 'resolved'.",
+    "issue_type và priority là TEXT không có CHECK constraint, tập giá trị hợp lệ không được schema xác định.",
+    "created_at và resolved_at là TEXT không có ràng buộc định dạng trong schema; không thể khẳng định định dạng thời gian cụ thể."
+  ]
+}

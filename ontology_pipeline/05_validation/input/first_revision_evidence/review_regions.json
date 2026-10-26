@@ -1,0 +1,19 @@
+{
+  "table_name": "regions",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "location": "base.class.description",
+      "reason": "Mô tả class khẳng định bản ghi 'được xác định duy nhất bởi mã khu vực' (region_code), trong khi khóa chính thực tế là region_id. region_code chỉ là cột UNIQUE phụ, không phải định danh chính.",
+      "evidence": "Class description: 'được xác định duy nhất bởi mã khu vực.' DDL: 'region_id INTEGER PRIMARY KEY, region_code TEXT NOT NULL UNIQUE'",
+      "suggestion": "Sửa description thành 'được xác định duy nhất bởi region_id (khóa chính), đồng thời có mã khu vực (region_code) duy nhất dùng làm định danh nghiệp vụ' để phản ánh đúng vai trò của từng cột."
+    },
+    {
+      "severity": "LOW",
+      "location": "relations[1].description",
+      "reason": "Mô tả relation customerRegion dùng tên 'regionId' (camelCase – tên property) trong khi relation supplierRegion (index 0) dùng 'region_id' (snake_case – tên cột DDL). Gây không nhất quán trong cách tham chiếu cột giữa các relation cùng trỏ về cùng một cột.",
+      "evidence": "customerRegion: 'qua cột regionId' | supplierRegion: 'qua cột region_id' | storeRegion: 'qua cột regionId'",
+      "suggestion": "Thống nhất dùng tên cột DDL (region_id) trong description của cả ba relation để tránh nhầm lẫn với tên property."
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:agents",
+    "name": "Agent",
+    "source_table": "agents",
+    "description": "Đại lý bán hàng trong hệ thống bán lẻ đa kênh, có thể được gán về một cửa hàng và một nhóm.",
+    "metadata_description": "",
+    "confidence": 0.92,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:agents.agent_id",
+      "name": "agentId",
+      "description": "Định danh duy nhất của agent, khóa chính dạng TEXT.",
+      "confidence": 0.98,
+      "source_table": "agents",
+      "source_column": "agent_id",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.agent_code",
+      "name": "agentCode",
+      "description": "Mã agent, duy nhất trong bảng.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "agent_code",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.full_name",
+      "name": "fullName",
+      "description": "Họ tên đầy đủ của agent.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "full_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.store_id",
+      "name": "storeId",
+      "description": "Tham chiếu đến cửa hàng mà agent có thể được gán; có thể không có giá trị.",
+      "confidence": 0.9,
+      "source_table": "agents",
+      "source_column": "store_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.email",
+      "name": "email",
+      "description": "Địa chỉ email của agent, duy nhất trong bảng; có thể không có giá trị.",
+      "confidence": 0.93,
+      "source_table": "agents",
+      "source_column": "email",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.phone",
+      "name": "phone",
+      "description": "Số điện thoại của agent; có thể không có giá trị.",
+      "confidence": 0.9,
+      "source_table": "agents",
+      "source_column": "phone",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.team",
+      "name": "team",
+      "description": "Nhóm mà agent thuộc về; có thể không có giá trị.",
+      "confidence": 0.88,
+      "source_table": "agents",
+      "source_column": "team",
+      "data_type": "TEXT",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.status",
+      "name": "status",
+      "description": "Trạng thái của agent, giá trị hợp lệ theo CHECK là 'ACTIVE' hoặc 'INACTIVE'; mặc định 'ACTIVE'.",
+      "confidence": 0.95,
+      "source_table": "agents",
+      "source_column": "status",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "'ACTIVE'",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:agents.created_at",
+      "name": "createdAt",
+      "description": "Thời điểm bản ghi được tạo, dạng TEXT; giá trị mặc định là CURRENT_TIMESTAMP.",
+      "confidence": 0.9,
+      "source_table": "agents",
+      "source_column": "created_at",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": "CURRENT_TIMESTAMP",
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByAgentId",
+      "description": "Tìm một agent theo agent_id (khóa chính). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "agentId",
+          "type": "string",
+          "required": true,
+          "source_column": "agent_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.97,
+      "method_id": "method:agents.lookupByAgentId",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "lookupByAgentCode",
+      "description": "Tìm một agent theo agent_code (duy nhất). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "agentCode",
+          "type": "string",
+          "required": true,
+          "source_column": "agent_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:agents.lookupByAgentCode",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listAgents",
+      "description": "Danh sách agent, có thể lọc theo cửa hàng, trạng thái hoặc nhóm.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "team",
+          "type": "string",
+          "required": false,
+          "source_column": "team",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:agents.listAgents",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countAgents",
+      "description": "Đếm số agent, có thể lọc theo cửa hàng hoặc trạng thái.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "store_id",
+        "status"
+      ],
+      "confidence": 0.93,
+      "method_id": "method:agents.countAgents",
+      "owner_class_id": "class:agents",
+      "source_table": "agents",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "agent_id dạng TEXT không chứng minh cấu trúc cụ thể (UUID, slug, v.v.); chỉ biết là khóa chính duy nhất.",
+    "store_id nullable nghĩa là agent có thể không được gán về cửa hàng nào; không suy diễn lý do.",
+    "team là TEXT không có CHECK, không xác nhận danh sách nhóm hợp lệ.",
+    "created_at mặc định CURRENT_TIMESTAMP chỉ áp dụng khi không ghi giá trị; không khẳng định mọi bản ghi đều dùng giá trị mặc định hoặc cùng định dạng.",
+    "email UNIQUE nhưng nullable: nhiều agent có thể không có email, nhưng nếu có thì không trùng."
+  ],
+  "input_fingerprint": "63cd072b299b970f4253dde89325c531995187c8de573ebabb92edffe7093b24",
+  "relations": [
+    {
+      "relation_id": "fk:25d84fb39fb2430a7849b37e:1",
+      "name": "agentStore",
+      "description": "Agent có thể tham chiếu đến một Store qua cột store_id.",
+      "confidence": 0.95,
+      "assumptions": [],
+      "source_class_id": "class:agents",
+      "target_class_id": "class:stores",
+      "source_property_ids": [
+        "property:agents.store_id"
+      ],
+      "target_property_ids": [
+        "property:stores.store_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "agents",
+        "source_columns": [
+          "store_id"
+        ],
+        "target_table": "stores",
+        "target_columns": [
+          "store_id"
+        ],
+        "on_update": "NO ACTION",
+        "on_delete": "NO ACTION",
+        "match": "NONE",
+        "relation_id": "fk:25d84fb39fb2430a7849b37e:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:afa1eddf108851d2045fcd06:1",
+      "name": "chatAgent",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Agent qua cột agent_id.",
+      "confidence": 0.93,
+      "assumptions": [],
+      "source_class_id": "class:chats",
+      "target_class_id": "class:agents",
+      "source_property_ids": [
+        "property:chats.agent_id"
+      ],
+      "target_property_ids": [
+        "property:agents.agent_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "chats",
+        "source_columns": [
+          "agent_id"
+        ],
+        "target_table": "agents",
+        "target_columns": [
+          "agent_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:afa1eddf108851d2045fcd06:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    },
+    {
+      "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1",
+      "name": "orderAgent",
+      "description": "Mỗi Order có thể tham chiếu đến một Agent qua cột agent_id.",
+      "confidence": 0.9,
+      "assumptions": [
+        "FK chỉ thiết lập tham chiếu; không chứng minh agent tạo hoặc chốt đơn hàng."
+      ],
+      "source_class_id": "class:orders",
+      "target_class_id": "class:agents",
+      "source_property_ids": [
+        "property:orders.agent_id"
+      ],
+      "target_property_ids": [
+        "property:agents.agent_id"
+      ],
+      "cardinality": {
+        "source_to_target": {
+          "min": 0,
+          "max": 1
+        },
+        "target_to_source": {
+          "min": 0,
+          "max": "many"
+        }
+      },
+      "source_fk": {
+        "source_table": "orders",
+        "source_columns": [
+          "agent_id"
+        ],
+        "target_table": "agents",
+        "target_columns": [
+          "agent_id"
+        ],
+        "on_update": "CASCADE",
+        "on_delete": "SET NULL",
+        "match": "NONE",
+        "relation_id": "fk:d21ab4a2b9c90eadf255e59d:1"
+      },
+      "physical_status": "VERIFIED_FROM_SCHEMA",
+      "semantic_status": "PROPOSED"
+    }
+  ]
+}

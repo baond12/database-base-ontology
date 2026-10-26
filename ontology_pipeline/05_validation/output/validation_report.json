@@ -1,0 +1,16 @@
+{
+  "structural_status": "PASS",
+  "findings": [],
+  "counts": {
+    "classes": 20,
+    "properties": 157,
+    "methods": 82,
+    "relations": 31
+  },
+  "runtime_readiness": "NOT_IMPLEMENTED",
+  "human_review_status": "PENDING",
+  "business_semantics": "PROPOSED_NOT_PROVEN",
+  "ai_review_status": "COMPLETED",
+  "ai_review_findings": [],
+  "semantic_status": "AI_REVIEWED_WITH_LIMITATIONS"
+}

@@ -1,0 +1,151 @@
+{
+  "class_name": "Region",
+  "description": "Khu vực địa lý trong hệ thống bán lẻ đa kênh, được định danh bằng mã vùng duy nhất.",
+  "confidence": 0.95,
+  "properties": [
+    {
+      "column_name": "region_id",
+      "name": "regionId",
+      "description": "Khóa chính của khu vực, kiểu INTEGER.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "region_code",
+      "name": "regionCode",
+      "description": "Mã vùng duy nhất, không trùng lặp trong bảng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "region_name",
+      "name": "regionName",
+      "description": "Tên hiển thị của khu vực.",
+      "confidence": 0.95
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupRegionById",
+      "description": "Tra cứu một khu vực theo khóa chính region_id. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "regionId",
+          "type": "integer",
+          "required": true,
+          "source_column": "region_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "region_id",
+          "region_code",
+          "region_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "region_id",
+        "region_code",
+        "region_name"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "lookupRegionByCode",
+      "description": "Tra cứu một khu vực theo mã vùng duy nhất region_code. Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "regionCode",
+          "type": "string",
+          "required": true,
+          "source_column": "region_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "region_id",
+          "region_code",
+          "region_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "region_id",
+        "region_code",
+        "region_name"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listRegions",
+      "description": "Liệt kê các khu vực, có thể lọc theo tên vùng (chứa chuỗi).",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "regionName",
+          "type": "string",
+          "required": false,
+          "source_column": "region_name",
+          "operator": "contains"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "region_id",
+          "region_code",
+          "region_name"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "region_id",
+        "region_code",
+        "region_name"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "name": "countRegions",
+      "description": "Đếm số khu vực, có thể lọc theo tên vùng (chứa chuỗi).",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "regionName",
+          "type": "string",
+          "required": false,
+          "source_column": "region_name",
+          "operator": "contains"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "region_name"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "assumptions": [
+    "Bảng regions là bảng tham chiếu tĩnh, không có cột thời gian tạo/sửa nên không xác định được thứ tự thời gian của các bản ghi.",
+    "region_code có ràng buộc UNIQUE toàn bảng nên mỗi mã vùng chỉ xuất hiện tối đa một lần."
+  ]
+}

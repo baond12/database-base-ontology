@@ -1,0 +1,32 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:1a63e58c48c731ca43afd203:1",
+      "name": "chatCustomer",
+      "description": "Bản ghi Chat tham chiếu bản ghi Customer qua cột customer_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:2041d1b09c418baf39a64157:1",
+      "name": "chatChannel",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Channel qua cột channel_id.",
+      "confidence": 0.93,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:a2f6974c8026fa9da5bbbf34:1",
+      "name": "chatProduct",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Product qua cột product_id.",
+      "confidence": 0.93,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:afa1eddf108851d2045fcd06:1",
+      "name": "chatAgent",
+      "description": "Bản ghi Chat có thể tham chiếu bản ghi Agent qua cột agent_id.",
+      "confidence": 0.93,
+      "assumptions": []
+    }
+  ]
+}

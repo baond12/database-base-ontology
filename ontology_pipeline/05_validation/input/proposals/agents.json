@@ -1,0 +1,248 @@
+{
+  "class_name": "Agent",
+  "description": "Đại lý bán hàng trong hệ thống bán lẻ đa kênh, có thể được gán về một cửa hàng và một nhóm.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "agent_id",
+      "name": "agentId",
+      "description": "Định danh duy nhất của agent, khóa chính dạng TEXT.",
+      "confidence": 0.98
+    },
+    {
+      "column_name": "agent_code",
+      "name": "agentCode",
+      "description": "Mã agent, duy nhất trong bảng.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "full_name",
+      "name": "fullName",
+      "description": "Họ tên đầy đủ của agent.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "store_id",
+      "name": "storeId",
+      "description": "Tham chiếu đến cửa hàng mà agent có thể được gán; có thể không có giá trị.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "email",
+      "name": "email",
+      "description": "Địa chỉ email của agent, duy nhất trong bảng; có thể không có giá trị.",
+      "confidence": 0.93
+    },
+    {
+      "column_name": "phone",
+      "name": "phone",
+      "description": "Số điện thoại của agent; có thể không có giá trị.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "team",
+      "name": "team",
+      "description": "Nhóm mà agent thuộc về; có thể không có giá trị.",
+      "confidence": 0.88
+    },
+    {
+      "column_name": "status",
+      "name": "status",
+      "description": "Trạng thái của agent, giá trị hợp lệ theo CHECK là 'ACTIVE' hoặc 'INACTIVE'; mặc định 'ACTIVE'.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "created_at",
+      "name": "createdAt",
+      "description": "Thời điểm bản ghi được tạo, dạng TEXT; giá trị mặc định là CURRENT_TIMESTAMP.",
+      "confidence": 0.9
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupByAgentId",
+      "description": "Tìm một agent theo agent_id (khóa chính). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "agentId",
+          "type": "string",
+          "required": true,
+          "source_column": "agent_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "name": "lookupByAgentCode",
+      "description": "Tìm một agent theo agent_code (duy nhất). Trả về tối đa một bản ghi.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "agentCode",
+          "type": "string",
+          "required": true,
+          "source_column": "agent_code",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "listAgents",
+      "description": "Danh sách agent, có thể lọc theo cửa hàng, trạng thái hoặc nhóm.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "team",
+          "type": "string",
+          "required": false,
+          "source_column": "team",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "agent_id",
+          "agent_code",
+          "full_name",
+          "store_id",
+          "email",
+          "phone",
+          "team",
+          "status",
+          "created_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "agent_id",
+        "agent_code",
+        "full_name",
+        "store_id",
+        "email",
+        "phone",
+        "team",
+        "status",
+        "created_at"
+      ],
+      "confidence": 0.93
+    },
+    {
+      "name": "countAgents",
+      "description": "Đếm số agent, có thể lọc theo cửa hàng hoặc trạng thái.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "storeId",
+          "type": "integer",
+          "required": false,
+          "source_column": "store_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "store_id",
+        "status"
+      ],
+      "confidence": 0.93
+    }
+  ],
+  "assumptions": [
+    "agent_id dạng TEXT không chứng minh cấu trúc cụ thể (UUID, slug, v.v.); chỉ biết là khóa chính duy nhất.",
+    "store_id nullable nghĩa là agent có thể không được gán về cửa hàng nào; không suy diễn lý do.",
+    "team là TEXT không có CHECK, không xác nhận danh sách nhóm hợp lệ.",
+    "created_at mặc định CURRENT_TIMESTAMP chỉ áp dụng khi không ghi giá trị; không khẳng định mọi bản ghi đều dùng giá trị mặc định hoặc cùng định dạng.",
+    "email UNIQUE nhưng nullable: nhiều agent có thể không có email, nhưng nếu có thì không trùng."
+  ]
+}

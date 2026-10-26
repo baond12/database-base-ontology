@@ -1,0 +1,18 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:cd91edcec0e36c30be311da1:1",
+      "name": "productSupplierToSupplier",
+      "description": "Bản ghi ProductSupplier tham chiếu đến bản ghi Supplier qua cột supplier_id. Mỗi bản ghi ProductSupplier tham chiếu đúng một bản ghi Supplier; một bản ghi Supplier có thể được tham chiếu bởi nhiều bản ghi ProductSupplier.",
+      "confidence": 0.95,
+      "assumptions": []
+    },
+    {
+      "relation_id": "fk:d1f0a36d2d90280a4a594471:1",
+      "name": "productSupplierToProduct",
+      "description": "Bản ghi ProductSupplier tham chiếu đến bản ghi Product qua cột product_id. Mỗi bản ghi ProductSupplier tham chiếu đúng một bản ghi Product; một bản ghi Product có thể được tham chiếu bởi nhiều bản ghi ProductSupplier.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

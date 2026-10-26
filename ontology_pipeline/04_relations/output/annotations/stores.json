@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:f09377f1f9863f5d6e217f86:1",
+      "name": "storeRegion",
+      "description": "Bản ghi Store tham chiếu bản ghi Region qua cột region_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}

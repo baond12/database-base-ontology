@@ -1,0 +1,174 @@
+{
+  "database_id": "omnichannel_retail",
+  "class": {
+    "class_id": "class:categories",
+    "name": "Category",
+    "source_table": "categories",
+    "description": "Danh mục sản phẩm trong hệ thống bán lẻ đa kênh, hỗ trợ phân cấp qua tham chiếu tự thân (parent_category_id).",
+    "metadata_description": "",
+    "confidence": 0.85,
+    "semantic_status": "PROPOSED"
+  },
+  "properties": [
+    {
+      "property_id": "property:categories.category_id",
+      "name": "categoryId",
+      "description": "Mã định danh duy nhất của danh mục.",
+      "confidence": 0.95,
+      "source_table": "categories",
+      "source_column": "category_id",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "primary_key_position": 1,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:categories.category_name",
+      "name": "categoryName",
+      "description": "Tên hiển thị của danh mục.",
+      "confidence": 0.9,
+      "source_table": "categories",
+      "source_column": "category_name",
+      "data_type": "TEXT",
+      "nullable": false,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": false,
+      "metadata_description": ""
+    },
+    {
+      "property_id": "property:categories.parent_category_id",
+      "name": "parentCategoryId",
+      "description": "Mã danh mục cha; NULL nếu đây là danh mục cấp cao nhất (gốc).",
+      "confidence": 0.9,
+      "source_table": "categories",
+      "source_column": "parent_category_id",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "primary_key_position": 0,
+      "default": null,
+      "generated": false,
+      "is_foreign_key": true,
+      "metadata_description": ""
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupCategory",
+      "description": "Lấy thông tin một danh mục theo mã định danh.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "categoryId",
+          "type": "integer",
+          "required": true,
+          "source_columns": [
+            "category_id"
+          ]
+        }
+      ],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ]
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.95,
+      "method_id": "method:categories.lookupCategory",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "listCategories",
+      "description": "Liệt kê danh mục, có thể lọc theo danh mục cha để lấy các danh mục con trực tiếp.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_columns": [
+            "parent_category_id"
+          ]
+        }
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "category_id",
+          "category_name",
+          "parent_category_id"
+        ]
+      },
+      "source_columns": [
+        "category_id",
+        "category_name",
+        "parent_category_id"
+      ],
+      "confidence": 0.9,
+      "method_id": "method:categories.listCategories",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    },
+    {
+      "name": "countCategories",
+      "description": "Đếm số lượng danh mục, có thể lọc theo danh mục cha.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "parentCategoryId",
+          "type": "integer",
+          "required": false,
+          "source_columns": [
+            "parent_category_id"
+          ]
+        }
+      ],
+      "output": {
+        "kind": "scalar",
+        "source_columns": []
+      },
+      "source_columns": [
+        "parent_category_id"
+      ],
+      "confidence": 0.85,
+      "method_id": "method:categories.countCategories",
+      "owner_class_id": "class:categories",
+      "source_table": "categories",
+      "scope": "BASE_CLASS",
+      "status": "PROPOSED_READ_ONLY"
+    }
+  ],
+  "assumptions": [
+    "parent_category_id NULL được hiểu là danh mục cấp cao nhất (gốc) dựa trên tính nullable và tham chiếu tự thân.",
+    "Không có ràng buộc UNIQUE trên category_name, do đó tên danh mục có thể trùng nhau giữa các nhánh khác nhau.",
+    "Bảng không có cột mô tả, thứ tự hiển thị hay trạng thái, nên không thể xác định thêm thuộc tính nghiệp vụ."
+  ],
+  "provenance": {
+    "input_fingerprint": "7c59c937d3a86467fe0aeb1f88f22ff1b7fc1633f27d1715b061ee8a69e66ad9",
+    "generation_fingerprint": "d19960e00e67e3016e04e75b811c2b77a1d90901a8fa5242a0aee1726eca1ed4",
+    "llm": {
+      "model": "qwen/qwen3.6-27b",
+      "base_url": "https://code-agent.cads.live/v1",
+      "temperature": 0,
+      "max_tokens": 16000,
+      "enable_thinking": true
+    },
+    "trace_path": "/home/baond12/Documents/Auto_Build_Ontology_From_DB/database-base-ontology/artifacts/omnichannel_retail/qa_baseline_thinking_v01/llm_traces/base/categories.json"
+  }
+}

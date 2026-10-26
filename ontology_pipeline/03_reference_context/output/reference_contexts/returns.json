@@ -1,0 +1,264 @@
+{
+  "database_id": "omnichannel_retail",
+  "class_id": "class:returns",
+  "current": {
+    "class": {
+      "class_id": "class:returns",
+      "name": "Return",
+      "source_table": "returns",
+      "description": "Bản ghi yêu cầu trả hàng cho một order item, bao gồm số lượng trả, số tiền hoàn, trạng thái xử lý và thời điểm liên quan.",
+      "metadata_description": "",
+      "confidence": 0.92,
+      "semantic_status": "PROPOSED"
+    },
+    "properties": [
+      {
+        "property_id": "property:returns.return_id",
+        "name": "returnId",
+        "description": "Khóa chính của bản ghi trả hàng.",
+        "confidence": 0.98,
+        "source_table": "returns",
+        "source_column": "return_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 1,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.order_item_id",
+        "name": "orderItemId",
+        "description": "Tham chiếu đến order_items, xác định order item được trả.",
+        "confidence": 0.95,
+        "source_table": "returns",
+        "source_column": "order_item_id",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": true,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.return_qty",
+        "name": "returnQty",
+        "description": "Số lượng sản phẩm được trả, luôn lớn hơn 0.",
+        "confidence": 0.95,
+        "source_table": "returns",
+        "source_column": "return_qty",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.refund_amount",
+        "name": "refundAmount",
+        "description": "Số tiền hoàn cho lần trả hàng, luôn lớn hơn hoặc bằng 0. Đơn vị tiền tệ không được schema xác định.",
+        "confidence": 0.9,
+        "source_table": "returns",
+        "source_column": "refund_amount",
+        "data_type": "INTEGER",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.status",
+        "name": "status",
+        "description": "Trạng thái xử lý yêu cầu trả hàng: requested, approved hoặc rejected.",
+        "confidence": 0.97,
+        "source_table": "returns",
+        "source_column": "status",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.requested_at",
+        "name": "requestedAt",
+        "description": "Thời điểm yêu cầu trả hàng được tạo, kiểu TEXT.",
+        "confidence": 0.9,
+        "source_table": "returns",
+        "source_column": "requested_at",
+        "data_type": "TEXT",
+        "nullable": false,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      },
+      {
+        "property_id": "property:returns.decided_at",
+        "name": "decidedAt",
+        "description": "Thời điểm quyết định (duyệt hoặc từ chối) yêu cầu trả hàng, kiểu TEXT, có thể null.",
+        "confidence": 0.88,
+        "source_table": "returns",
+        "source_column": "decided_at",
+        "data_type": "TEXT",
+        "nullable": true,
+        "primary_key_position": 0,
+        "default": null,
+        "generated": false,
+        "is_foreign_key": false,
+        "metadata_description": ""
+      }
+    ],
+    "input_fingerprint": "59a5c47d082d280455b382a325527cccb14276b74bc12fbe583d5bc5d7edcae7"
+  },
+  "references": [
+    {
+      "class_id": "class:order_items",
+      "ontology": {
+        "class": {
+          "class_id": "class:order_items",
+          "name": "OrderItem",
+          "source_table": "order_items",
+          "description": "Một dòng hàng trong đơn hàng, ghi nhận sản phẩm, số lượng, giá đơn vị và giảm giá áp dụng cho dòng đó.",
+          "metadata_description": "",
+          "confidence": 0.95,
+          "semantic_status": "PROPOSED"
+        },
+        "properties": [
+          {
+            "property_id": "property:order_items.order_item_id",
+            "name": "orderItemId",
+            "description": "Khóa chính nhận diện duy nhất một dòng hàng trong đơn.",
+            "confidence": 0.98,
+            "source_table": "order_items",
+            "source_column": "order_item_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 1,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.order_id",
+            "name": "orderId",
+            "description": "Tham chiếu đến đơn hàng mà dòng hàng này thuộc về.",
+            "confidence": 0.97,
+            "source_table": "order_items",
+            "source_column": "order_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.product_id",
+            "name": "productId",
+            "description": "Tham chiếu đến sản phẩm được ghi nhận trong dòng hàng này.",
+            "confidence": 0.97,
+            "source_table": "order_items",
+            "source_column": "product_id",
+            "data_type": "VARCHAR(50)",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.quantity",
+            "name": "quantity",
+            "description": "Số lượng sản phẩm trong dòng hàng, luôn lớn hơn 0.",
+            "confidence": 0.98,
+            "source_table": "order_items",
+            "source_column": "quantity",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.unit_price",
+            "name": "unitPrice",
+            "description": "Giá đơn vị của sản phẩm tại thời điểm ghi nhận dòng hàng, không âm.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "unit_price",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.line_discount",
+            "name": "lineDiscount",
+            "description": "Giá trị giảm giá áp dụng cho dòng hàng này, không âm.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "line_discount",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": false,
+            "metadata_description": ""
+          },
+          {
+            "property_id": "property:order_items.promotion_id",
+            "name": "promotionId",
+            "description": "Tham chiếu tùy chọn đến promotion liên quan đến dòng hàng; có thể không có.",
+            "confidence": 0.95,
+            "source_table": "order_items",
+            "source_column": "promotion_id",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "primary_key_position": 0,
+            "default": null,
+            "generated": false,
+            "is_foreign_key": true,
+            "metadata_description": ""
+          }
+        ],
+        "input_fingerprint": "49e5e2d885abb592d879a03a24d8f4280ef3e3dc0540a6696e0f42acecc221d0"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "source_table": "returns",
+      "source_columns": [
+        "order_item_id"
+      ],
+      "target_table": "order_items",
+      "target_columns": [
+        "order_item_id"
+      ],
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE",
+      "relation_id": "fk:f4a7a6e7f495b00374e049a4:1"
+    }
+  ],
+  "context_fingerprint": "1c2c8e7990104fbec31e9b5a272a8e8d13f61f664b21e26e44bd12d8f2585335"
+}

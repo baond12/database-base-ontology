@@ -1,0 +1,205 @@
+{
+  "class_name": "Return",
+  "description": "Bản ghi yêu cầu trả hàng cho một order item, bao gồm số lượng trả, số tiền hoàn, trạng thái xử lý và thời điểm liên quan.",
+  "confidence": 0.92,
+  "properties": [
+    {
+      "column_name": "return_id",
+      "name": "returnId",
+      "description": "Khóa chính của bản ghi trả hàng.",
+      "confidence": 0.98
+    },
+    {
+      "column_name": "order_item_id",
+      "name": "orderItemId",
+      "description": "Tham chiếu đến order_items, xác định order item được trả.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "return_qty",
+      "name": "returnQty",
+      "description": "Số lượng sản phẩm được trả, luôn lớn hơn 0.",
+      "confidence": 0.95
+    },
+    {
+      "column_name": "refund_amount",
+      "name": "refundAmount",
+      "description": "Số tiền hoàn cho lần trả hàng, luôn lớn hơn hoặc bằng 0. Đơn vị tiền tệ không được schema xác định.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "status",
+      "name": "status",
+      "description": "Trạng thái xử lý yêu cầu trả hàng: requested, approved hoặc rejected.",
+      "confidence": 0.97
+    },
+    {
+      "column_name": "requested_at",
+      "name": "requestedAt",
+      "description": "Thời điểm yêu cầu trả hàng được tạo, kiểu TEXT.",
+      "confidence": 0.9
+    },
+    {
+      "column_name": "decided_at",
+      "name": "decidedAt",
+      "description": "Thời điểm quyết định (duyệt hoặc từ chối) yêu cầu trả hàng, kiểu TEXT, có thể null.",
+      "confidence": 0.88
+    }
+  ],
+  "methods": [
+    {
+      "name": "lookupReturn",
+      "description": "Tra cứu một bản ghi trả hàng theo return_id.",
+      "operation": "lookup",
+      "input_parameters": [
+        {
+          "name": "returnId",
+          "type": "integer",
+          "required": true,
+          "source_column": "return_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "object",
+        "source_columns": [
+          "return_id",
+          "order_item_id",
+          "return_qty",
+          "refund_amount",
+          "status",
+          "requested_at",
+          "decided_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "return_id",
+        "order_item_id",
+        "return_qty",
+        "refund_amount",
+        "status",
+        "requested_at",
+        "decided_at"
+      ],
+      "confidence": 0.97
+    },
+    {
+      "name": "listReturnsByOrderItem",
+      "description": "Liệt kê các bản ghi trả hàng theo order_item_id, có thể lọc thêm theo status.",
+      "operation": "list",
+      "input_parameters": [
+        {
+          "name": "orderItemId",
+          "type": "integer",
+          "required": true,
+          "source_column": "order_item_id",
+          "operator": "eq"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "return_id",
+          "order_item_id",
+          "return_qty",
+          "refund_amount",
+          "status",
+          "requested_at",
+          "decided_at"
+        ],
+        "aggregations": []
+      },
+      "source_columns": [
+        "return_id",
+        "order_item_id",
+        "return_qty",
+        "refund_amount",
+        "status",
+        "requested_at",
+        "decided_at"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "countReturns",
+      "description": "Đếm số bản ghi trả hàng, có thể lọc theo status và order_item_id.",
+      "operation": "count",
+      "input_parameters": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "source_column": "status",
+          "operator": "eq"
+        },
+        {
+          "name": "orderItemId",
+          "type": "integer",
+          "required": false,
+          "source_column": "order_item_id",
+          "operator": "eq"
+        }
+      ],
+      "group_by": [],
+      "output": {
+        "kind": "scalar",
+        "source_columns": [],
+        "aggregations": [
+          {
+            "name": "rowCount",
+            "function": "count",
+            "source_column": null
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "order_item_id"
+      ],
+      "confidence": 0.95
+    },
+    {
+      "name": "aggregateRefundByStatus",
+      "description": "Tổng số tiền hoàn (sum refund_amount) nhóm theo status.",
+      "operation": "aggregate",
+      "input_parameters": [],
+      "group_by": [
+        "status"
+      ],
+      "output": {
+        "kind": "rows",
+        "source_columns": [
+          "status"
+        ],
+        "aggregations": [
+          {
+            "name": "totalRefundAmount",
+            "function": "sum",
+            "source_column": "refund_amount"
+          }
+        ]
+      },
+      "source_columns": [
+        "status",
+        "refund_amount"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "assumptions": [
+    "Đơn vị tiền tệ của refund_amount không được schema xác định; chỉ biết là số nguyên không âm.",
+    "requested_at và decided_at có kiểu TEXT; định dạng cụ thể (ISO 8601, epoch, v.v.) không được schema quy định.",
+    "decided_at có thể null; schema không xác nhận điều kiện nào khiến cột này có giá trị hay không (ví dụ: chỉ khi status không còn requested).",
+    "Không có ràng buộc UNIQUE trên order_item_id, nên một order item có thể có nhiều bản ghi trả hàng."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "relations": [
+    {
+      "relation_id": "fk:f4a7a6e7f495b00374e049a4:1",
+      "name": "returnToOrderItem",
+      "description": "Bản ghi Return tham chiếu bản ghi OrderItem qua cột order_item_id.",
+      "confidence": 0.95,
+      "assumptions": []
+    }
+  ]
+}
