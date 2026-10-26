@@ -1,0 +1,18 @@
+# Relative data paths are resolved from the repository root, not the shell cwd.
+database_id: omnichannel_retail
+sqlite_path: data/omnichannel_retail.sqlite3
+metadata_path: null
+output_root: artifacts
+# Use the same run_id for individual steps. Change it to keep a separate run.
+run_id: base_v01
+llm:
+  config_path: /home/baond12/projects/Text2Sql_Q3/2026-09-22/llm_config.yaml
+  profile: dc5
+  proxy_mode: company  # company | environment | none
+  proxy_url: http://proxy.hcm.fpt.vn:80
+  connect_timeout: 15
+  read_timeout: 120
+  max_tokens: 6000
+  temperature: 0
+  json_attempts: 2
+  enable_thinking: false

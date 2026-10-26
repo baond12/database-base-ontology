@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["relation_id", "source_class_id", "target_class_id", "source_property_ids", "target_property_ids", "name", "description", "confidence", "assumptions", "cardinality", "source_fk", "physical_status", "semantic_status", "runtime_contract_status"],
+  "properties": {
+    "relation_id": {"type": "string"}, "source_class_id": {"type": "string"}, "target_class_id": {"type": "string"},
+    "source_property_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "target_property_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "name": {"type": "string"}, "description": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "cardinality": {"type": "object", "required": ["source_to_target", "target_to_source"]},
+    "source_fk": {"type": "object"},
+    "physical_status": {"const": "VERIFIED_FROM_SCHEMA"},
+    "semantic_status": {"const": "PROPOSED"},
+    "runtime_contract_status": {"const": "NOT_APPROVED"}
+  }
+}

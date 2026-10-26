@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false, "required": ["relations"],
+  "properties": {"relations": {"type": "array", "items": {
+    "type": "object", "additionalProperties": false,
+    "required": ["relation_id", "name", "description", "confidence", "assumptions"],
+    "properties": {
+      "relation_id": {"type": "string"},
+      "name": {"type": "string", "pattern": "^[a-z][A-Za-z0-9]*$"},
+      "description": {"type": "string", "minLength": 1},
+      "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+      "assumptions": {"type": "array", "items": {"type": "string"}}
+    }
+  }}}
+}

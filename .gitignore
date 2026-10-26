@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.env
+*.sqlite
+*.sqlite3
+*.db
+configs/pipeline.yaml
+configs/*.local.yaml
+**/llm_config*.yaml
+data/*
+!data/README.md
+artifacts/

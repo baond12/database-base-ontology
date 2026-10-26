@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "database-base-ontology"
+version = "0.1.0"
+description = "Build per-table base ontologies and FK-grounded relations with a DC5 Qwen API."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0,<7", "requests>=2.31,<3", "jsonschema>=4.18,<5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+database_base_ontology = ["prompts/*.txt", "contracts/*.json"]

@@ -1,0 +1,11 @@
+{
+  "tables": {
+    "products": {
+      "description": "",
+      "columns": {
+        "brand_id": {"description": ""},
+        "description": {"description": ""}
+      }
+    }
+  }
+}

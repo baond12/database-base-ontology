@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["database_id", "class_id", "current", "references", "foreign_keys", "context_fingerprint"],
+  "properties": {
+    "database_id": {"type": "string"}, "class_id": {"type": "string"},
+    "current": {"type": "object"},
+    "references": {"type": "array", "items": {"type": "object", "required": ["class_id", "ontology"]}},
+    "foreign_keys": {"type": "array", "items": {"type": "object"}},
+    "context_fingerprint": {"type": "string"}
+  }
+}
