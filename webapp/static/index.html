@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#714de1">
+  <meta name="description" content="Tạo Ontology từ schema database. Kiểm tra Class, Property, Method và Relation với nguồn dữ liệu rõ ràng.">
+  <title>Ontology Studio — Từ schema đến tri thức có cấu trúc</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23714de1'/%3E%3Cpath d='m16 5 10 6v11l-10 6-10-6V11Zm0 12 10-6M16 17 6 11m10 6v11' stroke='white' fill='none' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 10 9-5M12 12 3 7m9 5v10"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+ <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M9 10v10m-6-5h18"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+ <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 7 2-2a5 5 0 0 1 7 7l-3 3a5 5 0 0 1-7 0m5 2-2 2a5 5 0 0 1-7-7l3-3a5 5 0 0 1 7 0"/></symbol>
+ <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 0v6h6M8 13h8m-8 4h5"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 9 3v6c0 5-9 9-9 9s-9-4-9-9V6l9-3Z"/><path d="m8 12 3 3 5-6"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></symbol>
+ <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+ <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 16v5h16v-5"/></symbol>
+ <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+ <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></symbol>
+ <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-11v1"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 12H5m6-6-6 6 6 6"/></symbol>
+</svg>
+
+<header class="site-header">
+ <div class="header-inner">
+  <a class="brand" href="#home" aria-label="Ontology Studio, trang chủ"><span class="brand-icon"><svg><use href="#i-cube"/></svg></span>Ontology<span class="brand-light">Studio</span></a>
+  <nav id="landing-nav" aria-label="Điều hướng chính"><a href="#how-it-works">Cách hoạt động</a><a href="#sample">Kết quả mẫu</a><span class="local-label"><i></i> Local workspace</span></nav>
+  <button class="btn primary small" data-action="new">Tạo Ontology <svg><use href="#i-arrow"/></svg></button>
+ </div>
+</header>
+
+<main id="landing">
+ <section class="hero section-wrap" id="home">
+  <div class="hero-copy">
+   <div class="eyebrow"><span class="tiny-dot"></span> DATABASE SCHEMA × LLM</div>
+   <h1>Từ schema database<br>đến ontology<br><em>có cấu trúc.</em></h1>
+   <p class="hero-description">Biến cấu trúc dữ liệu thành Class, Properties, Methods và Relations — với nguồn rõ ràng và từng bước có thể kiểm tra.</p>
+   <div class="hero-actions"><button class="btn primary" data-action="new">Tạo Ontology <svg><use href="#i-arrow"/></svg></button><button class="btn secondary" data-action="sample"><svg><use href="#i-table"/></svg>Xem kết quả mẫu</button></div>
+   <div class="hero-notes"><span><svg><use href="#i-check"/></svg>SQLite & SQL schema</span><span><svg><use href="#i-check"/></svg>DC5 · Thinking</span><span><svg><use href="#i-check"/></svg>Xuất JSON</span></div>
+  </div>
+  <div class="hero-visual" aria-label="Minh họa schema products chuyển thành Class Product và các Relations">
+   <div class="visual-top"><span><i class="green-dot"></i> TỪ CẤU TRÚC ĐẾN NGỮ NGHĨA</span><span class="mono">01 → 05</span></div>
+   <div class="visual-canvas">
+    <svg class="graph-lines" viewBox="0 0 570 425" preserveAspectRatio="none" aria-hidden="true"><path d="M173 133H234V208H285"/><path d="M399 234h40V342h-60"/><path d="M399 209h103V95h-59"/><circle cx="234" cy="208" r="4"/><circle cx="439" cy="342" r="4"/></svg>
+    <div class="diagram-node schema-node"><div class="node-head"><svg><use href="#i-table"/></svg> products <span class="tag source">TABLE</span></div><div class="schema-field"><b class="key">PK</b> product_id <span>varchar</span></div><div class="schema-field"><b class="key fk">FK</b> brand_id <span>integer</span></div><div class="schema-field"><b class="field-dot">·</b> name <span>varchar</span></div><div class="schema-field"><b class="field-dot">·</b> discount_price <span>numeric</span></div><div class="node-foot">20 cột · constraints từ schema</div></div>
+    <div class="transform-label"><svg><use href="#i-spark"/></svg> LLM + code</div>
+    <div class="diagram-node class-node"><div class="node-head"><svg><use href="#i-cube"/></svg> Product <span class="tag llm">CLASS</span></div><p>Sản phẩm trong hệ thống<br>bán lẻ đa kênh.</p><div class="ontology-item"><span class="item-icon blue">P</span>20 Properties <svg><use href="#i-check"/></svg></div><div class="ontology-item"><span class="item-icon purple">M</span>5 Methods <span class="muted">đề xuất</span></div></div>
+    <div class="diagram-node brand-node"><svg><use href="#i-cube"/></svg><span>Brand</span><span class="tag source">CLASS</span></div>
+    <div class="relation-caption">FK → Relation <span>0..1</span></div>
+    <div class="diagram-node output-node"><span class="output-symbol">{ }</span><div><strong>Ontology JSON</strong><span>Cấu trúc được kiểm định</span></div><span class="success-tick"><svg><use href="#i-check"/></svg></span></div>
+   </div>
+   <div class="visual-bottom"><span><i class="legend-dot gray"></i>Schema là nguồn</span><span><i class="legend-dot purple-bg"></i>LLM đề xuất ngữ nghĩa</span></div>
+  </div>
+ </section>
+
+ <section class="mapping-strip section-wrap" aria-label="Các ánh xạ ontology"><div><span class="map-mark gray">T</span><span>Table</span><span class="map-arrow">→</span><strong>Class</strong></div><div><span class="map-mark blue">C</span><span>Column</span><span class="map-arrow">→</span><strong>Property</strong></div><div><span class="map-mark purple">ƒ</span><span>Đọc một bảng</span><span class="map-arrow">→</span><strong>Method</strong></div><div><svg class="map-link"><use href="#i-link"/></svg><span>FK</span><span class="map-arrow">→</span><strong>Relation</strong></div></section>
+
+ <section class="how-section section-wrap" id="how-it-works">
+  <div class="section-heading"><div><div class="eyebrow">HIỂU TỪNG BƯỚC</div><h2>Một pipeline. Nguồn gốc rõ ràng.</h2></div><p>Schema xác định cấu trúc. LLM bổ sung diễn giải.<br>Code kết hợp và kiểm định kết quả.</p></div>
+  <div class="steps-explainer">
+   <article><div class="step-line"><span>01</span><svg><use href="#i-table"/></svg></div><span class="tag source">INPUT</span><h3>Trích xuất schema</h3><p>Đọc bảng, cột, kiểu dữ liệu, PK/FK, UNIQUE và metadata.</p></article>
+   <article><div class="step-line"><span>02</span><svg><use href="#i-spark"/></svg></div><span class="tag llm">LLM + CODE</span><h3>Tạo Base Ontology</h3><p>Đặt tên Class, Properties và đề xuất Methods chỉ đọc một bảng.</p></article>
+   <article><div class="step-line"><span>03</span><svg><use href="#i-link"/></svg></div><span class="tag code">CODE</span><h3>Ghép context</h3><p>Kết nối Class qua FK trực tiếp. Một bước, cả hai chiều và self-FK.</p></article>
+   <article><div class="step-line"><span>04</span><svg><use href="#i-cube"/></svg></div><span class="tag llm">CODE + LLM</span><h3>Xây Relations</h3><p>Code giữ endpoints và cardinality; LLM bổ sung tên, mô tả.</p></article>
+   <article><div class="step-line"><span>05</span><svg><use href="#i-shield"/></svg></div><span class="tag review">KIỂM ĐỊNH</span><h3>Kiểm tra & xuất</h3><p>Kiểm định cấu trúc, review ngữ nghĩa và xuất ontology JSON.</p></article>
+  </div>
+ </section>
+
+ <section class="sample-section" id="sample"><div class="section-wrap sample-inner"><div class="sample-copy"><div class="eyebrow">KHÔNG CẦN UPLOAD ĐỂ KHÁM PHÁ</div><h2>Mở một ontology.<br>Hiểu cách nó được tạo ra.</h2><p>Khám phá kết quả thực tế từ schema Omnichannel Retail. Từng Property, Method và Relation đều có thể đối chiếu với nguồn.</p><button class="btn primary" data-action="sample">Khám phá kết quả mẫu <svg><use href="#i-arrow"/></svg></button><span class="sample-disclaimer">Dữ liệu mẫu đã lưu · Không gọi LLM khi xem</span></div><div class="sample-preview"><div class="preview-header"><span class="tag llm">KẾT QUẢ MẪU</span><span class="mono">omnichannel_retail</span></div><div class="preview-metrics"><div><b>20</b><span>Classes</span></div><div><b>157</b><span>Properties</span></div><div><b>82</b><span>Methods</span></div><div><b>31</b><span>Relations</span></div></div><div class="sample-status"><span><svg><use href="#i-check"/></svg>Cấu trúc: PASS</span><span class="muted">Review nghiệp vụ: Chưa duyệt</span></div><div class="preview-files"><div><svg><use href="#i-file"/></svg><div><strong>Ontology toàn database</strong><span>Classes, Properties, Methods và Relations</span></div><span class="file-type">JSON</span></div><div><svg><use href="#i-cube"/></svg><div><strong>Ontology từng Class</strong><span>Chi tiết và các Relations liên quan</span></div><span class="file-type">JSON</span></div><div><svg><use href="#i-shield"/></svg><div><strong>Báo cáo kiểm định</strong><span>Coverage, tính nhất quán và findings</span></div><span class="file-type">JSON</span></div></div></div></div></section>
+
+ <section class="start-section section-wrap"><div><div class="eyebrow">BẮT ĐẦU VỚI DỮ LIỆU CỦA BẠN</div><h2>Schema đã có. Bước tiếp theo là ontology.</h2><p>Upload SQLite hoặc SQL schema theo cú pháp SQLite. Thêm metadata khi cần.</p></div><button class="btn primary" data-action="new">Tạo Ontology <svg><use href="#i-arrow"/></svg></button></section>
+ <div class="scope-note section-wrap"><svg><use href="#i-info"/></svg><p>Methods là đề xuất thao tác đọc dữ liệu, chưa phải SQL đã triển khai. PASS cấu trúc chưa chứng minh toàn bộ ý nghĩa nghiệp vụ đúng.</p></div>
+ <footer class="section-wrap"><span>Ontology Studio <span class="muted">/ Local edition</span></span><span>Từ schema đến ontology, từng bước có thể kiểm tra.</span></footer>
+</main>
+
+<main id="workspace" hidden>
+ <div class="workspace-wrap">
+  <div class="workspace-breadcrumb"><a href="#home"><svg><use href="#i-back"/></svg>Trang chủ</a><span>/</span><span>Workspace</span><span class="connection-status" id="connection-status"><i class="green-dot"></i> Backend local</span></div>
+  <div class="workspace-title"><div><div class="title-with-tag"><h1 id="run-name">Tạo Ontology</h1><span class="tag llm" id="mode-tag">LẦN CHẠY MỚI</span></div><p id="run-subtitle">Bắt đầu với schema database của bạn.</p></div><div class="workspace-actions"><button class="btn secondary small" data-action="sample">Xem mẫu</button><button class="btn primary small" data-action="new"><svg><use href="#i-plus"/></svg>Lần chạy mới</button></div></div>
+  <div id="stepper" class="stepper" aria-label="Các bước pipeline"></div>
+  <div id="run-status" class="run-status" hidden></div>
+  <section id="upload-view" class="upload-layout">
+   <form id="upload-form" class="upload-card">
+    <span class="tag source">BƯỚC 01 · INPUT</span><h2>Cung cấp schema của bạn</h2><p>Chọn một database SQLite hoặc file SQL chỉ chứa cấu trúc bảng.</p>
+    <label class="drop-zone" id="drop-zone" for="schema-file"><span class="upload-icon"><svg><use href="#i-upload"/></svg></span><strong id="file-name">Kéo thả file vào đây hoặc <span>chọn file</span></strong><small>.sqlite · .sqlite3 · .db · .sql — tối đa 20 MB</small><input id="schema-file" type="file" accept=".sqlite,.sqlite3,.db,.sql" required></label>
+    <div class="metadata-field"><label for="metadata-file">Metadata mô tả <span>Tùy chọn</span></label><p>Bổ sung mô tả bảng và cột để LLM có thêm ngữ cảnh.</p><input id="metadata-file" type="file" accept=".json"><button type="button" class="text-button" data-action="metadata-example">Tải metadata JSON mẫu <svg><use href="#i-download"/></svg></button></div>
+    <details class="settings-details"><summary>Cấu hình LLM nâng cao</summary><div class="settings-content"><div><span class="muted">Provider / Model</span><strong id="model-label">DC5</strong></div><label class="toggle-row"><span><strong>Thinking</strong><small>Cho model thêm thời gian suy luận; thời gian xử lý có thể tăng.</small></span><input id="thinking-toggle" type="checkbox" checked></label><p>API key được quản lý trên server.</p></div></details>
+    <div id="upload-error" class="inline-error" role="alert" hidden></div><button id="extract-button" class="btn primary" type="submit">Trích xuất schema <svg><use href="#i-arrow"/></svg></button>
+   </form>
+   <aside class="upload-guide"><div class="guide-icon"><svg><use href="#i-shield"/></svg></div><h3>Bắt đầu từ cấu trúc.</h3><p>LLM nhận schema và metadata mô tả, không nhận dữ liệu từng dòng.</p><div class="guide-divider"></div><h4>Điều gì sẽ xảy ra tiếp theo?</h4><ol><li>Kiểm tra các bảng và constraints đã trích xuất.</li><li>Bắt đầu pipeline với DC5.</li><li>Theo dõi, review và tải ontology JSON.</li></ol><div class="guide-note">File SQL cần dùng cú pháp SQLite và chỉ chứa CREATE TABLE / CREATE INDEX.</div><button class="text-button" data-action="sample">Chưa có schema? Khám phá mẫu <svg><use href="#i-arrow"/></svg></button></aside>
+  </section>
+  <section id="results-view" hidden>
+   <div id="metrics" class="metrics"></div>
+   <div class="workspace-grid">
+    <aside class="class-sidebar"><div class="sidebar-title"><strong>BẢNG / CLASS</strong><span id="table-total"></span></div><label class="search-box"><svg><use href="#i-search"/></svg><input id="class-search" placeholder="Tìm bảng hoặc Class…" aria-label="Tìm bảng hoặc Class"></label><div id="class-list" class="class-list"></div><div class="sidebar-foot"><i class="legend-dot purple-bg"></i>Tên Class do LLM đề xuất</div></aside>
+    <div class="detail-area"><div id="step-intro" class="step-intro"></div><div id="class-heading" class="class-heading"></div><div id="tabs" class="tabs" role="tablist"></div><div id="detail-content" class="detail-content"></div><div id="advanced-area"></div></div>
+   </div>
+   <div class="results-footer"><span><svg><use href="#i-info"/></svg>Methods chưa triển khai SQL. Ngữ nghĩa vẫn cần review nghiệp vụ.</span><div id="download-actions"></div></div>
+  </section>
+ </div>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

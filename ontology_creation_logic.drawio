@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="Ontology block diagram" version="24.7.17" pages="1">
+  <diagram id="ontology-creation-logic" name="Logic tạo Ontology">
+    <mxGraphModel dx="3010" dy="2070" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3010" pageHeight="2070" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" value="" />
+        <mxCell id="1" parent="0" value="" />
+        <mxCell id="title" value="LOGIC TẠO CLASS, PROPERTY, METHODS VÀ RELATION" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=32;fontColor=#0F172A;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="42" width="2850" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="ERD / schema xác định cấu trúc  •  LLM đề xuất tên, mô tả và kế hoạch đọc dữ liệu  •  Code ghép và kiểm định ontology" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=20;fontColor=#475569;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="107" width="2850" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="map-class" value="Table  →  &lt;b&gt;Class&lt;/b&gt;" style="rounded=1;arcSize=20;html=1;whiteSpace=wrap;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontFamily=Arial;fontSize=21;fontColor=#0F172A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="185" width="700" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="map-property" value="Column  →  &lt;b&gt;Property&lt;/b&gt;" style="rounded=1;arcSize=20;html=1;whiteSpace=wrap;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontFamily=Arial;fontSize=21;fontColor=#0F172A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="790" y="185" width="700" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="map-method" value="Đọc trong một bảng  →  &lt;b&gt;Method&lt;/b&gt;" style="rounded=1;arcSize=20;html=1;whiteSpace=wrap;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontFamily=Arial;fontSize=21;fontColor=#0F172A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="185" width="700" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="map-relation" value="FK  →  &lt;b&gt;Relation&lt;/b&gt;" style="rounded=1;arcSize=20;html=1;whiteSpace=wrap;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontFamily=Arial;fontSize=21;fontColor=#0F172A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2250" y="185" width="700" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="stage1" value="01  •  ĐẦU VÀO" style="shape=swimlane;html=1;horizontal=1;startSize=64;rounded=1;arcSize=8;fillColor=#0F172A;swimlaneFillColor=#FBFCFE;strokeColor=#CBD5E1;strokeWidth=1.3;fontColor=#FFFFFF;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=18;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="350" width="330" height="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="stage2" value="02  •  BASE ONTOLOGY TỪNG BẢNG" style="shape=swimlane;html=1;horizontal=1;startSize=64;rounded=1;arcSize=8;fillColor=#0F172A;swimlaneFillColor=#FBFCFE;strokeColor=#CBD5E1;strokeWidth=1.3;fontColor=#FFFFFF;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=18;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="450" y="350" width="650" height="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="stage3" value="03  •  CONTEXT THAM CHIẾU" style="shape=swimlane;html=1;horizontal=1;startSize=64;rounded=1;arcSize=8;fillColor=#0F172A;swimlaneFillColor=#FBFCFE;strokeColor=#CBD5E1;strokeWidth=1.3;fontColor=#FFFFFF;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=18;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="350" width="420" height="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="stage4" value="04  •  TẠO RELATIONS" style="shape=swimlane;html=1;horizontal=1;startSize=64;rounded=1;arcSize=8;fillColor=#0F172A;swimlaneFillColor=#FBFCFE;strokeColor=#CBD5E1;strokeWidth=1.3;fontColor=#FFFFFF;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=18;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="350" width="700" height="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="stage5" value="05  •  KIỂM ĐỊNH &amp;amp; XUẤT" style="shape=swimlane;html=1;horizontal=1;startSize=64;rounded=1;arcSize=8;fillColor=#0F172A;swimlaneFillColor=#FBFCFE;strokeColor=#CBD5E1;strokeWidth=1.3;fontColor=#FFFFFF;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=18;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry x="2400" y="350" width="550" height="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="erd" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;ERD / SCHEMA DATABASE&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Tables • Columns • Data Types&lt;br/&gt;PK • FK • UNIQUE&lt;br/&gt;Nullable • Các constraints&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage1">
+          <mxGeometry x="20" y="95" width="290" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="metadata" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;METADATA TÙY CHỌN&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Mô tả bảng / cột&lt;br/&gt;Có thể chưa được cung cấp&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage1">
+          <mxGeometry x="20" y="315" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="extract" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • CHUẨN HÓA INPUT&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Trích cấu trúc bảng và ràng buộc&lt;br/&gt;Ghép metadata mô tả nguồn&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage1">
+          <mxGeometry x="20" y="500" width="290" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;SCHEMA ĐÃ CHUẨN HÓA&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Schema từng bảng&lt;br/&gt;PK/FK • UNIQUE • Nullable&lt;br/&gt;Metadata mô tả nguồn&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage1">
+          <mxGeometry x="20" y="710" width="290" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="structure-note" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;CẤU TRÚC ĐƯỢC GIỮ CỐ ĐỊNH&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Code giữ thông tin vật lý và IDs.&lt;br/&gt;LLM bổ sung diễn giải, không quyết định bảng / cột / FK mới.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#475569;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;dashed=1;dashPattern=5 4;" vertex="1" parent="stage1">
+          <mxGeometry x="20" y="1050" width="290" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="base-prompt" value="CHUẨN BỊ PROMPT • BASE ONTOLOGY" style="shape=swimlane;html=1;horizontal=1;startSize=44;rounded=1;arcSize=8;fillColor=#DBEAFE;swimlaneFillColor=#F8FBFF;strokeColor=#93C5FD;strokeWidth=1.5;fontColor=#1E3A8A;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=16;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="stage2">
+          <mxGeometry x="30" y="95" width="590" height="715" as="geometry" />
+        </mxCell>
+        <mxCell id="base-context" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;A. CONTEXT ĐẦU VÀO&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Schema của &lt;b&gt;đúng một bảng&lt;/b&gt;&lt;br/&gt;Tên bảng / cột • Kiểu dữ liệu • Constraints&lt;br/&gt;Metadata mô tả nguồn nếu có&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="base-prompt">
+          <mxGeometry x="20" y="60" width="550" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="base-rules" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;B. CHỈ DẪN CHO LLM&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;• Đặt tên / mô tả Class và từng Property.&lt;br/&gt;• Mỗi cột tương ứng đúng một Property.&lt;br/&gt;• Methods: &lt;b&gt;list • lookup • count • aggregate&lt;/b&gt;.&lt;br/&gt;• Chỉ đọc bảng hiện tại; không JOIN / tạo cột mới.&lt;br/&gt;• Không khẳng định business rules thiếu bằng chứng.&lt;br/&gt;• Class: PascalCase; Property / Method: lowerCamelCase.&lt;br/&gt;• Tên tiếng Anh; mô tả tiếng Việt.&lt;br/&gt;• Feedback review đã đối chiếu nguồn, nếu có.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="base-prompt">
+          <mxGeometry x="20" y="230" width="550" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="base-contract" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;C. LLM RESPONSE CONTRACT&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;JSON bắt buộc:&lt;/b&gt; Class • Properties • Methods&lt;br/&gt;assumptions • confidence&lt;br/&gt;&lt;b&gt;Method:&lt;/b&gt; operation • input • output • cột sử dụng&lt;br/&gt;filter / operator • group_by • aggregation khi có&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="base-prompt">
+          <mxGeometry x="20" y="530" width="550" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="base-message-note" value="Chỉ dẫn → system prompt     |     Context + contract → user prompt" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#64748B;fontStyle=0;spacing=0;" vertex="1" parent="stage2">
+          <mxGeometry x="40" y="820" width="570" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="base-prompt-join" value="" style="shape=ellipse;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="1200" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="base-llm" value="&lt;div style=&quot;font-size:20px;font-weight:700;margin-bottom:10px;&quot;&gt;LLM • ĐỀ XUẤT NGỮ NGHĨA&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Tên / mô tả và kế hoạch Methods&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#A855F7;fontColor=#6B21A8;strokeWidth=1.5;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage2">
+          <mxGeometry x="85" y="890" width="480" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="base-proposal" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;PROPOSAL CHO MỘT BẢNG&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;Class + Properties + Methods&lt;/b&gt;&lt;br/&gt;Kèm assumptions và confidence&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage2">
+          <mxGeometry x="50" y="1015" width="550" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="base-assemble" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • GHÉP SCHEMA + PROPOSAL&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Giữ IDs và thông tin vật lý; ghép tên / mô tả.&lt;br/&gt;Kiểm tra đủ cột và logic Methods trong một bảng.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage2">
+          <mxGeometry x="50" y="1155" width="550" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="bases" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;BASE ONTOLOGIES&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Mỗi bảng có Class + Properties + Methods&lt;br/&gt;&lt;b&gt;Lặp cho từng bảng → hoàn thành toàn bộ bảng&lt;/b&gt;&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage2">
+          <mxGeometry x="50" y="1330" width="550" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="fk-bus" value="" style="shape=ellipse;html=1;fillColor=#2563EB;strokeColor=#2563EB;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1595" y="290" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="all-bases" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;TOÀN BỘ BASE ONTOLOGIES&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Đã có ontology của mọi bảng&lt;br/&gt;Giữ Methods tại Class sở hữu&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage3">
+          <mxGeometry x="25" y="95" width="370" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="build-context" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • GHÉP CONTEXT 1 BƯỚC&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Class / Properties hiện tại&lt;br/&gt;&lt;b&gt;+&lt;/b&gt; Class / Properties liên kết trực tiếp&lt;br/&gt;&lt;b&gt;Incoming FK • Outgoing FK • Self-FK&lt;/b&gt;&lt;br/&gt;Chọn láng giềng từ các FK trong schema&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage3">
+          <mxGeometry x="25" y="395" width="370" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="reference-context" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CONTEXT CHO TỪNG CLASS&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Class / Properties hiện tại&lt;br/&gt;Các Class / Properties tham chiếu&lt;br/&gt;Danh sách FK liên quan&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage3">
+          <mxGeometry x="25" y="740" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="context-scope-note" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;PHẠM VI CONTEXT&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;Chỉ 1 bước&lt;/b&gt; • Không đệ quy&lt;br/&gt;Giữ self-FK; không tự lặp Class trong láng giềng.&lt;br/&gt;Methods vẫn ở Class sở hữu; context mô tả Relations chỉ mang Class / Properties.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#475569;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;dashed=1;dashPattern=5 4;" vertex="1" parent="stage3">
+          <mxGeometry x="25" y="1050" width="370" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="physical-relation" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • KHUNG RELATION TỪ SCHEMA&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;Source / target Class + Properties&lt;/b&gt;&lt;br/&gt;Cardinality từ FK, Nullable, PK / UNIQUE toàn bảng&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage4">
+          <mxGeometry x="30" y="95" width="640" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-prompt" value="CHUẨN BỊ PROMPT • MÔ TẢ RELATIONS" style="shape=swimlane;html=1;horizontal=1;startSize=44;rounded=1;arcSize=8;fillColor=#DBEAFE;swimlaneFillColor=#F8FBFF;strokeColor=#93C5FD;strokeWidth=1.5;fontColor=#1E3A8A;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=16;collapsible=0;container=1;recursiveResize=0;" vertex="1" parent="stage4">
+          <mxGeometry x="25" y="260" width="650" height="625" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-context" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;A. CONTEXT ĐẦU VÀO&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;• Class / Properties hiện tại và tham chiếu trực tiếp.&lt;br/&gt;• &lt;b&gt;FK được giao cho bảng sở hữu hiện tại.&lt;/b&gt;&lt;br/&gt;• Khung Relation: endpoints và cardinality từ code.&lt;br/&gt;&lt;b&gt;Context:&lt;/b&gt; FK vào / ra / self. &lt;b&gt;Sinh:&lt;/b&gt; chỉ FK được giao.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="relation-prompt">
+          <mxGeometry x="20" y="60" width="610" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-rules" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;B. CHỈ DẪN CHO LLM&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;• Bổ sung &lt;b&gt;tên, mô tả, assumptions&lt;/b&gt;.&lt;br/&gt;• Mô tả đúng chiều source → target.&lt;br/&gt;• Không tạo FK mới; không sửa endpoints / cardinality.&lt;br/&gt;• Không suy diễn vai trò nghiệp vụ thiếu bằng chứng.&lt;br/&gt;• Tên tiếng Anh; mô tả tiếng Việt; đúng thuật ngữ.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="relation-prompt">
+          <mxGeometry x="20" y="265" width="610" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-contract" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;C. LLM RESPONSE CONTRACT&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;Mỗi relation_id được giao → đúng một kết quả.&lt;/b&gt;&lt;br/&gt;relation_id • name • description • assumptions&lt;br/&gt;Kèm confidence; giữ đúng tập FK được giao.&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="relation-prompt">
+          <mxGeometry x="20" y="490" width="610" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-prompt-join" value="" style="shape=ellipse;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="2320" y="1255" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-llm" value="&lt;div style=&quot;font-size:20px;font-weight:700;margin-bottom:10px;&quot;&gt;LLM • DIỄN GIẢI RELATIONS&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Bổ sung ngữ nghĩa cho đúng các FK được giao&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#A855F7;fontColor=#6B21A8;strokeWidth=1.5;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage4">
+          <mxGeometry x="100" y="950" width="500" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-annotations" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;DIỄN GIẢI THEO RELATION ID&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Tên • Mô tả • Assumptions • Confidence&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage4">
+          <mxGeometry x="45" y="1075" width="610" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-assemble" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • GHÉP KHUNG + DIỄN GIẢI&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Giữ endpoints / cardinality từ schema&lt;br/&gt;Ghép tên, mô tả và assumptions từ LLM&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage4">
+          <mxGeometry x="45" y="1200" width="610" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="relations" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;RELATIONS TOÀN CỤC&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;Một FK → một Relation toàn cục&lt;/b&gt;&lt;br/&gt;Relation được gắn vào các Class liên quan khi xuất&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage4">
+          <mxGeometry x="45" y="1335" width="610" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="validation-input" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;RELATIONS ĐÃ GHÉP&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Cấu trúc từ schema + diễn giải LLM&lt;br/&gt;Kết hợp với Base Ontologies được giữ lại&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="95" width="490" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="structural-validation" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;KIỂM ĐỊNH BẰNG CODE&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Coverage bảng / cột / FK&lt;br/&gt;IDs • References • Tính nhất quán&lt;br/&gt;Đối chiếu schema và các thành phần ontology&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;fontColor=#92400E;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="355" width="490" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="semantic-review" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;LLM • REVIEW NGỮ NGHĨA&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Đối chiếu mô tả với schema / metadata&lt;br/&gt;Kiểm tra logic Methods và Relations&lt;br/&gt;Ghi findings cần được xem xét&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#A855F7;fontColor=#6B21A8;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="620" width="490" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="qc-result" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;KẾT QUẢ KIỂM ĐỊNH&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Structural status + findings&lt;br/&gt;Kết quả review ngữ nghĩa&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;fontColor=#92400E;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="835" width="490" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="export" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;CODE • HỢP NHẤT &amp;amp; XUẤT JSON&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Giữ Methods ở đúng Class sở hữu&lt;br/&gt;Gắn Relation vào các Class liên quan&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="1000" width="490" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="merged-ontology" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;ONTOLOGY TOÀN DATABASE&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Classes • Properties&lt;br/&gt;Methods • Relations&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="1170" width="235" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="class-ontology" value="&lt;div style=&quot;font-size:18px;font-weight:700;margin-bottom:10px;&quot;&gt;ONTOLOGY TỪNG CLASS&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;Class • Properties&lt;br/&gt;Methods • Relations liên quan&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;strokeWidth=1.5;fontFamily=Arial;fontSize=16;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="285" y="1170" width="235" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="semantic-limit" value="&lt;div style=&quot;font-size:19px;font-weight:700;margin-bottom:10px;&quot;&gt;GIỚI HẠN CỦA PASS&lt;/div&gt;&lt;div style=&quot;line-height:1.38;&quot;&gt;&lt;b&gt;PASS cấu trúc chưa chứng minh toàn bộ ý nghĩa nghiệp vụ đúng.&lt;/b&gt;&lt;/div&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;fontColor=#92400E;strokeWidth=1.5;fontFamily=Arial;fontSize=17;align=center;verticalAlign=middle;spacingLeft=18;spacingRight=16;spacingTop=12;spacingBottom=12;" vertex="1" parent="stage5">
+          <mxGeometry x="30" y="1350" width="490" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="export-join" value="" style="shape=ellipse;html=1;fillColor=#059669;strokeColor=#059669;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="2670" y="1480" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="CHÚ GIẢI" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=18;fontColor=#0F172A;fontStyle=1;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1960" width="150" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-input" value="Dữ liệu đầu vào" style="rounded=1;arcSize=20;html=1;fillColor=#F1F5F9;strokeColor=#94A3B8;fontColor=#0F172A;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1955" width="345" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-code" value="Xử lý bằng code" style="rounded=1;arcSize=20;html=1;fillColor=#EFF6FF;strokeColor=#60A5FA;fontColor=#1E3A8A;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="605" y="1955" width="345" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-llm" value="Xử lý bằng LLM" style="rounded=1;arcSize=20;html=1;fillColor=#F3E8FF;strokeColor=#A855F7;fontColor=#6B21A8;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1955" width="345" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-check" value="Kiểm định" style="rounded=1;arcSize=20;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;fontColor=#92400E;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1355" y="1955" width="345" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-output" value="Đầu ra / artifact" style="rounded=1;arcSize=20;html=1;fillColor=#ECFDF5;strokeColor=#34D399;fontColor=#065F46;fontFamily=Arial;fontSize=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1730" y="1955" width="345" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-lines" value="Mũi tên: dữ liệu được truyền    |    Nét đứt xanh: cấu trúc từ schema được giữ nguyên" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=17;fontColor=#475569;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="2140" y="1950" width="810" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Đọc từ trái sang phải theo 5 bước. Methods là kế hoạch đọc được đề xuất; phần ngữ nghĩa vẫn cần được đối chiếu nguồn và review." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=16;fontColor=#64748B;fontStyle=0;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="2020" width="2890" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-extract" value="Cấu trúc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="erd" target="extract">
+          <mxGeometry relative="1" as="geometry" x="-0.4">
+            <mxPoint x="90" y="0" as="offset" />
+            <Array as="points">
+              <mxPoint x="65" y="532" />
+              <mxPoint x="65" y="915" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="metadata-extract" value="Mô tả nguồn" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="metadata" target="extract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="extract-inventory" value="Schema + metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="extract" target="inventory">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-base-context" value="Schema một bảng" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="inventory" target="base-context">
+          <mxGeometry relative="1" as="geometry" x="0.65">
+            <Array as="points">
+              <mxPoint x="425" y="1135" />
+              <mxPoint x="425" y="575" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-context-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-context" target="base-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="575" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-rules-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-rules" target="base-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-contract-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-contract" target="base-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="1055" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-prompt-llm" value="Prompt đầy đủ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-prompt-join" target="base-llm">
+          <mxGeometry relative="1" as="geometry" x="-0.1">
+            <Array as="points">
+              <mxPoint x="1080" y="1220" />
+              <mxPoint x="775" y="1220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-llm-proposal" value="Proposal JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-llm" target="base-proposal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="base-proposal-assemble" value="Tên • mô tả • kế hoạch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-proposal" target="base-assemble">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="base-schema-preserved" value="Schema gốc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="base-context" target="base-assemble">
+          <mxGeometry relative="1" as="geometry" x="0.8">
+            <Array as="points">
+              <mxPoint x="610" y="660" />
+              <mxPoint x="465" y="660" />
+              <mxPoint x="465" y="1640" />
+              <mxPoint x="610" y="1640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="base-assemble-bases" value="Base Ontology hợp lệ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="base-assemble" target="bases">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory-fk-bus" value="Schema • PK/FK • UNIQUE • Nullable" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=none;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="inventory" target="fk-bus">
+          <mxGeometry relative="1" as="geometry" x="0.6">
+            <Array as="points">
+              <mxPoint x="25" y="1135" />
+              <mxPoint x="25" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bases-all-bases" value="Toàn bộ Bases" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="bases" target="all-bases">
+          <mxGeometry relative="1" as="geometry" x="0.8">
+            <Array as="points">
+              <mxPoint x="1130" y="1730" />
+              <mxPoint x="1130" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="all-bases-context" value="Class / Properties" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="all-bases" target="build-context">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk-bus-context" value="FK" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="fk-bus" target="build-context">
+          <mxGeometry relative="1" as="geometry" x="0.8">
+            <Array as="points">
+              <mxPoint x="1600" y="855" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="context-output" value="Context 1 bước" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="build-context" target="reference-context">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fk-bus-physical" value="Ràng buộc vật lý" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="fk-bus" target="physical-relation">
+          <mxGeometry relative="1" as="geometry" x="0.3">
+            <Array as="points">
+              <mxPoint x="1990" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="physical-relation-context" value="Khung Relation" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.94;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="physical-relation" target="relation-context">
+          <mxGeometry relative="1" as="geometry" x="0.3">
+            <Array as="points">
+              <mxPoint x="2182" y="585" />
+              <mxPoint x="2258" y="585" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="reference-context-prompt" value="Context 1 bước" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="reference-context" target="relation-context">
+          <mxGeometry relative="1" as="geometry" x="0.75">
+            <Array as="points">
+              <mxPoint x="1620" y="1165" />
+              <mxPoint x="1620" y="757" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-context-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-context" target="relation-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2325" y="757" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-rules-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-rules" target="relation-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2325" y="972" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-contract-join" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=none;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-contract" target="relation-prompt-join">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2325" y="1155" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-prompt-llm" value="Prompt đầy đủ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-prompt-join" target="relation-llm">
+          <mxGeometry relative="1" as="geometry" x="-0.1">
+            <Array as="points">
+              <mxPoint x="2325" y="1280" />
+              <mxPoint x="1990" y="1280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-llm-annotations" value="Proposal JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-llm" target="relation-annotations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-annotations-assemble" value="Diễn giải" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-annotations" target="relation-assemble">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="physical-relation-preserved" value="Khung gốc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="physical-relation" target="relation-assemble">
+          <mxGeometry relative="1" as="geometry" x="0.97">
+            <Array as="points">
+              <mxPoint x="2355" y="502" />
+              <mxPoint x="2355" y="1597" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-assemble-output" value="Relations hợp lệ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relation-assemble" target="relations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="relations-validation-input" value="Relations" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="relations" target="validation-input">
+          <mxGeometry relative="1" as="geometry" x="0.8">
+            <Array as="points">
+              <mxPoint x="2380" y="1735" />
+              <mxPoint x="2380" y="512" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="schema-structural-validation" value="Schema nguồn" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.95;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="fk-bus" target="structural-validation">
+          <mxGeometry relative="1" as="geometry" x="0.93">
+            <Array as="points">
+              <mxPoint x="2975" y="295" />
+              <mxPoint x="2975" y="640" />
+              <mxPoint x="2895" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="input-structural-validation" value="Relations + schema" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="validation-input" target="structural-validation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bases-validation" value="Base Ontologies được giữ lại • Class + Properties + Methods" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="bases" target="structural-validation">
+          <mxGeometry relative="1" as="geometry" x="0">
+            <Array as="points">
+              <mxPoint x="775" y="1885" />
+              <mxPoint x="2940" y="1885" />
+              <mxPoint x="2940" y="782" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="structural-to-semantic" value="Schema + Base Ontologies + Relations" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="structural-validation" target="semantic-review">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="semantic-to-qc" value="Review findings" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="semantic-review" target="qc-result">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qc-to-export" value="Kết quả + trạng thái kiểm định" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="qc-result" target="export">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="export-join-edge" value="Ontology hợp nhất" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=none;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="export" target="export-join">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="export-merged" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="export-join" target="merged-ontology">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2547" y="1485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="export-class" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Arial;fontSize=15;fontColor=#334155;labelBackgroundColor=#FFFFFF;sourcePerimeterSpacing=3;targetPerimeterSpacing=5;" edge="1" parent="1" source="export-join" target="class-ontology">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2802" y="1485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

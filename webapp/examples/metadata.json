@@ -1,0 +1,21 @@
+{
+  "tables": {
+    "brands": {
+      "description": "Danh sách thương hiệu.",
+      "columns": {
+        "id": {"description": "Khóa chính thương hiệu."},
+        "name": {"description": "Tên thương hiệu."}
+      }
+    },
+    "products": {
+      "description": "Thông tin sản phẩm, có tham chiếu thương hiệu tùy chọn.",
+      "columns": {
+        "id": {"description": "Khóa chính sản phẩm."},
+        "sku": {"description": "Mã SKU duy nhất, bắt buộc."},
+        "name": {"description": "Tên sản phẩm."},
+        "brand_id": {"description": "Tham chiếu đến brands.id, có thể để trống."},
+        "price": {"description": "Giá sản phẩm; có thể NULL, nếu có thì không âm."}
+      }
+    }
+  }
+}
